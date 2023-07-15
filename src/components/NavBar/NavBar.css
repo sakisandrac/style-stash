@@ -7,14 +7,10 @@ nav {
   box-shadow: 0px 4px 4px 0px #E5C7E5
 }
 
-.menu-btn {
-  background-color: #00000000;
-  border: none;
-}
-
 .logo-heading {
   font-family: 'Sacramento', cursive;
   font-size: xxx-large;
   margin: 1%;
-  justify-self: center;
+  flex: 1;
+  text-align: center; 
 }
