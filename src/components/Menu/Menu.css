@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
-  width: 100%;
+  width: 45%;
 }
 
 .close-menu {
@@ -13,4 +13,10 @@
 .link {
   font-size: xx-large;
   margin: 10% 0% 10% 0%;
+}
+
+@media screen and (max-width: 600px) {
+  .menu {
+    width: 100%;
+  }
 }
