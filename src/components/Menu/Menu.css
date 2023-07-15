@@ -13,6 +13,11 @@
 .link {
   font-size: xx-large;
   margin: 10% 0% 10% 0%;
+  text-decoration: none;
+  padding: 5%;
+  width: 30%;
+  text-align: center;
+  border-bottom: 1px solid pink;
 }
 
 @media screen and (max-width: 600px) {
