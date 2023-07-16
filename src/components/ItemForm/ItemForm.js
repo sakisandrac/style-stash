@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import './ItemForm.css'
+import React, { useState, useEffect } from 'react';
+import './ItemForm.css';
+import { v4 as uuid} from 'uuid';
 
 const ItemForm = () => {
-  const [imgFile, setImgFile] = useState();
+  const [image, setImage] = useState();
   const [notes, setNotes] = useState();
   const [category, setCategory] = useState();
+  const [error, setError] = useState({error:false, message: ""});
+  const [addSuccess, setAddSuccess] = useState(false);
 
   const [newData, setNewData] = useState({
     id: "",
@@ -15,7 +18,7 @@ const ItemForm = () => {
 
   const handleChange = (e) => {
     console.log(e.target.files);
-    setImgFile(URL.createObjectURL(e.target.files[0]));
+    setImage(URL.createObjectURL(e.target.files[0]));
     console.log('file state', URL.createObjectURL(e.target.files[0]))
 }
 
@@ -24,13 +27,37 @@ const ItemForm = () => {
     console.log(category)
   }
 
+  const handleNotes = (e) => {
+    setNotes(e.target.value)
+    console.log(notes)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if(image && category) {
+      setError({error: false, message: ""})
+      setNewData({
+        id: uuid(),
+        image: image,
+        category: category,
+        notes: notes
+      })
+    } else {
+      setError({error: true, message:`Please select both an image and category!`})
+    }
+  }
+    
+    useEffect(() => {
+      console.log(newData)
+    }, [newData])
+
   return ( 
     <div className='item-form'>
       <h2>Add Item:</h2>
       <form>
       <input type="file" onChange={handleChange} />
-      <img className='file-image' src={imgFile} />
-      <textarea placeholder='notes'></textarea>
+      <img className='file-image' src={image} />
+      <textarea value={notes} onChange={handleNotes} placeholder='notes'></textarea>
       <select
         value={category}
         onChange={(e) => {handleSelect(e)}}
@@ -46,8 +73,9 @@ const ItemForm = () => {
         <option value='accessories'>Accessories</option>
         <option value='misc'>Miscellaneous</option>
       </select>
-      <button className='add-btn'>Add Item</button>
+      <button className='add-btn' onClick={handleSubmit}>Add Item</button>
       </form>
+      {error.error && <p>{error.message}</p>}
 
       
     </div>
