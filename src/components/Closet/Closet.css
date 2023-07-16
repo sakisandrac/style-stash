@@ -1,4 +1,4 @@
-.closet-page {
+/* .closet-page {
   width: 100%;
   height: 80vh;
   display: flex;
@@ -14,10 +14,13 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .category {
   background: url('../../images/sparkles.png');
+}
+
+.closet-link {
   text-align: center;
   text-decoration: none;
   font-size: x-large;
