@@ -17,33 +17,35 @@ const ItemForm = () => {
   });
 
   const handleChange = (e) => {
+    setAddSuccess(false);
     console.log(e.target.files);
     setImage(URL.createObjectURL(e.target.files[0]));
     console.log('file state', URL.createObjectURL(e.target.files[0]))
 }
 
   const handleSelect = (e) => {
-    setCategory(e.target.value)
-    console.log(category)
+    setAddSuccess(false);
+    setCategory(e.target.value);
   }
 
   const handleNotes = (e) => {
-    setNotes(e.target.value)
-    console.log(notes)
+    setAddSuccess(false);
+    setNotes(e.target.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if(image && category) {
-      setError({error: false, message: ""})
+      setError({error: false, message: ""});
+      setAddSuccess(true);
       setNewData({
         id: uuid(),
         image: image,
         category: category,
         notes: notes
-      })
+      });
     } else {
-      setError({error: true, message:`Please select both an image and category!`})
+      setError({error: true, message:`Please select both an image and category!`});
     }
   }
     
@@ -53,30 +55,33 @@ const ItemForm = () => {
 
   return ( 
     <div className='item-form'>
-      <h2>Add Item:</h2>
+      <h1 className='add-item-header'>Add Item:</h1>
       <form>
-      <input type="file" onChange={handleChange} />
-      <img className='file-image' src={image} />
-      <textarea value={notes} onChange={handleNotes} placeholder='notes'></textarea>
-      <select
-        value={category}
-        onChange={(e) => {handleSelect(e)}}
-        name="category">
-        <option>Please Select one:</option>
-        <option value='pants'>Pants</option>
-        <option value='skirts'>Skirts</option>
-        <option value='onePieces'>One-Pieces</option>
-        <option value='tops'>Tops</option>
-        <option value='outerwear'>Outerwear</option>
-        <option value='shoes'>Shoes</option>
-        <option value='bags'>Bags</option>
-        <option value='accessories'>Accessories</option>
-        <option value='misc'>Miscellaneous</option>
-      </select>
-      <button className='add-btn' onClick={handleSubmit}>Add Item</button>
+        <label htmlFor='fileUpload' className='upload-img-btn'>Upload Image
+          <input id='fileUpload' className='file-upload-default' type="file" onChange={handleChange} />
+        </label>
+        <img className='file-image' src={image} />
+        <select
+          className='select-input'
+          value={category}
+          onChange={(e) => { handleSelect(e) }}
+          name="category">
+          <option>Please Select one:</option>
+          <option value='pants'>Pants</option>
+          <option value='skirts'>Skirts</option>
+          <option value='onePieces'>One-Pieces</option>
+          <option value='tops'>Tops</option>
+          <option value='outerwear'>Outerwear</option>
+          <option value='shoes'>Shoes</option>
+          <option value='bags'>Bags</option>
+          <option value='accessories'>Accessories</option>
+          <option value='misc'>Miscellaneous</option>
+        </select>
+        <textarea className='notes-input' value={notes} onChange={handleNotes} placeholder='notes'></textarea>
+        <button className='add-btn' onClick={handleSubmit}>Add Item</button>
       </form>
       {error.error && <p>{error.message}</p>}
-
+      {addSuccess && <p>Item successfully added!</p>}
       
     </div>
   )
