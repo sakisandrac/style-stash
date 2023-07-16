@@ -21,6 +21,7 @@ const ItemForm = () => {
 
   const handleSelect = (e) => {
     setCategory(e.target.value)
+    console.log(category)
   }
 
   return ( 
