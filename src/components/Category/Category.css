@@ -1,0 +1,12 @@
+.category {
+  text-align: center;
+  border: 1px solid pink;
+  border-radius: 25px;
+  width: 25%;
+  height: 30%;
+  margin: 1%;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
