@@ -1,0 +1,27 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 45%;
+}
+
+.close-menu {
+  align-self: flex-end;
+}
+
+.link {
+  font-size: xx-large;
+  margin: 10% 0% 10% 0%;
+  text-decoration: none;
+  padding: 5%;
+  width: 30%;
+  text-align: center;
+  border-bottom: 1px solid pink;
+}
+
+@media screen and (max-width: 600px) {
+  .menu {
+    width: 100%;
+  }
+}
