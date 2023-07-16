@@ -2,6 +2,8 @@ import './App.css';
 import NavBar from '../NavBar/NavBar'
 import Home from '../Home/Home'
 import Menu from '../Menu/Menu'
+import Closet from '../Closet/Closet'
+import Outfits from '../Outfits/Outfits'
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -38,6 +40,8 @@ function App() {
       {mainShown && 
       <Routes>
         <Route path="/" element={<Home />}/> 
+        <Route path='/closet' element={<Closet />} />
+        <Route path='/outfits' element={<Outfits />} />
       </Routes>}
     </main>
   );
