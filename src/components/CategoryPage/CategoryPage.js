@@ -4,66 +4,66 @@ import './CategoryPage.css'
 
 const CategoryPage = ({closeMenu}) => {
   //this fake data will be removed after connecting the backend 
-  const allPieces = 
+  const allPieces = [
     {
-      pants: [
-        {
-          id: 1,
-          image: placeholder
-        },
-        {
-          id: 2,
-          image: placeholder
-        }
-      ],
-      tops: [],
-      skirts: [
-        {
-          id: 3,
-          image: placeholder
-        }
-      ],
-      onePieces: [
-        {
-          id: 4,
-          image: placeholder
-        }
-      ],
-      shoes: [
-        {
-          id: 5,
-          image: placeholder
-        }
-      ],
-      bags: [
-        {
-          id: 6,
-          image: placeholder
-        }
-      ],
-      accessories: [
-        {
-          id: 7,
-          image: placeholder
-        }
-      ],
-      outerwear: [
-        {
-          id: 8,
-          image: placeholder
-        }
-      ],
-      miscellaneous: [
-        {
-          id: 9,
-          image: placeholder
-        }
-      ],
-    } 
+    id: "PIE-tops-ex-1",
+    image: placeholder,
+    categoryID: 'CAT-tops',
+    notes: ""
+    }, 
+    {
+      id: "PIE-tops-ex-2",
+      image: placeholder,
+      categoryID: "CAT-tops",
+      notes: ""
+    },
+    {
+      id: "PIE-skirts-ex-1",
+      image: placeholder,
+      categoryID: "CAT-skirts",
+      notes: ""
+    },
+    {
+      id: "PIE-onepiece-ex-1",
+      image: placeholder,
+      categoryID: "CAT-onePieces",
+      notes: ""
+    },
+    {
+      id: "PIE-shoes-ex-1",
+      image: placeholder,
+      categoryID: "CAT-shoes",
+      notes: ""
+    },
+    {
+      id: "PIE-bag-ex-1",
+      image: placeholder,
+      categoryID: "CAT-bags",
+      notes: ""
+    },
+    {
+      id: "PIE-accessories-ex-1",
+      image: placeholder,
+      categoryID: "CAT-accessories",
+      notes: ""
+    },
+    {
+      id: "PIE-outerwear-ex-1",
+      image: placeholder,
+      categoryID: "CAT-outerwear",
+      notes: ""
+    },
+    {
+      id: "PIE-misc-ex-1",
+      image: placeholder,
+      categoryID: "CAT-miscellaneous",
+      notes: ""
+    }
+  ]
   
   //this will be a network request --> 
   const category = useParams().category
-  const pieces = allPieces[category]
+  const pieces = allPieces.filter(piece => piece.categoryID.split('-')[1] === category)
   const pieceEls = pieces.map(piece => 
   <Link to={`/closet/${category}/${piece.id}`} className='piece-link closet-link' key={piece.id} id={piece.id} onClick={() => closeMenu('close')} >
     <img src={piece.image} />
