@@ -59,7 +59,13 @@ const ItemForm = () => {
         setError({error: false, message: ""});
         setAddSuccess(true);
       })
-      .catch(err => setError({error: true, message: err.message}))
+      .catch(err => {
+        if(err.message.includes('Failed')) {
+          setError({error: true, message: `Connection error, please try again later!`})
+        } else {
+          setError({error: true, message: err.message})}
+        })
+      
         console.log('post sent')
       }
     },[newData])
