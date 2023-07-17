@@ -6,6 +6,7 @@ import Closet from '../Closet/Closet'
 import Outfits from '../Outfits/Outfits'
 import Piece from '../Piece/Piece';
 import CategoryPage from '../CategoryPage/CategoryPage'
+import ItemForm from '../ItemForm/ItemForm';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -46,6 +47,7 @@ function App() {
         <Route path='/closet/:category' element={<CategoryPage closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category/:pieceID' element={<Piece />} />
         <Route path='/outfits' element={<Outfits />} />
+        <Route path="/itemform" element={<ItemForm />} />
       </Routes>}
     </main>
   );
