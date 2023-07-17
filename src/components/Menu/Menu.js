@@ -11,7 +11,10 @@ const Menu = ({closeMenu}) => {
 
   return (
     <aside className='menu'> 
-    <button className='menu-btn close-menu' onClick={() => closeMenu('close')}><img src={close} alt='close button' /></button>
+      <div className='menu-top'>
+        <h1 className="logo-heading">Style Stash</h1>
+        <button className='menu-btn close-menu' onClick={() => closeMenu('close')}><img src={close} alt='close button' /></button>
+      </div>
       {links}
     </aside>
   )

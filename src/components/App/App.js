@@ -1,8 +1,12 @@
 import './App.css';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../NavBar/NavBar'
+import Home from '../Home/Home'
+import Menu from '../Menu/Menu'
+import Closet from '../Closet/Closet'
+import Outfits from '../Outfits/Outfits'
+import Piece from '../Piece/Piece';
+import CategoryPage from '../CategoryPage/CategoryPage'
 import ItemForm from '../ItemForm/ItemForm';
-import Home from '../Home/Home';
-import Menu from '../Menu/Menu';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -16,7 +20,7 @@ function App() {
   }
 
   const resizeScreen = () => {
-    window.innerWidth < 600 
+    window.innerWidth <= 700 
       ? setSmallScreen(true)
       : setSmallScreen(false)
   }
@@ -39,6 +43,10 @@ function App() {
       {mainShown && 
       <Routes>
         <Route path="/" element={<Home />}/> 
+        <Route path='/closet' element={<Closet closeMenu={openOrCloseMenu}/>} />
+        <Route path='/closet/:category' element={<CategoryPage closeMenu={openOrCloseMenu}/>} />
+        <Route path='/closet/:category/:pieceID' element={<Piece />} />
+        <Route path='/outfits' element={<Outfits />} />
         <Route path="/itemform" element={<ItemForm />} />
       </Routes>}
     </main>

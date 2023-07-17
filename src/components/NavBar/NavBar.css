@@ -4,13 +4,13 @@ nav {
   align-items: center;
   z-index: 1; 
   height: min-content;
-  box-shadow: 0px 4px 4px 0px #E5C7E5
+  box-shadow: 0px 4px 4px 0px #eccdc1
 }
 
 .logo-heading {
   font-family: 'Sacramento', cursive;
   font-size: xxx-large;
-  margin: 1%;
+  margin: 1% 7% 1% 1%;
   flex: 1;
   text-align: center; 
 }
