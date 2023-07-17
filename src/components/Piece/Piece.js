@@ -1,7 +1,7 @@
-const Piece = ({piece}) => {
+const Piece = () => {
   return (
     <section className="piece">
-
+      <p>A clothing item and it's details will appear here</p>
     </section>
   )
 }

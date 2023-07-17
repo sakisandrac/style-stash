@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom"
 import placeholder from '../../images/placeholder.png'
+import './CategoryPage.css'
 
 const CategoryPage = ({closeMenu}) => {
   //this fake data will be removed after connecting the backend 
@@ -11,16 +12,11 @@ const CategoryPage = ({closeMenu}) => {
           image: placeholder
         },
         {
-          id: 10,
-          image: placeholder
-        }
-      ],
-      shirts: [
-        {
           id: 2,
           image: placeholder
         }
       ],
+      shirts: [],
       skirts: [
         {
           id: 3,
@@ -73,12 +69,11 @@ const CategoryPage = ({closeMenu}) => {
     <img src={piece.image} />
   </Link>)
   
-  console.log(allPieces.pants[0].image)
   return (
     <section className='category-page'>
       <h1 className='page-title' >{category.toUpperCase()}</h1>
       <section className='piece-container'>
-        {pieceEls}
+        {pieces.length ? pieceEls : <p>No items in the {category} category yet! Add to your collection to get started!</p>}
       </section>
     </section>
   )
