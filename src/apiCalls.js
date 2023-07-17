@@ -1,12 +1,18 @@
+const handleError = (response) => {
+  if (response.ok) {
+    return response.json();
+  } else {
+    throw new Error(`Error ${response.status} -- Please try again`);
+  };
+}
+
 const getClosetData = async () => {
-  let response = await fetch('http://localhost:3003/api/v1/data/closet')
-  if(!response.ok) {
-      console.log(response.statusText)
-      throw new Error(response.statusText)
-  }
-  let data = response.json()
+  let response = await fetch('http://localhost:3003/api/v1/data/closet');
+  handleError(response);
+  let data = response.json();
   return data
 }
+
 
 const postClosetData = async (newData) => {
   let response = await fetch('http://localhost:3003/api/v1/data/closet', {

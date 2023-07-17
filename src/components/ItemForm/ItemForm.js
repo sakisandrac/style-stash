@@ -9,13 +9,7 @@ const ItemForm = () => {
   const [category, setCategory] = useState("");
   const [error, setError] = useState({error:false, message: ""});
   const [addSuccess, setAddSuccess] = useState(false);
-
-  const [newData, setNewData] = useState({
-    id: "",
-    image: "",
-    category:"",
-    notes: ""
-  });
+  const [newData, setNewData] = useState(null);
 
   const handleChange = (e) => {
     setAddSuccess(false);
@@ -42,8 +36,6 @@ const ItemForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(image && category) {
-      setError({error: false, message: ""});
-      setAddSuccess(true);
       setNewData({
         id: uuid(),
         image: image,
@@ -61,11 +53,15 @@ const ItemForm = () => {
     }, [newData])
 
     useEffect(() => {
+      if(newData) {
       postClosetData(newData)
-      .catch(err => console.log(err))
-        //update error handling please
+      .then(() => {
+        setError({error: false, message: ""});
+        setAddSuccess(true);
+      })
+      .catch(err => setError({error: true, message: err.message}))
         console.log('post sent')
-      
+      }
     },[newData])
 
   return ( 
