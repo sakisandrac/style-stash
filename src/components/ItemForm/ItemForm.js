@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './ItemForm.css';
 import { v4 as uuid} from 'uuid';
+import { postClosetData } from '../../apiCalls';
 
 const ItemForm = () => {
-  const [image, setImage] = useState();
-  const [notes, setNotes] = useState();
-  const [category, setCategory] = useState();
+  const [image, setImage] = useState("");
+  const [notes, setNotes] = useState("");
+  const [category, setCategory] = useState("");
   const [error, setError] = useState({error:false, message: ""});
   const [addSuccess, setAddSuccess] = useState(false);
 
@@ -32,6 +33,11 @@ const ItemForm = () => {
     setAddSuccess(false);
     setNotes(e.target.value);
   }
+  const clearForm = () => {
+    setImage("")
+    setNotes("")
+    setCategory("")
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -44,6 +50,7 @@ const ItemForm = () => {
         category: category,
         notes: notes
       });
+      clearForm();
     } else {
       setError({error: true, message:`Please select both an image and category!`});
     }
@@ -53,9 +60,16 @@ const ItemForm = () => {
       console.log(newData)
     }, [newData])
 
+    useEffect(() => {
+      postClosetData(newData)
+        //update error handling please
+        console.log('post sent')
+      .catch(err => console.log(err))
+    },[newData])
+
   return ( 
     <div className='item-form'>
-      <h1 className='add-item-header'>Add Item:</h1>
+      <h1 className='add-item-header'>Add Item To Closet:</h1>
       <form>
         <label htmlFor='fileUpload' className='upload-img-btn'>Upload Image
           <input id='fileUpload' className='file-upload-default' type="file" onChange={handleChange} />
