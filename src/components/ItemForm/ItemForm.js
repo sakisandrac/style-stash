@@ -62,9 +62,10 @@ const ItemForm = () => {
 
     useEffect(() => {
       postClosetData(newData)
+      .catch(err => console.log(err))
         //update error handling please
         console.log('post sent')
-      .catch(err => console.log(err))
+      
     },[newData])
 
   return ( 
