@@ -53,20 +53,22 @@ const ItemForm = () => {
     }, [newData])
 
     useEffect(() => {
+      const apiCall = async () => {
+        try {
+          await postClosetData(newData)
+          setError({error: false, message: ""});
+          setAddSuccess(true);
+        } catch (err) {
+          if(err.message.includes('Failed')) {
+            setError({error: true, message: `Connection error, please try again later!`})
+          } else {
+            setError({error: true, message: err.message})
+          }
+        }
+        }
+        
       if(newData) {
-      postClosetData(newData)
-      .then(() => {
-        setError({error: false, message: ""});
-        setAddSuccess(true);
-      })
-      .catch(err => {
-        if(err.message.includes('Failed')) {
-          setError({error: true, message: `Connection error, please try again later!`})
-        } else {
-          setError({error: true, message: err.message})}
-        })
-      
-        console.log('post sent')
+      apiCall()
       }
     },[newData])
 
