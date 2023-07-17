@@ -26,7 +26,7 @@ const CategoryPage = ({closeMenu}) => {
     {
       id: "PIE-onepiece-ex-1",
       image: placeholder,
-      categoryID: "CAT-onePieces",
+      categoryID: "CAT-onepieces",
       notes: ""
     },
     {
