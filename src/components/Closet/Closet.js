@@ -7,7 +7,7 @@ const Closet = ({closeMenu}) => {
   const categoryEls = categories.map(category => {
     const id = uuidv4();
     const linkLocation = category.split(' ').join('').toLowerCase()
-    return <Link to={`/closet/${linkLocation}`} className='closet-link category' key={id} id={id} onClick={() => closeMenu('close')}>{category}</Link>
+    return <Link to={`/closet/${linkLocation}`} className='closet-link category' key={id} id={id} onClick={() => closeMenu('close')}><p className='category-text'>{category}</p></Link>
   })
 
   return (
