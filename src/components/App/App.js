@@ -1,7 +1,8 @@
 import './App.css';
-import NavBar from '../NavBar/NavBar'
-import Home from '../Home/Home'
-import Menu from '../Menu/Menu'
+import NavBar from '../NavBar/NavBar';
+import ItemForm from '../ItemForm/ItemForm';
+import Home from '../Home/Home';
+import Menu from '../Menu/Menu';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -38,6 +39,7 @@ function App() {
       {mainShown && 
       <Routes>
         <Route path="/" element={<Home />}/> 
+        <Route path="/itemform" element={<ItemForm />} />
       </Routes>}
     </main>
   );
