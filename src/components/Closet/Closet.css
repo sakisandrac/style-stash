@@ -20,6 +20,11 @@
   background: url('../../images/sparkles.png');
 }
 
+.category-text {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
 .closet-link {
   text-align: center;
   text-decoration: none;
