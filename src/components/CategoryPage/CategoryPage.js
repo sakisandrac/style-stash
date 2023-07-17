@@ -16,7 +16,7 @@ const CategoryPage = ({closeMenu}) => {
           image: placeholder
         }
       ],
-      shirts: [],
+      tops: [],
       skirts: [
         {
           id: 3,
@@ -53,7 +53,7 @@ const CategoryPage = ({closeMenu}) => {
           image: placeholder
         }
       ],
-      misc: [
+      miscellaneous: [
         {
           id: 9,
           image: placeholder

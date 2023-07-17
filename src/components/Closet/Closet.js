@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Closet.css'
 
 const Closet = ({closeMenu}) => {
-  const categories = ['Pants', 'Skirts', 'Shirts', 'One Pieces', 'Outer Wear', 'Bags', 'Shoes', 'Accessories', 'Other']
+  const categories = ['Pants', 'Skirts', 'Tops', 'One Pieces', 'Outer Wear', 'Bags', 'Shoes', 'Accessories', 'Miscellaneous']
   const categoryEls = categories.map(category => {
     const id = uuidv4();
     const linkLocation = category.split(' ').join('').toLowerCase()
