@@ -19,9 +19,16 @@ const OutfitForm = ({closeMenu}) => {
   const [outfit, setOutfit] = useState('')
   const [fullOutfitImage, setFullOutfitImage] = useState('')
 
+  const clearOutfitSetup = () => {
+    setCart([])
+    setNotes('')
+    setOutfit('')
+    setFullOutfitImage('')
+    setOutfitReady(false)
+  }
+
   useEffect(() => {
     if(outfitReady) {
-      console.log('in use effect for outfit ready')
       setOutfit({id: `OUT-${uuid()}`, fullOutfitImage, notes})
     }
   }, [outfitReady])
@@ -34,7 +41,9 @@ const OutfitForm = ({closeMenu}) => {
         pieceIDs.forEach(id => {
           postPieceToOutfit({outfitID: newOutfit.newData.id, pieceID: id})
         })
+        clearOutfitSetup()
       } catch (error) {
+        //update this to use the error component 
         console.log(error)
       }
     }
@@ -43,6 +52,11 @@ const OutfitForm = ({closeMenu}) => {
       apiCall()
     }
   }, [outfit])
+
+  const updateNotes = newNotes => {
+    setNotes(newNotes)
+  }
+
   const updateOutfitImg = (e) => setFullOutfitImage(URL.createObjectURL(e.target.files[0]))
 
   const checkCartForItem = (id) => cart.find(item => item.id === id) ? true : false
@@ -66,9 +80,25 @@ const OutfitForm = ({closeMenu}) => {
 
   const MainContent = () => {
     if(location.pathname.includes('cart')) {
-      return <Cart cart={cart} removeFromCart={removeFromCart} fullOutfitImage={fullOutfitImage} updateOutfitImg={updateOutfitImg} setOutfitReady={setOutfitReady}/>
+      return (
+        <Cart 
+          cart={cart} 
+          removeFromCart={removeFromCart} 
+          fullOutfitImage={fullOutfitImage} 
+          updateOutfitImg={updateOutfitImg} 
+          updateNotes={updateNotes} 
+          setOutfitReady={setOutfitReady}
+        />
+      )
     } else if(categoryInUrl) {
-      return <CategoryPage cart={cart} checkCartForItem={checkCartForItem} addToCart={addToCart} removeFromCart={removeFromCart}/>     
+      return (
+        <CategoryPage 
+          cart={cart} 
+          checkCartForItem={checkCartForItem} 
+          addToCart={addToCart} 
+          removeFromCart={removeFromCart}
+        />     
+      )
     } else {
       return <ChooseCategory />
     }

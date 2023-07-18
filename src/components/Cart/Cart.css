@@ -29,6 +29,13 @@
   text-align: center
 }
 
+.outfit-notes {
+  width: 65%;
+  height: 20%;
+  border-radius: 25px;
+  text-align: center;
+}
+
 .cart-button {
   border: none;
   padding: 8px;

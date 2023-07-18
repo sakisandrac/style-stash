@@ -1,10 +1,12 @@
 import './Cart.css'
 import { Link } from "react-router-dom"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import remove from '../../images/close.png'
 
-const Cart = ({cart, removeFromCart, fullOutfitImage, updateOutfitImg, setOutfitReady}) => {
+const Cart = ({cart, removeFromCart, fullOutfitImage, updateOutfitImg, updateNotes, setOutfitReady}) => {
   const [error, setError] = useState('');
+  const [outfitNotes, setOutfitNotes] = useState('')
+
   const pieceEls = cart.map(piece => {
     return (
       <div style={{width: '90%', display: "flex", }}key={piece.id}>
@@ -18,8 +20,8 @@ const Cart = ({cart, removeFromCart, fullOutfitImage, updateOutfitImg, setOutfit
     if(!cart.length) {
       setError('Add at least one clothing item to create an outfit!')
     } else {
-      console.log('inside complete look')
       setOutfitReady(true)
+      updateNotes(outfitNotes)
     }
   }
   return (
@@ -34,6 +36,7 @@ const Cart = ({cart, removeFromCart, fullOutfitImage, updateOutfitImg, setOutfit
       <section className="cart-pieces">
         {cart.length ? pieceEls : <p className='empty-cart-text'>No clothing items added yet! Add some pieces to create an outfit!</p>}
       </section>
+      <input className='outfit-notes' type='textarea' placeholder="Add notes for this outfit..." value={outfitNotes} onChange={(e) => setOutfitNotes(e.target.value)}/>
       <button className='cart-button' onClick={completeLook}>Complete The Look</button>
       {error && <p>{error}</p>}
     </section>
