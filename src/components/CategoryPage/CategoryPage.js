@@ -1,70 +1,32 @@
-import { useParams, Link } from "react-router-dom"
-import placeholder from '../../images/placeholder.png'
-import './CategoryPage.css'
+import { useParams, Link } from "react-router-dom";
+import placeholder from '../../images/placeholder.png';
+import './CategoryPage.css';
+import { getClosetData } from '../../apiCalls';
+import { useEffect, useState } from 'react';
 
 const CategoryPage = ({closeMenu}) => {
-  //this fake data will be removed after connecting the backend 
-  const allPieces = 
-    {
-      pants: [
-        {
-          id: 1,
-          image: placeholder
-        },
-        {
-          id: 2,
-          image: placeholder
-        }
-      ],
-      tops: [],
-      skirts: [
-        {
-          id: 3,
-          image: placeholder
-        }
-      ],
-      onePieces: [
-        {
-          id: 4,
-          image: placeholder
-        }
-      ],
-      shoes: [
-        {
-          id: 5,
-          image: placeholder
-        }
-      ],
-      bags: [
-        {
-          id: 6,
-          image: placeholder
-        }
-      ],
-      accessories: [
-        {
-          id: 7,
-          image: placeholder
-        }
-      ],
-      outerwear: [
-        {
-          id: 8,
-          image: placeholder
-        }
-      ],
-      miscellaneous: [
-        {
-          id: 9,
-          image: placeholder
-        }
-      ],
-    } 
   
-  //this will be a network request --> 
+  const [allPieces, setAllPieces] = useState(null);
   const category = useParams().category
-  const pieces = allPieces[category]
-  const pieceEls = pieces.map(piece => 
+ 
+    useEffect(() => {
+      const apiCall = async () => {
+        try {
+          let data = await getClosetData(category)
+          setAllPieces(data.filteredPieces)
+          return data
+        } catch (error) {
+          //should we move error up to app so that we can pass the same error state every where? or make it its own component?
+        }
+      }
+      apiCall();
+  }, [])
+
+  useEffect(() => {
+    console.log('data', allPieces)
+  }, [allPieces])
+
+  const pieceEls = allPieces?.map(piece => 
   <Link to={`/closet/${category}/${piece.id}`} className='piece-link closet-link' key={piece.id} id={piece.id} onClick={() => closeMenu('close')} >
     <img src={piece.image} />
   </Link>)
@@ -73,7 +35,7 @@ const CategoryPage = ({closeMenu}) => {
     <section className='category-page'>
       <h1 className='page-title' >{category.toUpperCase()}</h1>
       <section className='piece-container'>
-        {pieces.length ? pieceEls : <p>No items in the {category} category yet! Add to your collection to get started!</p>}
+        {allPieces ? pieceEls : <p>No items in the {category} category yet! Add to your collection to get started!</p>}
       </section>
     </section>
   )
