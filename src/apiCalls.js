@@ -6,9 +6,10 @@ const handleError = (response) => {
   };
 }
 
-const getClosetData = async () => {
-  let response = await fetch('http://localhost:3003/api/v1/data/closet');
-  let data = handleError(response);
+const getClosetData = async (category) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/closet/${category}`,);
+  let data = await handleError(response);
+  console.log('inapu', data)
   return data;
 }
 
@@ -24,5 +25,6 @@ const postClosetData = async (newData) => {
   let json = await handleError(response)
   console.log(json)
 }
+
 
 export { getClosetData, postClosetData }
