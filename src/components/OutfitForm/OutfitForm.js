@@ -1,4 +1,5 @@
 import '../Closet/Closet.css'
+import './OutfitForm.css'
 import CategoryContainer from "../CategoryContainer/CategoryContainer"
 import hanger from '../../images/hanger.png'
 import add from '../../images/add.png'
@@ -31,7 +32,10 @@ const OutfitForm = ({closeMenu}) => {
 
   return (
     <section className='closet-page'>
-      <Link to='/cart'><img src={hanger}/></Link>
+      <section className="outfit-cart-link-container">
+        <Link className='outfit-cart-link' to='/cart'><img src={hanger}/></Link>
+        <div className='cart-count-container'><p className="cart-count">{cart.length}</p></div>
+      </section>
       {useParams().category ? <CategoryPage checkCartForItem={checkCartForItem} addToCart={addToCart} removeFromCart={removeFromCart}/> : <ChooseCategory />}
     </section>
   )

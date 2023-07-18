@@ -1,3 +1,8 @@
 .piece-link > img{
   max-width: 100%;
 }
+
+.choose-piece {
+  display: flex; 
+  flex-direction: column;
+}

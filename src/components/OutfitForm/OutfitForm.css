@@ -1,0 +1,21 @@
+.outfit-cart-link > img {
+  width: 100px;
+}
+
+.outfit-cart-link-container{
+  width: 100%;
+  display: flex; 
+  justify-content: flex-end;
+  margin-top: 2%;
+  margin-right: 5%;
+}
+
+.cart-count-container {
+  padding: 2px 10px;
+  border: 1px solid #eccdc1;
+  height: 30%;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
