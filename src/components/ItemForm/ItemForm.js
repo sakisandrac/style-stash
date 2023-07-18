@@ -37,9 +37,9 @@ const ItemForm = () => {
     e.preventDefault()
     if(image && category) {
       setNewData({
-        id: uuid(),
+        id: `PIE-${uuid()}`,
         image: image,
-        category: category,
+        categoryID: `${category.slice(0,3).toUpperCase()}-${uuid()}`,
         notes: notes
       });
       clearForm();

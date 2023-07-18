@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
 import './Closet.css'
 
-const Closet = ({closeMenu}) => {
+const Closet = ({ closeMenu }) => {
   const categories = ['Pants', 'Skirts', 'Tops', 'One Pieces', 'Outer Wear', 'Bags', 'Shoes', 'Accessories', 'Miscellaneous']
   const categoryEls = categories.map(category => {
     const id = uuidv4();
