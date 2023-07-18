@@ -14,9 +14,9 @@ const Cart = ({cart, removeFromCart, fullOutfitImage, updateOutfitImg, notes, up
 
   const pieceEls = cart.map(piece => {
     return (
-      <div style={{width: '90%', display: "flex", }}key={piece.id}>
-        <img style={{width: '80%'}} src={piece.image} alt='item in cart'/>
-        <button onClick={() => removeFromCart(piece)}><img src={remove}/></button>
+      <div className='piece-in-cart' key={piece.id}>
+        <img src={piece.image} alt='item in cart'/>
+        <button className='remove-cart-button' onClick={() => removeFromCart(piece)}><img src={remove}/></button>
       </div>
     )
 })
