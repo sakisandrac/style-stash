@@ -9,6 +9,7 @@ const handleError = (response) => {
 const getClosetData = async (category) => {
   let response = await fetch(`http://localhost:3003/api/v1/data/closet/${category}`,);
   let data = await handleError(response);
+  console.log('inapu', data)
   return data;
 }
 

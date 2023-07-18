@@ -39,7 +39,7 @@ const ItemForm = () => {
       setNewData({
         id: `PIE-${uuid()}`,
         image: image,
-        categoryID: `${category.slice(0,3).toUpperCase()}-${uuid()}`,
+        categoryID: `CAT-${category.toLowerCase()}`,
         notes: notes
       });
       clearForm();
