@@ -5,7 +5,7 @@ import './CategoryPage.css';
 import { getClosetData } from '../../apiCalls';
 import { useEffect, useState } from 'react';
 
-const CategoryPage = ({closeMenu}) => {
+const CategoryPage = ({closeMenu, checkCartForItem, addToCart, removeFromCart}) => {
   const location = useLocation()
   
   const [allPieces, setAllPieces] = useState(null);
@@ -29,10 +29,14 @@ const CategoryPage = ({closeMenu}) => {
   }, [allPieces])
 
   const pieceEls = allPieces?.map(piece => {
-    return location.pathname.includes('closet')
-      ? <PieceLink key={piece.id} category={category} piece={piece} closeMenu={closeMenu}/>
-      : <FormPiece key={piece.id} piece={piece}/>
-    })
+    if (location.pathname.includes('closet')) {
+      return <PieceLink key={piece.id} category={category} piece={piece} closeMenu={closeMenu}/>
+    } else {
+      const itemInCart = checkCartForItem(piece.id)
+      const updatedPiece = {...piece, inCart: itemInCart}
+      return <FormPiece key={piece.id} piece={updatedPiece} addToCart={addToCart} removeFromCart={removeFromCart}/>
+    }
+  })
   
   return (
     <section className='category-page'>

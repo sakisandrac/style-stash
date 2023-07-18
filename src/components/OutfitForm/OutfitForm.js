@@ -7,24 +7,34 @@ import { useEffect, useState } from 'react'
 import CategoryPage from '../CategoryPage/CategoryPage'
 
 const OutfitForm = ({closeMenu}) => {
-const [cart, setCart] = useState([])
+  const [cart, setCart] = useState([])
 
-const ChooseCategory = () => {
+  const checkCartForItem = (id) => cart.find(itemID => itemID === id) ? true : false
+
+  const addToCart = (id) => {
+    setCart(prevCart => [...prevCart, id])
+  }
+
+  const removeFromCart = (id) => {
+    setCart(prevCart => prevCart.filter(itemID => itemID !== id))
+  }
+
+  const ChooseCategory = () => {
+    return (
+      <>
+        <h2 style={{textAlign: "center", fontWeight: "lighter"}}>Choose a category to add an item</h2>
+        <CategoryContainer closeMenu={closeMenu} parentRoute={'outfitform'}/>
+      </>
+    )
+  }
+
+
   return (
-    <>
-      <h2 style={{textAlign: "center", fontWeight: "lighter"}}>Choose a category to add an item</h2>
-      <CategoryContainer closeMenu={closeMenu} parentRoute={'outfitform'}/>
-    </>
+    <section className='closet-page'>
+      <Link to='/cart'><img src={hanger}/></Link>
+      {useParams().category ? <CategoryPage checkCartForItem={checkCartForItem} addToCart={addToCart} removeFromCart={removeFromCart}/> : <ChooseCategory />}
+    </section>
   )
-}
-
-
-return (
-  <section className='closet-page'>
-    <Link to='/cart'><img src={hanger}/></Link>
-    {useParams().category ? <CategoryPage /> : <ChooseCategory />}
-  </section>
-)
 }
 
 export default OutfitForm
