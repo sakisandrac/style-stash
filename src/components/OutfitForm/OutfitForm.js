@@ -14,6 +14,7 @@ const OutfitForm = ({closeMenu}) => {
   const location = useLocation()
   const categoryInUrl = useParams().category
   const [cart, setCart] = useState([])
+  const [addSuccess, setAddSuccess] = useState(false);
   const [outfitReady, setOutfitReady] = useState(false)
   const [notes, setNotes] = useState('')
   const [outfit, setOutfit] = useState('')
@@ -42,6 +43,7 @@ const OutfitForm = ({closeMenu}) => {
           postPieceToOutfit({outfitID: newOutfit.newData.id, pieceID: id})
         })
         clearOutfitSetup()
+        setAddSuccess(true)
       } catch (error) {
         //update this to use the error component 
         console.log(error)
@@ -85,9 +87,12 @@ const OutfitForm = ({closeMenu}) => {
           cart={cart} 
           removeFromCart={removeFromCart} 
           fullOutfitImage={fullOutfitImage} 
-          updateOutfitImg={updateOutfitImg} 
+          updateOutfitImg={updateOutfitImg}
+          notes={notes} 
           updateNotes={updateNotes} 
           setOutfitReady={setOutfitReady}
+          addSuccess={addSuccess}
+          setAddSuccess={setAddSuccess}
         />
       )
     } else if(categoryInUrl) {
