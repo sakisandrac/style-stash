@@ -13,9 +13,7 @@ const ItemForm = () => {
 
   const handleChange = (e) => {
     setAddSuccess(false);
-    console.log(e.target.files);
     setImage(URL.createObjectURL(e.target.files[0]));
-    console.log('file state', URL.createObjectURL(e.target.files[0]))
 }
 
   const handleSelect = (e) => {
@@ -47,10 +45,6 @@ const ItemForm = () => {
       setError({error: true, message:`Please select both an image and category!`});
     }
   }
-    
-    useEffect(() => {
-      console.log(newData)
-    }, [newData])
 
     useEffect(() => {
       const apiCall = async () => {

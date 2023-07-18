@@ -1,11 +1,10 @@
 import add from '../../images/add.png'
 import remove from '../../images/remove.png'
 
-const FormPiece = ({piece, addToCart, removeFromCart}) => {
-  console.log('piece in cart', piece.inCart)
+const FormPiece = ({piece, itemInCart, addToCart, removeFromCart}) => {
   return (
   <div className='choose-piece'>
-    <button onClick={piece.inCart ? () => removeFromCart(piece.id) : () => addToCart(piece.id)}><img src={piece.inCart ? remove : add}/></button>
+    <button onClick={itemInCart ? () => removeFromCart(piece) : () => addToCart(piece)}><img src={itemInCart ? remove : add}/></button>
     <img src={piece.image} />
   </div>
   )

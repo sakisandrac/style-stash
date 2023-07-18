@@ -5,7 +5,7 @@ import './CategoryPage.css';
 import { getClosetData } from '../../apiCalls';
 import { useEffect, useState } from 'react';
 
-const CategoryPage = ({closeMenu, checkCartForItem, addToCart, removeFromCart}) => {
+const CategoryPage = ({closeMenu, cart, checkCartForItem, addToCart, removeFromCart}) => {
   const location = useLocation()
   
   const [allPieces, setAllPieces] = useState(null);
@@ -24,17 +24,12 @@ const CategoryPage = ({closeMenu, checkCartForItem, addToCart, removeFromCart}) 
       apiCall();
   }, [])
 
-  useEffect(() => {
-    console.log('data', allPieces)
-  }, [allPieces])
-
   const pieceEls = allPieces?.map(piece => {
     if (location.pathname.includes('closet')) {
       return <PieceLink key={piece.id} category={category} piece={piece} closeMenu={closeMenu}/>
     } else {
       const itemInCart = checkCartForItem(piece.id)
-      const updatedPiece = {...piece, inCart: itemInCart}
-      return <FormPiece key={piece.id} piece={updatedPiece} addToCart={addToCart} removeFromCart={removeFromCart}/>
+      return <FormPiece key={piece.id} piece={piece} itemInCart={itemInCart} addToCart={addToCart} removeFromCart={removeFromCart}/>
     }
   })
   
