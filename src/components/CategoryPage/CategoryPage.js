@@ -1,10 +1,12 @@
-import { useParams, Link } from "react-router-dom";
-import placeholder from '../../images/placeholder.png';
+import { useParams, Link, useLocation} from "react-router-dom";
+import PieceLink from "../PieceLink/PieceLink";
+import FormPiece from '../FormPiece/FormPiece'
 import './CategoryPage.css';
 import { getClosetData } from '../../apiCalls';
 import { useEffect, useState } from 'react';
 
 const CategoryPage = ({closeMenu}) => {
+  const location = useLocation()
   
   const [allPieces, setAllPieces] = useState(null);
   const category = useParams().category
@@ -26,10 +28,11 @@ const CategoryPage = ({closeMenu}) => {
     console.log('data', allPieces)
   }, [allPieces])
 
-  const pieceEls = allPieces?.map(piece => 
-  <Link to={`/closet/${category}/${piece.id}`} className='piece-link closet-link' key={piece.id} id={piece.id} onClick={() => closeMenu('close')} >
-    <img src={piece.image} />
-  </Link>)
+  const pieceEls = allPieces?.map(piece => {
+    return location.pathname.includes('closet')
+      ? <PieceLink key={piece.id} category={category} piece={piece} closeMenu={closeMenu}/>
+      : <FormPiece key={piece.id} piece={piece}/>
+    })
   
   return (
     <section className='category-page'>

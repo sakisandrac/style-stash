@@ -1,10 +1,14 @@
 import '../Closet/Closet.css'
 import CategoryContainer from "../CategoryContainer/CategoryContainer"
-import CategoryPage from '../CategoryPage/CategoryPage'
-import { useParams } from 'react-router-dom'
+import hanger from '../../images/hanger.png'
+import add from '../../images/add.png'
+import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import CategoryPage from '../CategoryPage/CategoryPage'
 
 const OutfitForm = ({closeMenu}) => {
+const [cart, setCart] = useState([])
+
 const ChooseCategory = () => {
   return (
     <>
@@ -14,17 +18,11 @@ const ChooseCategory = () => {
   )
 }
 
-const AddItem = () => {
-  return (
-    <section>
-      <CategoryPage />
-    </section>
-  )
-}
 
 return (
   <section className='closet-page'>
-    {useParams().category ? <AddItem /> : <ChooseCategory />}
+    <Link to='/cart'><img src={hanger}/></Link>
+    {useParams().category ? <CategoryPage /> : <ChooseCategory />}
   </section>
 )
 }
