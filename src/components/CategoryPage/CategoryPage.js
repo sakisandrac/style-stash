@@ -1,13 +1,17 @@
 import { useParams, Link } from "react-router-dom";
-import placeholder from '../../images/placeholder.png';
 import './CategoryPage.css';
 import { getClosetData } from '../../apiCalls';
 import { useEffect, useState } from 'react';
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
-const CategoryPage = ({closeMenu}) => {
+const CategoryPage = ({ closeMenu, appError, setAppError }) => {
   
   const [allPieces, setAllPieces] = useState(null);
   const category = useParams().category
+
+  useEffect(() => {
+    setAppError(null)
+  }, [])
  
     useEffect(() => {
       const apiCall = async () => {
@@ -16,7 +20,7 @@ const CategoryPage = ({closeMenu}) => {
           setAllPieces(data.filteredPieces)
           return data
         } catch (error) {
-          //should we move error up to app so that we can pass the same error state every where? or make it its own component?
+          setAppError(error)
         }
       }
       apiCall();
@@ -33,6 +37,7 @@ const CategoryPage = ({closeMenu}) => {
   
   return (
     <section className='category-page'>
+      {appError && <ErrorMessage appError={appError}/>}
       <h1 className='page-title' >{category.toUpperCase()}</h1>
       <section className='piece-container'>
         {allPieces ? pieceEls : <p>No items in the {category} category yet! Add to your collection to get started!</p>}

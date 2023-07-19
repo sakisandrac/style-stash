@@ -16,6 +16,7 @@ function App() {
   const [mainShown, setMainShown] = useState(true)
   const [smallScreen, setSmallScreen] = useState(false)
   const [user, setUser] = useState(null);
+  const [appError, setAppError] = useState(null);
 
   const openOrCloseMenu = (setting) => {
     setting === 'open' ? setMenuOpen(true) : setMenuOpen(false)
@@ -46,11 +47,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}/> 
         <Route path='/closet' element={<Closet user={user} closeMenu={openOrCloseMenu}/>} />
-        <Route path='/closet/:category' element={<CategoryPage closeMenu={openOrCloseMenu}/>} />
+        <Route path='/closet/:category' element={<CategoryPage appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category/:pieceID' element={<Piece />} />
         <Route path='/outfits' element={<Outfits user={user} />} />
         <Route path="/itemform" element={<ItemForm />} />
-        <Route path="/login" element={<LoginPage setUser={setUser} user={user}/>} />
+        <Route path="/login" element={<LoginPage appError={appError} setAppError={setAppError} setUser={setUser} user={user}/>} />
       </Routes>}
     </main>
   );
