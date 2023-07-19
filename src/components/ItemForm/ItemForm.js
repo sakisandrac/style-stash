@@ -13,7 +13,7 @@ const ItemForm = () => {
 
   const handleChange = (e) => {
     setAddSuccess(false);
-    console.log(e.target.files);
+    console.log(e.target.files[0]);
     setImage(URL.createObjectURL(e.target.files[0]));
     console.log('file state', URL.createObjectURL(e.target.files[0]))
 }

@@ -9,15 +9,32 @@ import CategoryPage from '../CategoryPage/CategoryPage'
 import ItemForm from '../ItemForm/ItemForm';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { getUserData } from '../../apiCalls';
+import LoginPage from '../LoginPage/LoginPage';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [mainShown, setMainShown] = useState(true)
   const [smallScreen, setSmallScreen] = useState(false)
+  const [user, setUser] = useState(null);
 
   const openOrCloseMenu = (setting) => {
     setting === 'open' ? setMenuOpen(true) : setMenuOpen(false)
   }
+
+  // useEffect(() => {
+  //   const login = async (username, password) => {
+  //     try {
+  //       const data = await getUserData({username, password});
+  //       setUser(data);
+  //     } catch (error) {
+  //       //set error here come back to it
+  //     }
+  //   }
+
+  //   login();
+  // }, [])
+
 
   const resizeScreen = () => {
     window.innerWidth <= 700 
@@ -39,8 +56,8 @@ function App() {
 
   return (
     <main className={menuOpen ? 'row-flex' : ''}>
-      {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar openMenu={openOrCloseMenu}/>}
-      {mainShown && 
+      {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} openMenu={openOrCloseMenu}/>}
+      {mainShown &&
       <Routes>
         <Route path="/" element={<Home />}/> 
         <Route path='/closet' element={<Closet closeMenu={openOrCloseMenu}/>} />
@@ -48,6 +65,7 @@ function App() {
         <Route path='/closet/:category/:pieceID' element={<Piece />} />
         <Route path='/outfits' element={<Outfits />} />
         <Route path="/itemform" element={<ItemForm />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>}
     </main>
   );

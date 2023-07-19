@@ -10,7 +10,39 @@ nav {
 .logo-heading {
   font-family: 'Sacramento', cursive;
   font-size: xxx-large;
-  margin: 1% 7% 1% 1%;
+  margin: 1% 1% 1% 1%;
   flex: 1;
   text-align: center; 
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  word-wrap: break-word;
+}
+
+.user-icon {
+  height: 25px;
+  margin: 10px;
+}
+
+.login-text {
+  margin-right: 10px;
+  font-size: .9rem;
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 60px;
+    word-wrap: break-word;
+  }
+
+  .login-text {
+    margin: 0px 10px 0 10px;
+    font-size: .7rem;
+  }
 }
