@@ -2,7 +2,8 @@ const handleError = (response) => {
   if (response.ok) {
     return response.json();
   } else {
-    throw new Error(`Error ${response.status} -- Please try again`);
+    console.log(response)
+    throw new Error(`Error ${response.statusText} -- Please try again`);
   };
 }
 
@@ -33,8 +34,9 @@ const getUserData = async (loginInfo) => {
       'Content-Type': 'application/json'
     }
   })
-  let json = await handleError(response)
-  console.log(json)
+  let data = await handleError(response)
+  console.log('data', data)
+  return data
 }
 
 

@@ -22,20 +22,6 @@ function App() {
     setting === 'open' ? setMenuOpen(true) : setMenuOpen(false)
   }
 
-  // useEffect(() => {
-  //   const login = async (username, password) => {
-  //     try {
-  //       const data = await getUserData({username, password});
-  //       setUser(data);
-  //     } catch (error) {
-  //       //set error here come back to it
-  //     }
-  //   }
-
-  //   login();
-  // }, [])
-
-
   const resizeScreen = () => {
     window.innerWidth <= 700 
       ? setSmallScreen(true)
@@ -56,7 +42,7 @@ function App() {
 
   return (
     <main className={menuOpen ? 'row-flex' : ''}>
-      {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} openMenu={openOrCloseMenu}/>}
+      {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} setUser={setUser} openMenu={openOrCloseMenu}/>}
       {mainShown &&
       <Routes>
         <Route path="/" element={<Home />}/> 
@@ -65,7 +51,7 @@ function App() {
         <Route path='/closet/:category/:pieceID' element={<Piece />} />
         <Route path='/outfits' element={<Outfits />} />
         <Route path="/itemform" element={<ItemForm />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage setUser={setUser} user={user}/>} />
       </Routes>}
     </main>
   );
