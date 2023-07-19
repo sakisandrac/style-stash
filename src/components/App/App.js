@@ -10,11 +10,14 @@ import OutfitForm from '../OutfitForm/OutfitForm';
 import ItemForm from '../ItemForm/ItemForm';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import LoginPage from '../LoginPage/LoginPage';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [mainShown, setMainShown] = useState(true)
   const [smallScreen, setSmallScreen] = useState(false)
+  const [user, setUser] = useState(null);
+  const [appError, setAppError] = useState(null);
 
   const openOrCloseMenu = (setting) => {
     setting === 'open' ? setMenuOpen(true) : setMenuOpen(false)
@@ -40,17 +43,18 @@ function App() {
 
   return (
     <main className={menuOpen ? 'row-flex' : ''}>
-      {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar openMenu={openOrCloseMenu}/>}
-      {mainShown && 
+      {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} setUser={setUser} openMenu={openOrCloseMenu}/>}
+      {mainShown &&
       <Routes>
         <Route path="/" element={<Home />}/> 
-        <Route path='/closet' element={<Closet closeMenu={openOrCloseMenu}/>} />
-        <Route path='/closet/:category' element={<CategoryPage closeMenu={openOrCloseMenu}/>} />
+        <Route path='/closet' element={<Closet user={user} closeMenu={openOrCloseMenu}/>} />
+        <Route path='/closet/:category' element={<CategoryPage user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category/:pieceID' element={<Piece />} />
-        <Route path='/outfits' element={<Outfits closeMenu={openOrCloseMenu}/>} />
+        <Route path="/login" element={<LoginPage appError={appError} setAppError={setAppError} setUser={setUser} user={user}/>} />
+        <Route path='/outfits' element={<Outfits user={user} closeMenu={openOrCloseMenu}/>} />
         <Route path="/itemform" element={<ItemForm />} />
         <Route path='/outfitform' element={<OutfitForm closeMenu={openOrCloseMenu}/>} />
-        <Route path='/outfitform/:category' element={<OutfitForm closeMenu={openOrCloseMenu}/>} />
+        <Route path='/outfitform/:category' element={<OutfitForm user={user} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
       </Routes>}
     </main>
   );

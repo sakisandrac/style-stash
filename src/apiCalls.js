@@ -2,12 +2,13 @@ const handleError = (response) => {
   if (response.ok) {
     return response.json();
   } else {
-    throw new Error(`Error ${response.status} -- Please try again`);
+    console.log(response)
+    throw new Error(`Error ${response.statusText} -- Please try again`);
   };
 }
 
-const getClosetData = async (category) => {
-  let response = await fetch(`http://localhost:3003/api/v1/data/closet/${category}`,);
+const getClosetData = async (category, userID) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/closet/${userID}/${category}`,);
   let data = await handleError(response);
   return data;
 }
@@ -48,5 +49,17 @@ const postPieceToOutfit = async(idInfo) => {
   return data;
 }
 
+const getUserData = async (loginInfo) => {
+  let response = await fetch('http://localhost:3003/api/v1/data/user', {
+    method: 'POST',
+    body: JSON.stringify(loginInfo), 
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  let data = await handleError(response)
+  console.log('data', data)
+  return data
+}
 
-export { getClosetData, postClosetData, postOutfit, postPieceToOutfit }
+export { getClosetData, postClosetData,getUserData, postOutfit, postPieceToOutfit }
