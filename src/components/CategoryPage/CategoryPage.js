@@ -4,6 +4,7 @@ import FormPiece from '../FormPiece/FormPiece'
 import './CategoryPage.css';
 import { getClosetData } from '../../apiCalls';
 import { useEffect, useState } from 'react';
+import back from '../../images/arrow.png'
 
 const CategoryPage = ({closeMenu, cart, checkCartForItem, addToCart, removeFromCart}) => {
   const location = useLocation()
@@ -38,6 +39,7 @@ const CategoryPage = ({closeMenu, cart, checkCartForItem, addToCart, removeFromC
   
   return (
     <section className='category-page'>
+      {location.pathname.includes('closet') && <div className='back-to-closet'><Link to='/closet'><img src={back} alt='back button'/></Link></div>}
       <h1 className='page-title' >{category.toUpperCase()}</h1>
       <section className='piece-container'>
         {allPieces ? pieceEls : loading ? <p>Loading...</p> : <p>No items in the {category} category yet! Add to your collection to get started!</p>}
