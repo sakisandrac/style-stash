@@ -13,9 +13,7 @@ const ItemForm = () => {
 
   const handleChange = (e) => {
     setAddSuccess(false);
-    console.log(e.target.files);
     setImage(URL.createObjectURL(e.target.files[0]));
-    console.log('file state', URL.createObjectURL(e.target.files[0]))
 }
 
   const handleSelect = (e) => {
@@ -47,10 +45,6 @@ const ItemForm = () => {
       setError({error: true, message:`Please select both an image and category!`});
     }
   }
-    
-    useEffect(() => {
-      console.log(newData)
-    }, [newData])
 
     useEffect(() => {
       const apiCall = async () => {
@@ -88,13 +82,13 @@ const ItemForm = () => {
           <option>Please Select one:</option>
           <option value='pants'>Pants</option>
           <option value='skirts'>Skirts</option>
-          <option value='onePieces'>One-Pieces</option>
+          <option value='onepieces'>One-Pieces</option>
           <option value='tops'>Tops</option>
           <option value='outerwear'>Outerwear</option>
           <option value='shoes'>Shoes</option>
           <option value='bags'>Bags</option>
           <option value='accessories'>Accessories</option>
-          <option value='misc'>Miscellaneous</option>
+          <option value='miscellaneous'>Miscellaneous</option>
         </select>
         <textarea className='notes-input' value={notes} onChange={handleNotes} placeholder='notes'></textarea>
         <button className='add-btn' onClick={handleSubmit}>Add Item</button>
