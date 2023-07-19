@@ -1,0 +1,24 @@
+.outfit-cart-link > img {
+  width: 80px;
+}
+.top-form-links {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  margin: 2% 5%;
+}
+.outfit-cart-link-container{
+  display: flex; 
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.cart-count-container {
+  padding: 2px 8px;
+  border: 1px solid #eccdc1;
+  height: 30%;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}

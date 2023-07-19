@@ -1,0 +1,10 @@
+.add-cart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.add-cart-btn > img{
+  width: 30px;
+}

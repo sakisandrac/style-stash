@@ -22,8 +22,31 @@ const postClosetData = async (newData) => {
       'Content-Type': 'application/json'
     }
   })
-  let json = await handleError(response)
-  console.log(json)
+  let data = await handleError(response)
+}
+
+const postOutfit = async(outfit) => {
+  let response = await fetch('http://localhost:3003/api/v1/data/outfits', {
+    method: 'POST',
+    body: JSON.stringify(outfit), 
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  let data = handleError(response) 
+  return data;
+}
+
+const postPieceToOutfit = async(idInfo) => {
+  let response = await fetch('http://localhost:3003/api/v1/data/outfit-to-pieces', {
+    method: 'POST',
+    body: JSON.stringify(idInfo), 
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  let data = handleError(response)
+  return data;
 }
 
 const getUserData = async (loginInfo) => {
@@ -39,5 +62,4 @@ const getUserData = async (loginInfo) => {
   return data
 }
 
-
-export { getClosetData, postClosetData, getUserData }
+export { getClosetData, postClosetData,getUserData, postOutfit, postPieceToOutfit }
