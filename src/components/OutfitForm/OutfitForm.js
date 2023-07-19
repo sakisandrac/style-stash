@@ -10,7 +10,7 @@ import CategoryPage from '../CategoryPage/CategoryPage'
 import Cart from '../Cart/Cart'
 import { postOutfit, postPieceToOutfit } from '../../apiCalls'
 
-const OutfitForm = ({closeMenu}) => {
+const OutfitForm = ({closeMenu, setAppError, user}) => {
   const location = useLocation()
   const categoryInUrl = useParams().category
   const [cart, setCart] = useState([])
@@ -102,6 +102,8 @@ const OutfitForm = ({closeMenu}) => {
           checkCartForItem={checkCartForItem} 
           addToCart={addToCart} 
           removeFromCart={removeFromCart}
+          setAppError={setAppError}
+          user={user}
         />     
       )
     } else {

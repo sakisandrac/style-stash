@@ -5,6 +5,11 @@
   width: 100%;
 }
 
+.login-logo {
+  margin-top: 20px;
+  width: 40%;
+}
+
 .login-input {
   border-radius: 20px;
   border: 1px solid black;

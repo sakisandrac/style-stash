@@ -3,6 +3,7 @@ import { getUserData } from '../../apiCalls';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import loginLogo from '../../images/login-logo.png'
 
 const LoginPage = ({ user, setUser, appError, setAppError }) => {
 
@@ -67,7 +68,7 @@ const LoginPage = ({ user, setUser, appError, setAppError }) => {
   return (
     <div className='loginpage-container'>
       <main className='login-form-container'>
-        <label className='login-form-label' htmlFor='login-form'>Please Log In:</label>
+        <img className='login-logo' src={loginLogo} alt="please log in sign"/>
         <form name='login-form' className='login-form'>
           <label className='input-label' htmlFor='username'>Username:</label>
           <input className='login-input' value={username} onChange={(e) => { handleChange(e) }} name='username' type='text' />

@@ -54,7 +54,7 @@ function App() {
         <Route path='/outfits' element={<Outfits user={user} closeMenu={openOrCloseMenu}/>} />
         <Route path="/itemform" element={<ItemForm />} />
         <Route path='/outfitform' element={<OutfitForm closeMenu={openOrCloseMenu}/>} />
-        <Route path='/outfitform/:category' element={<OutfitForm closeMenu={openOrCloseMenu}/>} />
+        <Route path='/outfitform/:category' element={<OutfitForm user={user} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
       </Routes>}
     </main>
   );

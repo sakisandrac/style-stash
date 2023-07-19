@@ -14,7 +14,7 @@ const CategoryPage = ({  user, appError, setAppError, closeMenu, cart, checkCart
   const [loading, setLoading] = useState(true);
 
   const category = useParams().category
-  const userID = user.userID
+  const userID = user?.userID
 
   useEffect(() => {
     setAppError(null)
@@ -32,7 +32,9 @@ const CategoryPage = ({  user, appError, setAppError, closeMenu, cart, checkCart
           setAppError(error)
         }
       }
-      apiCall();
+      if(user) {
+        apiCall();
+      }
   }, [])
 
   const pieceEls = allPieces?.map(piece => {
@@ -50,7 +52,7 @@ const CategoryPage = ({  user, appError, setAppError, closeMenu, cart, checkCart
       {location.pathname.includes('closet') && <div className='back-to-closet'><Link to='/closet'><img src={back} alt='back button'/></Link></div>}
       <h1 className='page-title' >{category.toUpperCase()}</h1>
       <section className='piece-container'>
-        {allPieces ? pieceEls : loading ? <p>Loading...</p> : <p>No items in the {category} category yet! Add to your collection to get started!</p>}
+        {allPieces ? pieceEls : user ? loading ? <p>Loading...</p> : <p>No items in the {category} category yet! Add to your collection to get started!</p> : <p>Please login to continue</p>}
       </section>
     </section>
   )
