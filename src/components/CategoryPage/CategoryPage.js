@@ -4,19 +4,21 @@ import { getClosetData } from '../../apiCalls';
 import { useEffect, useState } from 'react';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
-const CategoryPage = ({ closeMenu, appError, setAppError }) => {
+const CategoryPage = ({ user, closeMenu, appError, setAppError }) => {
   
   const [allPieces, setAllPieces] = useState(null);
   const category = useParams().category
+  const userID = user.userID
 
   useEffect(() => {
     setAppError(null)
   }, [])
  
     useEffect(() => {
+      console.log('id', userID)
       const apiCall = async () => {
         try {
-          let data = await getClosetData(category)
+          let data = await getClosetData(category, userID)
           setAllPieces(data.filteredPieces)
           return data
         } catch (error) {

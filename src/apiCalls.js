@@ -7,8 +7,8 @@ const handleError = (response) => {
   };
 }
 
-const getClosetData = async (category) => {
-  let response = await fetch(`http://localhost:3003/api/v1/data/closet/${category}`,);
+const getClosetData = async (category, userID) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/closet/${userID}/${category}`,);
   let data = await handleError(response);
   return data;
 }

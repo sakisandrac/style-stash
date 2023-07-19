@@ -47,7 +47,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}/> 
         <Route path='/closet' element={<Closet user={user} closeMenu={openOrCloseMenu}/>} />
-        <Route path='/closet/:category' element={<CategoryPage appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
+        <Route path='/closet/:category' element={<CategoryPage user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category/:pieceID' element={<Piece />} />
         <Route path='/outfits' element={<Outfits user={user} />} />
         <Route path="/itemform" element={<ItemForm />} />
