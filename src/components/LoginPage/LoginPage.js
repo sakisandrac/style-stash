@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getUserData } from '../../apiCalls';
-import './LoginPage.css'
+import './LoginPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = ({ user, setUser}) => {
 
@@ -8,7 +9,6 @@ const LoginPage = ({ user, setUser}) => {
   const [password, setPassword] = useState("");
   const [credentialsSubmitted, setCredentialsSubmitted] = useState(false);
   const [loginError, setLoginError] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleChange = (e) => {
     if (e.target.name === 'username') {
@@ -36,11 +36,9 @@ const LoginPage = ({ user, setUser}) => {
         const data = await getUserData({username, password});
         console.log(data.credentialsFound[0])
         setUser(data.credentialsFound[0])
-        setLoginSuccess(true)
       } catch (error) {
         console.log('login error', error)
-        setLoginSuccess(false)
-        //set error here come back to it
+        //set error component here come back to it
       }
     }
     if(credentialsSubmitted) {
@@ -48,7 +46,16 @@ const LoginPage = ({ user, setUser}) => {
     }
   }, [credentialsSubmitted])
 
- 
+ const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate('/')
+      }, 3000)
+    }
+  }, [user])
+
   return (
     <div className='loginpage-container'>
       <main className='login-form-container'>
@@ -59,7 +66,7 @@ const LoginPage = ({ user, setUser}) => {
           <input className='login-input' value={password} onChange={(e) => { handleChange(e) }} name='password' type='password' />
           <button className='submit-btn' onClick={(e) => {submitCredentials(e)}}>Login</button>
           {loginError && <p>Please enter both username and password!</p>}
-          {loginSuccess && <p>Login Successful!</p>}
+          {user && <p>Login Successful! You will be directed back to the homepage shortly</p>}
         </form>
       </main>
     </div>

@@ -9,7 +9,6 @@ import CategoryPage from '../CategoryPage/CategoryPage'
 import ItemForm from '../ItemForm/ItemForm';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getUserData } from '../../apiCalls';
 import LoginPage from '../LoginPage/LoginPage';
 
 function App() {
@@ -46,10 +45,10 @@ function App() {
       {mainShown &&
       <Routes>
         <Route path="/" element={<Home />}/> 
-        <Route path='/closet' element={<Closet closeMenu={openOrCloseMenu}/>} />
+        <Route path='/closet' element={<Closet user={user} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category' element={<CategoryPage closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category/:pieceID' element={<Piece />} />
-        <Route path='/outfits' element={<Outfits />} />
+        <Route path='/outfits' element={<Outfits user={user} />} />
         <Route path="/itemform" element={<ItemForm />} />
         <Route path="/login" element={<LoginPage setUser={setUser} user={user}/>} />
       </Routes>}

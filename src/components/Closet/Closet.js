@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
 import './Closet.css';
 
-const Closet = ({ closeMenu }) => {
+const Closet = ({ closeMenu, user }) => {
   const categories = ['Pants', 'Skirts', 'Tops', 'One Pieces', 'Outer Wear', 'Bags', 'Shoes', 'Accessories', 'Miscellaneous']
   const categoryEls = categories.map(category => {
     const id = uuidv4();
@@ -11,12 +11,17 @@ const Closet = ({ closeMenu }) => {
   })
 
   return (
+    <>
+    {user ?
     <section className='closet-page'>
       <h1 className='page-title' >My Closet</h1>
       <div className='category-container'>
         {categoryEls}
       </div>
     </section>
+    : <p>Please Login to Continue</p>
+    } 
+    </>
   )
 }
 
