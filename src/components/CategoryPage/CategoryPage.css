@@ -5,4 +5,10 @@
 .choose-piece {
   display: flex; 
   flex-direction: column;
+  justify-content: flex-start;
+  min-height: 150px;
+}
+
+.choose-piece > img {
+  height: 100%
 }
