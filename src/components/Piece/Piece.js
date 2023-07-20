@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { getClosetData } from "../../apiCalls"
+import { getClosetData, patchPiece } from "../../apiCalls"
 import { useEffect, useState } from "react"
 import back from '../../images/arrow.png'
 import './Piece.css'
@@ -10,6 +10,7 @@ const Piece = ({user}) => {
   const [pieceNotes, setPieceNotes] = useState('')
   const {pieceID, category} = useParams()
 
+  
   useEffect(() => {
     console.log('mounting...')
     const apiCall = async () => {
@@ -29,9 +30,18 @@ const Piece = ({user}) => {
     setPieceNotes(piece.notes)
   }, [piece])
 
-  useEffect(() => {
-    console.log('editing', editing)
-  }, [editing])
+  // useEffect(() => {
+  //   console.log('editing', editing)
+  // }, [editing])
+
+  const handleSave = async() => {
+    try {
+      setPiece( await patchPiece(user.userID, {...piece, notes: pieceNotes}))
+      setEditing(prev => !prev)
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
 
   return (
@@ -44,7 +54,10 @@ const Piece = ({user}) => {
       : <article className={piece.notes ? "outfit-notes piece-notes" : "outfit-notes piece-notes no-note"}>
         {piece.notes ? piece.notes : 'Edit item to add notes'}
       </article>}
-      <button className="cart-button" id="editBtn" onClick={() => setEditing(prev => !prev)}>{editing ? 'SAVE' : 'EDIT'} ITEM</button>
+      {editing 
+        ? <button className="cart-button" id="editBtn" onClick={() => handleSave()}>SAVE ITEM</button>
+        : <button className="cart-button" id="editBtn" onClick={() => setEditing(prev => !prev)}>EDIT ITEM</button>
+      }
     </section>
   )
 }

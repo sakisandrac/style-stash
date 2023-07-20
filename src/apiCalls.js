@@ -62,4 +62,17 @@ const getUserData = async (loginInfo) => {
   return data
 }
 
-export { getClosetData, postClosetData,getUserData, postOutfit, postPieceToOutfit }
+const patchPiece = async (userID, piece) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/closet/${userID}/${piece.id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({notes: piece.notes}),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+
+  let data = await handleError(response);
+  return data 
+}
+
+export { getClosetData, postClosetData,getUserData, postOutfit, postPieceToOutfit, patchPiece }
