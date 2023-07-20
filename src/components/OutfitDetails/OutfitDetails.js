@@ -1,11 +1,17 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
-const OutfitDetails = () => {
-  const { id } = useParams();
-  
+const OutfitDetails = ({ user, setAppError, appError }) => {
+  const outfitID = useParams().id;
+
   return (
-    <div>outfit details</div>
+    <>
+    {appError && <ErrorMessage appError={appError}/>}
+    {user ? 
+      <div>outfit details</div>
+    : <p>Please login to continue</p>}
+    </>
   )
 }
 

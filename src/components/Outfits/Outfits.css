@@ -5,8 +5,16 @@
   border-radius: 20px;
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
   align-items: center;
+  background-color: #debdacae;
+}
+
+.outfit-grid {
+  border: 1px solid black;
+  height: 180px;
+  width: 170px;
 }
 
 .overlay {

@@ -18,6 +18,12 @@ const getOutfitData = async (userID) => {
   return data;
 }
 
+const getOutfitPieces = async (userID, outfitID) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/outfits/${userID}/${outfitID}`);
+  let data = await handleError(response);
+  return data;
+}
+
 const postClosetData = async (newData) => {
   let response = await fetch('http://localhost:3003/api/v1/data/closet', {
     method: 'POST',
@@ -27,7 +33,11 @@ const postClosetData = async (newData) => {
     }
   })
   let data = await response.json()
-  throw new Error(`${data.message} -- Please try again`)
+  
+  if(data.message.includes('Error')) {
+    throw new Error(`${data.message} -- Please try again`)
+  }
+  return data
 }
 
 const postOutfit = async(outfit) => {
@@ -39,7 +49,11 @@ const postOutfit = async(outfit) => {
     }
   })
   let data = await response.json()
-  throw new Error(`${data.message} -- Please try again`)
+  
+  if(data.message.includes('Error')) {
+    throw new Error(`${data.message} -- Please try again`)
+  }
+  return data
 }
 
 const postPieceToOutfit = async(idInfo) => {
@@ -51,7 +65,11 @@ const postPieceToOutfit = async(idInfo) => {
     }
   })
   let data = await response.json()
-  throw new Error(`${data.message} -- Please try again`)
+  
+  if(data.message.includes('Error')) {
+    throw new Error(`${data.message} -- Please try again`)
+  }
+  return data
 }
 
 const getUserData = async (loginInfo) => {
@@ -63,11 +81,16 @@ const getUserData = async (loginInfo) => {
     }
   })
   let data = await response.json()
-  if(data.message) {
+
+  if(data.message.includes('Error')) {
     throw new Error(`${data.message} -- Please try again`)
   }
   return data
   
 }
 
-export { getClosetData, postClosetData,getUserData, postOutfit, postPieceToOutfit, getOutfitData }
+
+
+
+
+export { getClosetData, postClosetData,getUserData, postOutfit, postPieceToOutfit, getOutfitData, getOutfitPieces }
