@@ -28,4 +28,19 @@ const postData = async (type, info) => {
   return data
 }
 
-export { postData, getData }
+const patchData = async (type, info) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}`, {
+    method: 'PATCH',
+    body: JSON.stringify(info), 
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  let data = await response.json()
+  
+  if(data.message.includes('Error')) {
+    throw new Error(`${data.message} -- Please try again`)
+  }
+  return data
+}
+export { postData, getData, patchData }
