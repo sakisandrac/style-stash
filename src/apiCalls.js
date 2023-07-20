@@ -25,8 +25,8 @@ const postClosetData = async (newData) => {
   let data = await handleError(response)
 }
 
-const postOutfit = async(outfit) => {
-  let response = await fetch('http://localhost:3003/api/v1/data/outfits', {
+const postOutfit = async(outfit, userID) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/outfits/${userID}`, {
     method: 'POST',
     body: JSON.stringify(outfit), 
     headers: {
@@ -37,8 +37,8 @@ const postOutfit = async(outfit) => {
   return data;
 }
 
-const postPieceToOutfit = async(idInfo) => {
-  let response = await fetch('http://localhost:3003/api/v1/data/outfit-to-pieces', {
+const postPieceToOutfit = async(idInfo, userID) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/outfit-to-pieces/${userID}`, {
     method: 'POST',
     body: JSON.stringify(idInfo), 
     headers: {
