@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { getData } from '../../apiCalls';
-import './OutfitDetails.css'
+import './OutfitDetails.css';
+import backIcon from '../../images/arrow.png'
 
 const OutfitDetails = ({ user, setAppError, appError }) => {
   const outfitID = useParams().id;
@@ -48,6 +49,9 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
     {appError && <ErrorMessage appError={appError}/>}
     {user ? 
       <div className='outfit-details-container'>
+        <div className='back-icon-container'>
+          <Link to='/outfits'><img alt='icon for back button'src={backIcon}/></Link>
+        </div>
         <h1 className='page-title page-title-short'>My Outfit</h1>
         <div className='pieces-container'>
           <button className='cart-button' onClick={toggleEditing}>{`${isEditing? 'Save Edits' : 'Edit Outfit'}`}</button>
