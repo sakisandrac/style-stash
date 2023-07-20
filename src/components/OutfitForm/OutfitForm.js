@@ -8,7 +8,7 @@ import { Link, useLocation, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import CategoryPage from '../CategoryPage/CategoryPage'
 import Cart from '../Cart/Cart'
-import { postOutfit, postPieceToOutfit } from '../../apiCalls'
+import { postData } from '../../apiCalls'
 
 const OutfitForm = ({closeMenu, setAppError, user}) => {
   const location = useLocation()
@@ -37,10 +37,10 @@ const OutfitForm = ({closeMenu, setAppError, user}) => {
   useEffect(() => {
     const apiCall = async () => {
       try {
-        let newOutfit = await postOutfit(outfit, user.userID)
+        let newOutfit = await postData(`outfits/${user.userID}`, outfit)
         let pieceIDs = cart.map(piece => piece.id)
         pieceIDs.forEach(id => {
-          postPieceToOutfit({outfitID: newOutfit.newData.id, pieceID: id}, user.userID)
+          postData(`outfit-to-pieces/${user.userID}`, {outfitID: newOutfit.newData.id, pieceID: id})
         })
         clearOutfitSetup()
         setAddSuccess(true)
