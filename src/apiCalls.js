@@ -6,20 +6,8 @@ const handleError = (response) => {
   };
 }
 
-const getClosetData = async (category, userID) => {
-  let response = await fetch(`http://localhost:3003/api/v1/data/closet/${userID}/${category}`,);
-  let data = await handleError(response);
-  return data;
-}
-
-const getOutfitData = async (userID) => {
-  let response = await fetch(`http://localhost:3003/api/v1/data/outfits/${userID}`,);
-  let data = await handleError(response);
-  return data;
-}
-
-const getOutfitPieces = async (userID, outfitID) => {
-  let response = await fetch(`http://localhost:3003/api/v1/data/outfits/${userID}/${outfitID}`);
+const getData = async (type, userID, secondID) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}/${userID}/${secondID?secondID:''}`);
   let data = await handleError(response);
   return data;
 }
@@ -86,11 +74,10 @@ const getUserData = async (loginInfo) => {
     throw new Error(`${data.message} -- Please try again`)
   }
   return data
-  
 }
 
 
 
 
 
-export { getClosetData, postClosetData,getUserData, postOutfit, postPieceToOutfit, getOutfitData, getOutfitPieces }
+export { getData, postClosetData,getUserData, postOutfit, postPieceToOutfit }

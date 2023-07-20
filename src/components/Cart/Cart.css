@@ -79,7 +79,7 @@
 } */
 
 .cart-pieces::-webkit-scrollbar-thumb {
-  background: pink;
+  background: #debdac;
   border-radius: 25px;
 }
 

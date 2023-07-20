@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { getOutfitPieces } from '../../apiCalls';
+import { getData } from '../../apiCalls';
 import './OutfitDetails.css'
 
 const OutfitDetails = ({ user, setAppError, appError }) => {
@@ -9,9 +9,9 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
   const [pieces, setPieces] = useState(null);
 
   useEffect(() => {
-    const apiCall = async (userID, outfitID) => {
+    const apiCall = async (type, userID, outfitID) => {
       try {
-        const data = await getOutfitPieces(userID, outfitID)
+        const data = await getData(type, userID, outfitID)
         console.log(data.outfitPieces)
         setPieces(data.outfitPieces)
       } catch (error) {
@@ -19,7 +19,7 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
       }
     }
     if (user) {
-      apiCall(user.userID, outfitID)
+      apiCall('outfits', user.userID, outfitID)
     }
   },[])
 
