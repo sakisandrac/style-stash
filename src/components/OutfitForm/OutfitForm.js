@@ -37,10 +37,10 @@ const OutfitForm = ({closeMenu, setAppError, user}) => {
   useEffect(() => {
     const apiCall = async () => {
       try {
-        let newOutfit = await postData('outfits', outfit)
+        let newOutfit = await postData(`outfits/${user.userID}`, outfit)
         let pieceIDs = cart.map(piece => piece.id)
         pieceIDs.forEach(id => {
-          postData('outfit-to-pieces', {outfitID: newOutfit.newData.id, pieceID: id})
+          postData(`outfit-to-pieces/${user.userID}`, {outfitID: newOutfit.newData.id, pieceID: id})
         })
         clearOutfitSetup()
         setAddSuccess(true)
