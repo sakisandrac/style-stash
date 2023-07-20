@@ -21,7 +21,6 @@ const CategoryPage = ({  user, appError, setAppError, closeMenu, cart, checkCart
   }, [])
  
     useEffect(() => {
-      console.log('id', userID)
       const apiCall = async () => {
         setLoading(true)
         try {

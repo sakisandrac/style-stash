@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { getData, patchData } from '../../apiCalls';
+import { getData, patchData, deleteData } from '../../apiCalls';
 import './OutfitDetails.css';
 import backIcon from '../../images/arrow.png';
 import xIcon from '../../images/close.png';
@@ -15,13 +15,13 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
   const [loading, setLoading] = useState(true);
   const [newOutfitImage, setNewOutfitImage] = useState("");
   const [addSuccess, setAddSuccess] = useState(false);
+  const [deletedPieces, setDeletedPieces] = useState([]);
 
   useEffect(() => {
     const apiCall = async (type, userID, outfitID) => {
       setLoading(true)
       try {
         const data = await getData(type, userID, outfitID)
-        console.log('data', data)
         setPieces(data.outfitPieces)
         setOutfitData(data.outfitData)
         setNotes(data.outfitData.notes)
@@ -38,6 +38,7 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
   const removePiece = (e) => {
     const filteredPieces = pieces.filter(piece => piece.id !== e.target.id)
     setPieces(filteredPieces)
+    setDeletedPieces(prev => [...prev, e.target.id])
   }
 
   const pieceEls = (pieces) => {
@@ -55,12 +56,6 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
     setAddSuccess(false)
 
     if(isEditing) {
-      console.log({
-        pieces,
-        notes,
-        newOutfitImage,
-        id: outfitData.id
-      })
       setAddSuccess(true)
     }
   }
@@ -76,25 +71,25 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
   useEffect(() => {
     const apiCall = async () => {
       try {
-        let newOutfit = await patchData('outfits', {notes, userID: user.userID,newOutfitImage, id: outfitData.id })
-        console.log(newOutfit)
-        // let pieceIDs = cart.map(piece => piece.id)
-        // pieceIDs.forEach(id => {
-        //   postData('outfit-to-pieces', { outfitID: newOutfit.newData.id, pieceID: id })
-        // })
-        console.log('api call')
+        let newOutfit = await patchData('outfits', {
+          notes, 
+          userID: user.userID, 
+          fullOutfitImage: newOutfitImage, 
+          id: outfitData.id 
+        })
+
+        deletedPieces.forEach(id => {
+          deleteData('outfit-to-pieces', { outfitID: outfitData.id, pieceID: id })
+        })
       } catch (error) {
-        //update this to use the error component 
-        console.log(error)
+        setAppError(error)
       }
     }
 
-    if (!isEditing) {
+    if (addSuccess) {
       apiCall()
     }
-  }, [isEditing])
-
-
+  }, [addSuccess])
 
   return (
     <>
