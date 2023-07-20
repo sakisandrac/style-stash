@@ -13,7 +13,6 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
     const apiCall = async (userID) => {
       try {
         const data = await getOutfitData(userID)
-        console.log('outfit', data.allData)
         setOutfits(data.allData)
       } catch (error) {
         setAppError(error)
@@ -45,7 +44,6 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
         )
       } else {
         return (
-          <div>
             <Link key={outfit.outfit.id} to={`/outfitdetails/${outfit.outfit.id}`}>
             <div className='outfit-img-container'>
               {outfitPieceImgs(outfit)}
@@ -53,7 +51,6 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
               <div className='view-outfit-btn'>View my outfit</div>
             </div>
           </Link>
-          </div>
         )
       }
     })
