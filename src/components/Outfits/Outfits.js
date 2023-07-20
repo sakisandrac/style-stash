@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import add from '../../images/add.png';
 import { Link } from 'react-router-dom';
-import { getOutfitData, getOutfitPieces } from '../../apiCalls';
+import { getOutfitData } from '../../apiCalls';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import './Outfits.css'
 
@@ -25,19 +25,12 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
       }
   },[])
 
-  useEffect(() => {
-    const apiCall = async (userID, outfitID) => {
-      try {
-        const data = await getOutfitPieces(userID, outfitID)
-        console.log(data)
-      } catch (error) {
-        //handle errpr
-      }
-      
-    }
-    // apiCall(user.userID, outfitID)
-  },[])
-
+  const outfitPieceImgs = (outfit) => {
+    const allImages = outfit.outfitPieces.map(piece => {
+      return <img key={piece.id} className='piece-img' src={piece.image} />
+    })
+    return allImages.slice(0, 4)
+  }
 
     const userOutfitImages = outfits?.map(outfit => {
       if(outfit.outfit.fullOutfitImage) {
@@ -55,9 +48,7 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
           <div>
             <Link key={outfit.outfit.id} to={`/outfitdetails/${outfit.outfit.id}`}>
             <div className='outfit-img-container'>
-              {outfit.outfitPieces.map(piece => {
-                return <img key={piece.id} className='piece-img' src={piece.image} />
-              })}
+              {outfitPieceImgs(outfit)}
               <div className="overlay"></div>
               <div className='view-outfit-btn'>View my outfit</div>
             </div>
