@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUserData } from '../../apiCalls';
+import { getData } from '../../apiCalls';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -42,7 +42,7 @@ const LoginPage = ({ user, setUser, appError, setAppError }) => {
     useEffect(() => {
     const login = async (username, password) => {
       try {
-        const data = await getUserData({username, password});
+        const data = await getData('user', {username, password});
         console.log(data.credentialsFound[0])
         setUser(data.credentialsFound[0])
       } catch (error) {
