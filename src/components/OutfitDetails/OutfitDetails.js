@@ -71,15 +71,13 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
   useEffect(() => {
     const apiCall = async () => {
       try {
-        let newOutfit = await patchData('outfits', {
+        let newOutfit = await patchData('outfit', `${user.userID}/${outfitData.id }`, {
           notes, 
-          userID: user.userID, 
-          fullOutfitImage: newOutfitImage, 
-          id: outfitData.id 
+          fullOutfitImage: newOutfitImage,  
         })
 
         deletedPieces.forEach(id => {
-          deleteData('outfit-to-pieces', { outfitID: outfitData.id, pieceID: id })
+          deleteData('outfit-to-pieces', `${user.userID}`, { outfitID: outfitData.id, pieceID: id })
         })
       } catch (error) {
         setAppError(error)

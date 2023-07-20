@@ -28,8 +28,8 @@ const postData = async (type, info) => {
   return data
 }
 
-const patchData = async (type, info) => {
-  let response = await fetch(`http://localhost:3003/api/v1/data/${type}`, {
+const patchData = async (type, allIDs, info) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}/${allIDs}`, {
     method: 'PATCH',
     body: JSON.stringify(info), 
     headers: {
@@ -44,8 +44,8 @@ const patchData = async (type, info) => {
   return data
 }
 
-const deleteData = async (type, info) => {
-  let response = await fetch(`http://localhost:3003/api/v1/data/${type}`, {
+const deleteData = async (type, userID, info) => {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}/${userID}`, {
     method: 'DELETE',
     body: JSON.stringify(info), 
     headers: {
