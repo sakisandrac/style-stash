@@ -55,13 +55,9 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
           <div>
             <Link key={outfit.outfit.id} to={`/outfitdetails/${outfit.outfit.id}`}>
             <div className='outfit-img-container'>
-              {/* {outfit.outfitPieces.map(piece) => {
-
-              }} */}
-              <div className='outfit-grid'>img1</div>
-              <div className='outfit-grid'>img2</div>
-              <div className='outfit-grid'>img3</div>
-              <div className='outfit-grid'>img4</div>
+              {outfit.outfitPieces.map(piece => {
+                return <img key={piece.id} className='piece-img' src={piece.image} />
+              })}
               <div className="overlay"></div>
               <div className='view-outfit-btn'>View my outfit</div>
             </div>

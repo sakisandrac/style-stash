@@ -17,6 +17,12 @@
   width: 170px;
 }
 
+.piece-img {
+  border-radius: 20px;
+  height: 180px;
+  width: 170px;
+}
+
 .overlay {
   position: absolute;
   top: 0;
