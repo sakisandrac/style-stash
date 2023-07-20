@@ -15,11 +15,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
 }
-
+/* 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
 
 .menu-btn {
   background-color: #00000000;
