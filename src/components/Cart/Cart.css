@@ -30,10 +30,14 @@
 }
 
 .outfit-notes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 65%;
   height: 20%;
   border-radius: 25px;
   text-align: center;
+  border: 1px solid black;
 }
 
 .piece-in-cart {
@@ -79,7 +83,7 @@
 } */
 
 .cart-pieces::-webkit-scrollbar-thumb {
-  background: pink;
+  background: #debdac;
   border-radius: 25px;
 }
 

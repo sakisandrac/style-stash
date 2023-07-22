@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ItemForm.css';
 import { v4 as uuid} from 'uuid';
-import { postClosetData } from '../../apiCalls';
+import { postData } from '../../apiCalls';
 
 const ItemForm = () => {
   const [image, setImage] = useState("");
@@ -49,7 +49,7 @@ const ItemForm = () => {
     useEffect(() => {
       const apiCall = async () => {
         try {
-          await postClosetData(newData)
+          await postData('closet', newData)
           setError({error: false, message: ""});
           setAddSuccess(true);
         } catch (err) {

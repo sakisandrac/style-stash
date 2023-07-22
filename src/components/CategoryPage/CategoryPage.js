@@ -3,7 +3,7 @@ import { useParams, Link, useLocation} from "react-router-dom";
 import PieceLink from "../PieceLink/PieceLink";
 import FormPiece from '../FormPiece/FormPiece'
 import './CategoryPage.css';
-import { getClosetData } from '../../apiCalls';
+import { getData } from '../../apiCalls';
 import { useEffect, useState } from 'react';
 import back from '../../images/arrow.png'
 
@@ -21,11 +21,10 @@ const CategoryPage = ({  user, appError, setAppError, closeMenu, cart, checkCart
   }, [])
  
     useEffect(() => {
-      console.log('id', userID)
       const apiCall = async () => {
         setLoading(true)
         try {
-          let data = await getClosetData(category, userID)
+          let data = await getData('closet', userID, category)
           setAllPieces(data.filteredPieces)
           setLoading(false)
         } catch (error) {

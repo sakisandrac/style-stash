@@ -40,6 +40,13 @@
   cursor: pointer;
 }
 
+.icon-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 10px;
+}
+
 @media screen and (max-width: 880px){
   .closet-link {
     width: 30%;
