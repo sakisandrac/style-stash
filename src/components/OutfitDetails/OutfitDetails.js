@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { getData, patchData, deleteData } from '../../apiCalls';
 import './OutfitDetails.css';
 import backIcon from '../../images/arrow.png';
 import xIcon from '../../images/close.png';
+import plus from '../../images/add.png'
 
 const OutfitDetails = ({ user, setAppError, appError }) => {
   const outfitID = useParams().id;
@@ -16,6 +17,8 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
   const [newOutfitImage, setNewOutfitImage] = useState("");
   const [addSuccess, setAddSuccess] = useState(false);
   const [deletedPieces, setDeletedPieces] = useState([]);
+  const location = useLocation()
+  console.log(location)
 
   useEffect(() => {
     const apiCall = async (type, userID, outfitID) => {
@@ -89,13 +92,12 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
     }
   }, [addSuccess])
 
-  return (
-    <>
-    {appError && <ErrorMessage appError={appError}/>}
-    {user ? 
+  const OutfitLanding = () => {
+    return (
       <div className='outfit-details-container'>
         <div className='back-icon-container'>
           <Link to='/outfits'><img alt='icon for back button'src={backIcon}/></Link>
+          {isEditing && <Link to={`/outfitdetails/${outfitID}/add-piece`} ><img alt='icon for add item button' src={plus}/></Link>}
         </div>
         <h1 className='page-title page-title-short'>My Outfit</h1>
         <div className='pieces-container'>
@@ -118,7 +120,23 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
           {addSuccess && <p>Outfit Edited!</p>}
         </div>
       </div>
-    : <p>Please login to continue</p>}
+    )
+  }
+
+  const MainContent = () =>{
+    if(location.pathname.includes('add-piece')) {
+      return (
+        <p>this location is under construction</p>
+      )
+    } else {
+      return <OutfitLanding />
+    }
+  }
+
+  return (
+    <>
+    {appError && <ErrorMessage appError={appError}/>}
+    {user ? <MainContent /> : <p>Please login to continue</p>}
     </>
   )
 }

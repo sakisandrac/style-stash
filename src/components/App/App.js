@@ -217,6 +217,7 @@ function App() {
         <Route path='/outfitform' element={<OutfitForm closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitform/:category' element={<OutfitForm user={user} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitdetails/:id' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError}/>} />
+        <Route path='/outfitdetails/:id/add-piece' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError}/>} />
       </Routes>}
     </main>
   );
