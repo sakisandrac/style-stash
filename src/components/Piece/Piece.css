@@ -1,0 +1,41 @@
+.piece {
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 90vh;
+}
+
+.piece-notes {
+  border: 2px solid #eccdc1;
+  display: flex; 
+  justify-content: center;
+  text-align: center;
+  padding: 1%;
+  margin: 2%;
+  overflow-y: auto;
+}
+
+.no-note {
+  align-items: center;
+}
+
+
+.piece-notes::-webkit-scrollbar {
+  width: 10px;
+}
+
+.piece-notes::-webkit-scrollbar-thumb {
+  background: pink;
+  border-radius: 25px;
+}
+
+.clothing-container {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+#editBtn {
+  padding: 5%;
+}

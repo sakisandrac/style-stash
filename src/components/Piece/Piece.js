@@ -1,10 +1,71 @@
 import { Link, useParams } from "react-router-dom"
+import { getData, patchData } from "../../apiCalls"
+import ErrorMessage from "../ErrorMessage/ErrorMessage"
+import { useEffect, useState } from "react"
+import back from '../../images/arrow.png'
+import './Piece.css'
 
-const Piece = () => {
+const Piece = ({user, appError, setAppError}) => {
+  const [piece, setPiece] = useState('')
+  const [editing, setEditing] = useState(false)
+  const [pieceNotes, setPieceNotes] = useState('')
+  const [addSuccess, setAddSuccess] = useState(false)
+  const {pieceID, category} = useParams()
+
+  const apiCall = async () => {
+    try {
+      const fetchedCategory = await getData('closet', user.userID, category)
+      const fetchedPiece = fetchedCategory.filteredPieces.find(item => item.id === pieceID)
+      setPiece(fetchedPiece)
+    } catch(error) {
+      setAppError(error)
+    }
+  }
+  
+  useEffect(() => {
+    apiCall()
+    return () => setAppError(null)
+  }, [])
+
+  useEffect(() => {
+    setPieceNotes(piece.notes)
+  }, [piece])
+
+  const handleSave = async() => {
+    try {
+      setPiece( await patchData('closet', `${user.userID}/${pieceID}`, {...piece, notes: pieceNotes}))
+      apiCall()
+    } catch(error) {
+      setAppError(error)
+    }
+    setEditing(prev => !prev)
+    setAddSuccess(true)
+  }
+
   return (
     <section className="piece">
-      <Link to={`/closet/${useParams().category}`} style={{color: 'black', textDecoration: 'none'}}>BACK TO ALL {useParams().category.toUpperCase()}</Link>
-      <p>A clothing item and it's details will appear here</p>
+      <div className='back-to-closet'><Link to={`/closet/${category}`}><img src={back} alt='back button'/></Link></div>
+      {appError && <ErrorMessage appError={appError}/>}
+      <section className="cart-pieces clothing-container">
+        <img src={piece.image} alt={`clothing item from ${category} category`}/> 
+      </section>
+      {editing ? <input className='outfit-notes' type='textarea' placeholder="Add notes for this outfit..." value={pieceNotes} onChange={(e) => setPieceNotes(e.target.value)}/>
+      : <article className={piece.notes ? "outfit-notes piece-notes" : "outfit-notes piece-notes no-note"}>
+        {piece.notes ? piece.notes : 'Edit item to add notes'}
+      </article>}
+      {editing 
+        ? <button className="cart-button" id="editBtn" onClick={() => handleSave()}>SAVE ITEM</button>
+        : <button 
+            className="cart-button" 
+            id="editBtn" 
+            onClick={() => {
+              setEditing(prev => !prev) 
+              setAddSuccess(false)
+            }}>
+              EDIT ITEM
+          </button>
+      }
+      {addSuccess && <p>Item Edited!</p>}
     </section>
   )
 }

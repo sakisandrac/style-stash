@@ -73,7 +73,7 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
       try {
         let newOutfit = await patchData('outfit', `${user.userID}/${outfitData.id }`, {
           notes, 
-          fullOutfitImage: newOutfitImage,  
+          fullOutfitImage: newOutfitImage ? newOutfitImage : outfitData.fullOutfitImage,  
         })
 
         deletedPieces.forEach(id => {
