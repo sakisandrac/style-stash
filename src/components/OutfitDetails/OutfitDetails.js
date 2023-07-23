@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import CategoryContainer from '../CategoryContainer/CategoryContainer';
 import { getData, patchData, deleteData } from '../../apiCalls';
 import './OutfitDetails.css';
 import backIcon from '../../images/arrow.png';
 import xIcon from '../../images/close.png';
 import plus from '../../images/add.png'
 
-const OutfitDetails = ({ user, setAppError, appError }) => {
+const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   const outfitID = useParams().id;
   const [pieces, setPieces] = useState(null);
   const [outfitData, setOutfitData] = useState(null);
@@ -122,11 +123,19 @@ const OutfitDetails = ({ user, setAppError, appError }) => {
       </div>
     )
   }
+  const ChooseCategory = () => {
+    return (
+      <>
+        <h2 style={{textAlign: "center", fontWeight: "lighter"}}>Choose a category to add an item</h2>
+        <CategoryContainer closeMenu={closeMenu} parentRoute={`outfitdetails/${outfitID}/add-piece`}/>
+      </>
+    )
+  }
 
   const MainContent = () =>{
     if(location.pathname.includes('add-piece')) {
       return (
-        <p>this location is under construction</p>
+        <ChooseCategory />
       )
     } else {
       return <OutfitLanding />
