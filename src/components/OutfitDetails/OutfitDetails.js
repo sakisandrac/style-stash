@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import CategoryContainer from '../CategoryContainer/CategoryContainer';
+import CategoryPage from '../CategoryPage/CategoryPage';
 import { getData, patchData, deleteData } from '../../apiCalls';
 import './OutfitDetails.css';
 import backIcon from '../../images/arrow.png';
@@ -19,7 +20,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   const [addSuccess, setAddSuccess] = useState(false);
   const [deletedPieces, setDeletedPieces] = useState([]);
   const location = useLocation()
-  console.log(location)
+  const categoryInUrl = useParams().category
 
   useEffect(() => {
     const apiCall = async (type, userID, outfitID) => {
@@ -39,18 +40,24 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     }
   },[])
 
-  const removePiece = (e) => {
-    const filteredPieces = pieces.filter(piece => piece.id !== e.target.id)
+  const removePiece = (currentPiece) => {
+    const filteredPieces = pieces.filter(piece => piece.id !== currentPiece.id)
     setPieces(filteredPieces)
-    setDeletedPieces(prev => [...prev, e.target.id])
+    setDeletedPieces(prev => [...prev, currentPiece.id])
   }
+
+  const addPiece = (piece) => {
+    setPieces(prev => [...prev, piece])
+  }
+
+  const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
 
   const pieceEls = (pieces) => {
     return pieces?.map(piece => {
       return (
       <div key={piece.id} className='piece-image-container'>
         <img className='piece-image' alt='piece of clothing' src={piece.image}/>
-        {isEditing && <img id={piece.id} alt='icon to remove item' src={xIcon} onClick={(e) => {removePiece(e)}} />}
+        {isEditing && <img alt='icon to remove item' src={xIcon} onClick={() => {removePiece(piece)}} />}
       </div>
     )})
   }
@@ -126,6 +133,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   const ChooseCategory = () => {
     return (
       <>
+        <Link to={`/outfitdetails/${outfitID}`}><img src={backIcon} alt='back button'/></Link>
         <h2 style={{textAlign: "center", fontWeight: "lighter"}}>Choose a category to add an item</h2>
         <CategoryContainer closeMenu={closeMenu} parentRoute={`outfitdetails/${outfitID}/add-piece`}/>
       </>
@@ -133,7 +141,18 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   }
 
   const MainContent = () =>{
-    if(location.pathname.includes('add-piece')) {
+    if(categoryInUrl) {
+      return (
+        <CategoryPage 
+        removeFromCart={removePiece}
+        addToCart={addPiece}
+        checkCartForItem={checkForItem}
+        outfitID={outfitID}
+        setAppError={setAppError}
+        user={user}
+      /> 
+      )
+    } else if(location.pathname.includes('add-piece')) {
       return (
         <ChooseCategory />
       )
