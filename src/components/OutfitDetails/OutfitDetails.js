@@ -3,7 +3,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import CategoryContainer from '../CategoryContainer/CategoryContainer';
 import CategoryPage from '../CategoryPage/CategoryPage';
-import { getData, patchData, deleteData } from '../../apiCalls';
+import { getData, patchData, postData, deleteData } from '../../apiCalls';
 import './OutfitDetails.css';
 import backIcon from '../../images/arrow.png';
 import xIcon from '../../images/close.png';
@@ -19,6 +19,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   const [newOutfitImage, setNewOutfitImage] = useState("");
   const [addSuccess, setAddSuccess] = useState(false);
   const [deletedPieces, setDeletedPieces] = useState([]);
+  const [newPieces, setNewPieces] = useState([]);
   const location = useLocation()
   const categoryInUrl = useParams().category
 
@@ -48,6 +49,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
 
   const addPiece = (piece) => {
     setPieces(prev => [...prev, piece])
+    setNewPieces(prev => [...prev, piece.id])
   }
 
   const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
@@ -89,6 +91,10 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
 
         deletedPieces.forEach(id => {
           deleteData('outfit-to-pieces', `${user.userID}`, { outfitID: outfitData.id, pieceID: id })
+        })
+        
+        newPieces.forEach(id => {
+          postData(`outfit-to-pieces/${user.userID}`, {outfitID: outfitData.id, pieceID: id})
         })
       } catch (error) {
         setAppError(error)
