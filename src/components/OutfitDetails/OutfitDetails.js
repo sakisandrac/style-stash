@@ -171,10 +171,10 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   }
 
   return (
-    <>
+    <div className='outfit-page'>
     {appError && <ErrorMessage appError={appError}/>}
     {user ? <MainContent /> : <p>Please login to continue</p>}
-    </>
+    </div>
   )
 }
 
