@@ -52,6 +52,13 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     setNewPieces(prev => [...prev, piece.id])
   }
 
+  const deleteOutfit = () => {
+    deleteData('outfits', user.userID, {id: outfitID})
+    .then(data => {
+      console.log(data)
+    })
+  }
+
   const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
 
   const pieceEls = (pieces) => {
@@ -134,6 +141,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
           <input type='textarea' className='outfit-notes' onChange={(e) => handleChange(e)} value={outfitNotes} placeholder={outfitNotes.length > 0? outfitNotes : 'Add notes here...'}/>
           : <div className='outfit-notes'>{loading? 'loading...' : notes.length > 0? notes : 'Add notes here...'}
           </div>}
+          {isEditing && <button className='cart-button' onClick={deleteOutfit}>Delete Outfit</button>}
           {addSuccess && <p>Outfit Edited!</p>}
         </div>
       </div>
