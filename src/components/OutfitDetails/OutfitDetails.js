@@ -56,6 +56,9 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   const deleteOutfit = () => {
     deleteData('outfits', user.userID, {id: outfitID});
     setDeleteSuccess(true);
+    pieces.forEach(piece => {
+      deleteData('outfit-to-pieces', user.userID, {outfitID, pieceID: piece.id})
+    })
   }
 
   const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
@@ -177,6 +180,8 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
       return <OutfitLanding />
     }
   }
+
+
 
   return (
     <div className='outfit-page'>
