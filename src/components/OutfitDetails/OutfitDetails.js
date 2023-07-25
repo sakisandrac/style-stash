@@ -74,10 +74,6 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     }
   }
 
-  // const handleChange = (e) => {
-  //   setNotes(e.target.value)
-  // }
-
   const changeOutfitImage = (e) => {
     setNewOutfitImage(URL.createObjectURL(e.target.files[0]));
   }
