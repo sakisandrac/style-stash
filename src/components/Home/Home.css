@@ -6,7 +6,7 @@
 }
 
 .featured-img-container {
-  width: 30%;
+  width: 20%;
   /* max-height: 400px; */
   position: relative;
   display: flex;
@@ -54,7 +54,10 @@
   justify-content: center;
   background-color: #eccdc1;
   height: 100vh;
-  margin-top: 5px;
+  /* margin-top: 5px; */
+  background-image: url('../../images/background.png');
+  background-size: cover;
+  background-repeat: no-repeat ;
 }
 
 .homepage {
@@ -70,12 +73,23 @@
   object-fit: contain;
 }
 
-@media (max-width: 920px) {
+.featured-img-text {
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+@media (max-width: 1300px) {
   .featured-img-container {
     width: 50%;
   }
 
   .home-logo {
     width: 60%;
+  }
+}
+
+@media (max-width: 900px) {
+  .featured-img-text {
+    font-size: 1.3rem;
   }
 }
