@@ -64,7 +64,8 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     )})
   }
   
-  const toggleEditing = () => {
+  const toggleEditing = (notes) => {
+    setNotes(notes)
     setIsEditing(prev => !prev)
     setAddSuccess(false)
 
@@ -73,9 +74,9 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     }
   }
 
-  const handleChange = (e) => {
-    setNotes(e.target.value)
-  }
+  // const handleChange = (e) => {
+  //   setNotes(e.target.value)
+  // }
 
   const changeOutfitImage = (e) => {
     setNewOutfitImage(URL.createObjectURL(e.target.files[0]));
@@ -107,6 +108,12 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   }, [addSuccess])
 
   const OutfitLanding = () => {
+    const [outfitNotes, setOutfitNotes] = useState(notes)
+
+    const handleChange = (e) => {
+      setOutfitNotes(e.target.value)
+    }
+
     return (
       <div className='outfit-details-container'>
         <div className='back-icon-container'>
@@ -115,7 +122,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
         </div>
         <h1 className='page-title page-title-short'>My Outfit</h1>
         <div className='pieces-container'>
-          <button className='cart-button' onClick={toggleEditing}>{`${isEditing? 'Save Edits' : 'Edit Outfit'}`}</button>
+          <button className='cart-button' onClick={() => toggleEditing(outfitNotes)}>{`${isEditing? 'Save Edits' : 'Edit Outfit'}`}</button>
           {isEditing &&
              <>
              <label htmlFor='fileUpload' className='upload-img-btn'>{`${outfitData.fullOutfitImage? 'Change': 'Upload'} Outfit Image`}
@@ -128,7 +135,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
             {pieceEls(pieces)}
           </div>
           {isEditing ?
-          <input type='textarea' className='outfit-notes' onChange={(e) => handleChange(e)} value={notes} placeholder={notes.length > 0? notes : 'Add notes here...'}/>
+          <input type='textarea' className='outfit-notes' onChange={(e) => handleChange(e)} value={outfitNotes} placeholder={outfitNotes.length > 0? outfitNotes : 'Add notes here...'}/>
           : <div className='outfit-notes'>{loading? 'loading...' : notes.length > 0? notes : 'Add notes here...'}
           </div>}
           {addSuccess && <p>Outfit Edited!</p>}
