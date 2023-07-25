@@ -20,8 +20,9 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   const [addSuccess, setAddSuccess] = useState(false);
   const [deletedPieces, setDeletedPieces] = useState([]);
   const [newPieces, setNewPieces] = useState([]);
-  const location = useLocation()
-  const categoryInUrl = useParams().category
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const location = useLocation();
+  const categoryInUrl = useParams().category;
 
   useEffect(() => {
     const apiCall = async (type, userID, outfitID) => {
@@ -42,21 +43,19 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   },[])
 
   const removePiece = (currentPiece) => {
-    const filteredPieces = pieces.filter(piece => piece.id !== currentPiece.id)
-    setPieces(filteredPieces)
-    setDeletedPieces(prev => [...prev, currentPiece.id])
+    const filteredPieces = pieces.filter(piece => piece.id !== currentPiece.id);
+    setPieces(filteredPieces);
+    setDeletedPieces(prev => [...prev, currentPiece.id]);
   }
 
   const addPiece = (piece) => {
-    setPieces(prev => [...prev, piece])
-    setNewPieces(prev => [...prev, piece.id])
+    setPieces(prev => [...prev, piece]);
+    setNewPieces(prev => [...prev, piece.id]);
   }
 
   const deleteOutfit = () => {
-    deleteData('outfits', user.userID, {id: outfitID})
-    .then(data => {
-      console.log(data)
-    })
+    deleteData('outfits', user.userID, {id: outfitID});
+    setDeleteSuccess(true);
   }
 
   const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
@@ -143,6 +142,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
           </div>}
           {isEditing && <button className='cart-button' onClick={deleteOutfit}>Delete Outfit</button>}
           {addSuccess && <p>Outfit Edited!</p>}
+          {deleteSuccess && <p>Outfit Succesfully Deleted!</p>}
         </div>
       </div>
     )
