@@ -7,7 +7,7 @@ import { getData, patchData, postData, deleteData } from '../../apiCalls';
 import './OutfitDetails.css';
 import backIcon from '../../images/arrow.png';
 import xIcon from '../../images/close.png';
-import plus from '../../images/add.png'
+import plus from '../../images/add.png';
 
 const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   const outfitID = useParams().id;
@@ -53,12 +53,17 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     setNewPieces(prev => [...prev, piece.id]);
   }
 
-  const deleteOutfit = () => {
+  const deleteWarning = (e) => {
+    e.target.nextElementSibling.showModal()
+  }
+
+  const deleteOutfit = (e) => {
     deleteData('outfits', user.userID, {id: outfitID});
     setDeleteSuccess(true);
     pieces.forEach(piece => {
       deleteData('outfit-to-pieces', user.userID, {outfitID, pieceID: piece.id})
     })
+    e.target.parentElement.parentElement.close()
   }
 
   const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
@@ -143,9 +148,19 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
           <input type='textarea' className='outfit-notes' onChange={(e) => handleChange(e)} value={outfitNotes} placeholder={outfitNotes.length > 0? outfitNotes : 'Add notes here...'}/>
           : <div className='outfit-notes'>{loading? 'loading...' : notes.length > 0? notes : 'Add notes here...'}
           </div>}
-          {isEditing && <button className='cart-button' onClick={deleteOutfit}>Delete Outfit</button>}
-          {addSuccess && <p>Outfit Edited!</p>}
-          {deleteSuccess && <p>Outfit Succesfully Deleted!</p>}
+          {isEditing && 
+          <div className='delete-container'>
+            <button className='cart-button delete-button' onClick={(e) => deleteWarning(e)}>Delete Outfit</button>
+              <dialog className='delete-warning'>
+                <div className='delete-warning-container'>
+                  <p>Warning: You are about to delete this outfit! Action cannot be undone!</p>
+                  <button className='cart-button delete-button' onClick={(e) => {deleteOutfit(e)}}>DELELTE OUTFIT</button>
+                </div>
+              </dialog>
+          </div>
+          }
+          {addSuccess && <p className='success-text'>Outfit Edited!</p>}
+          {deleteSuccess && <p className='success-text'>Outfit Succesfully Deleted!</p>}
         </div>
       </div>
     )
@@ -180,8 +195,6 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
       return <OutfitLanding />
     }
   }
-
-
 
   return (
     <div className='outfit-page'>
