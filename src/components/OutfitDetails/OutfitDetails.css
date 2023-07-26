@@ -59,11 +59,11 @@
 
 .delete-warning {
   width: 50%;
-  height: 100px;
+  height: 130px;
   border: 1px solid;
   border-radius: 20px;
   background-color: #f7f2eb;
-  padding: 50px;
+  padding: 20px;
 }
 
 .delete-warning-container {
@@ -75,4 +75,20 @@
 
 .success-text {
   font-size: 1.2rem;
+}
+
+.modal-button-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-btn {
+  width: 140px;
+  height: 45px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

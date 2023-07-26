@@ -63,7 +63,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     pieces.forEach(piece => {
       deleteData('outfit-to-pieces', user.userID, {outfitID, pieceID: piece.id})
     })
-    e.target.parentElement.parentElement.close()
+    e.target.parentElement.parentElement.parentElement.close()
   }
 
   const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
@@ -154,11 +154,13 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
               <dialog className='delete-warning'>
                 <div className='delete-warning-container'>
                   <p>Warning: You are about to delete this outfit! Action cannot be undone!</p>
-                  <button className='cart-button delete-button' onClick={(e) => {deleteOutfit(e)}}>DELELTE OUTFIT</button>
+                  <div className='modal-button-container'>
+                    <button className='cart-button delete-button' onClick={(e) => {deleteOutfit(e)}}>DELELTE OUTFIT</button>
+                    <div src={xIcon} className='cart-button back-btn' onClick={(e)=> {e.target.parentElement.parentElement.parentElement.close()}}>Go Back</div>
+                  </div>
                 </div>
               </dialog>
-          </div>
-          }
+          </div>}
           {addSuccess && <p className='success-text'>Outfit Edited!</p>}
           {deleteSuccess && <p className='success-text'>Outfit Succesfully Deleted!</p>}
         </div>
