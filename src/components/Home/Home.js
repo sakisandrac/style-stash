@@ -2,6 +2,7 @@ import './Home.css';
 import logo from '../../images/homepage.png';
 import { useEffect, useState } from 'react';
 import { getData } from '../../apiCalls';
+import { Link } from 'react-router-dom';
 
 const Home = ({user, setAppError}) => {
 
@@ -15,7 +16,8 @@ const Home = ({user, setAppError}) => {
       try {
         const data = await getData(type, userID)
         console.log(data.allData)
-        setFeaturedImage(data.allData[getRandIndex(data.allData.length)].outfit.fullOutfitImage)
+        setFeaturedImage(data.allData[getRandIndex(data.allData.length)].outfit)
+        console.log(featuredImage)
       } catch (error) {
         setAppError(error)
       }
@@ -32,10 +34,8 @@ const Home = ({user, setAppError}) => {
         <img className='home-logo' src={logo} />
         {user?
         <div className='featured-img-container'>
-          <img className='featured-img' src={featuredImage}/> 
-          {/* <div className="overlay1"></div> */}
-          <div className='view-outfit-btn'>View my outfit</div>
-          {/* this doesn't link anywhere yet- will have to come back and add it! */}
+          <img className='featured-img' src={featuredImage.fullOutfitImage}/> 
+          <Link className='view-outfit-link' to={`/outfitdetails/${featuredImage.id}`}><div className='view-outfit-btn-home'>View my outfit</div></Link>
           <p className='featured-img-text'>♡ Today's Featured Outfit ♡</p>
         </div> 
         : <p>Please Login to Style Stash!</p>}

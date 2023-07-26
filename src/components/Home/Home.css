@@ -7,7 +7,6 @@
 
 .featured-img-container {
   width: 20%;
-  /* max-height: 400px; */
   position: relative;
   display: flex;
   justify-content: center;
@@ -16,8 +15,8 @@
   object-fit: contain;
 }
 
-.view-outfit-btn {
-  position: absolute;
+.view-outfit-btn-home {
+  /* position: absolute; */
   background-color: #debdac;
   border-radius: 20px;
   color: black;
@@ -29,23 +28,11 @@
   transition: opacity .35s ease;
 }
 
-/* .overlay1 {
+.view-outfit-link {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0);
-  border-radius: 180px 180px 0px 0px;
-  transition: background 0.5s ease;
-} */
-
-.featured-img-container:hover .overlay1 {
-  display: block;
-  background: rgba(255, 245, 231, 0.3);
 }
 
-.featured-img-container:hover .view-outfit-btn {
+.featured-img-container:hover .view-outfit-btn-home {
   opacity: 1;
 }
 
