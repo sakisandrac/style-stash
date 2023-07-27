@@ -41,3 +41,54 @@
   justify-content: space-between;
   margin: 0% 30% 0% 30%;
 }
+
+.delete-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete-button {
+  margin: 15px;
+}
+
+.delete-button:hover {
+  background-color: rgb(180, 47, 47);
+}
+
+.delete-warning {
+  width: 50%;
+  height: 130px;
+  border: 1px solid;
+  border-radius: 20px;
+  background-color: #f7f2eb;
+  padding: 20px;
+}
+
+.delete-warning-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-text {
+  font-size: 1.2rem;
+}
+
+.modal-button-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-btn {
+  width: 140px;
+  height: 45px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

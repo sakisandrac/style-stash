@@ -3,7 +3,7 @@ import './ItemForm.css';
 import { v4 as uuid} from 'uuid';
 import { postData } from '../../apiCalls';
 
-const ItemForm = () => {
+const ItemForm = ({user}) => {
   const [image, setImage] = useState("");
   const [notes, setNotes] = useState("");
   const [category, setCategory] = useState("");
@@ -38,7 +38,8 @@ const ItemForm = () => {
         id: `PIE-${uuid()}`,
         image: image,
         categoryID: `CAT-${category.toLowerCase()}`,
-        notes: notes
+        notes: notes,
+        userID: user.userID
       });
       clearForm();
     } else {
