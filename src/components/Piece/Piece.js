@@ -47,8 +47,8 @@ const Piece = ({user, appError, setAppError}) => {
       <div className='back-to-closet'><Link to={`/closet/${category}`}><img src={back} alt='back button'/></Link></div>
       {appError && <ErrorMessage appError={appError}/>}
       <div className="piece-cart-container">
-        <section className="cart-pieces clothing-container">
-          <img src={piece.image} alt={`clothing item from ${category} category`} />
+        <section className="clothing-container">
+          <img className='piece-cart-img' src={piece.image} alt={`clothing item from ${category} category`} />
         </section>
         {editing ? <textarea className='edit-notes' placeholder="Add notes for this outfit..." value={pieceNotes} onChange={(e) => setPieceNotes(e.target.value)} />
           : <article className={piece.notes ? "piece-notes" : "piece-notes no-note"}>

@@ -1,6 +1,7 @@
 .outfit-page {
   height: 80vh;
 }
+
 .outfit-details-container {
   display: flex;
   flex-direction: column;

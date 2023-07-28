@@ -3,12 +3,13 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  /* height: 90vh; */
 }
 
 .piece-cart-container {
   display: flex;
   align-items: center;
+  flex-direction: column;
+  height: 90vh;
 }
 
 .edit-button {
@@ -27,6 +28,10 @@
   font-size: large;
 }
 
+.piece-cart-img {
+  width: 80%;
+}
+
 .piece-notes {
   border: 2px solid #eccdc1;
   border-radius: 20px;
@@ -37,7 +42,7 @@
   margin: 2%;
   overflow-y: auto;
   width: 50%;
-  max-height: 400px;
+  height: 80px;
 }
 
 .edit-notes {
@@ -48,7 +53,7 @@
   margin: 2%;
   overflow: auto;
   width: 50%;
-  height: 300px;
+  height: 80px;
 }
 
 .no-note {
@@ -65,22 +70,34 @@
 }
 
 .clothing-container {
-  display: flex; 
+  display: flex;
   justify-content: center;
+  width: 500px;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  overflow-y: auto;
+  background-color: #eccdc166;
+  border: 3px solid #eccdc1;
+  border-radius: 25px;
+  padding: 3%;
+  margin: 3%;
 }
 
 @media (max-width: 600px) {
-  .piece-cart-container {
-    flex-direction: column;
-    align-items: center;
-  }
 
   .piece-notes {
     max-height: 100px;
   }
 
-  .edit-notes {
-    height: 100px;
+  .clothing-container {
+    width: 60%;
+    height: 50%;
   }
+
+  .piece-cart-container {
+    justify-content: center;
+  }
+  
 }
