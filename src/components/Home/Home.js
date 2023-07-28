@@ -17,7 +17,12 @@ const Home = ({user, setAppError}) => {
     const apiCall = async (type, userID) => {
       try {
         const data = await getData(type, userID)
-        setFeaturedImage(data.allData[getRandIndex(data.allData.length)].outfit)
+        const outfit = data.allData[getRandIndex(data.allData.length)].outfit
+        if (outfit.fullOutfitImage) {
+          setFeaturedImage(data.allData[getRandIndex(data.allData.length)].outfit)
+        } else {
+          apiCall()
+        }
       } catch (error) {
         setAppError(error)
       }
@@ -28,28 +33,28 @@ const Home = ({user, setAppError}) => {
       }
   },[])
 
-  useEffect(() => {
-    const apiCall = async (type, userID) => {
-      try {
-        const data = await getData(type, userID)
-        console.log(data)
-        const items = [data.pieces[getRandIndex(data.pieces.length)]]
-        // , data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)]
-        setFeaturedItems(items)
-      } catch (error) {
-        setAppError(error)
-      }
-    }
+  // useEffect(() => {
+  //   const apiCall = async (type, userID) => {
+  //     try {
+  //       const data = await getData(type, userID)
+  //       console.log(data)
+  //       const items = [data.pieces[getRandIndex(data.pieces.length)]]
+  //       // , data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)]
+  //       setFeaturedItems(items)
+  //     } catch (error) {
+  //       setAppError(error)
+  //     }
+  //   }
 
-      if(user) {
-        apiCall('closet', user.userID)
-      }
-  },[])
+  //     if(user) {
+  //       apiCall('closet', user.userID)
+  //     }
+  // },[])
 
-  const featuredPieces = () => {
-    console.log(featuredItems)
-    return featuredItems.map(item => <img key={item.id} className='featured-piece' src={item.image}/>
-  )}
+  // const featuredPieces = () => {
+  //   console.log(featuredItems)
+  //   return featuredItems.map(item => <img key={item.id} className='featured-piece' src={item.image}/>
+  // )}
 
   return (
     <div className='homepage-container'>
@@ -62,10 +67,10 @@ const Home = ({user, setAppError}) => {
               <Link className='view-outfit-link' to={`/outfitdetails/${featuredImage.id}`}><div className='view-outfit-btn-home'>View my outfit</div></Link>
               <p className='featured-img-text'>♡ Today's Featured Outfit ♡</p>
             </div>
-            <div className='featured-pieces-container'>
+            {/* <div className='featured-pieces-container'>
               {featuredPieces()}
               <p className='featured-img-text'>♡ Today's Featured Piece ♡</p>
-            </div>
+            </div> */}
           </div>
         : <p>Please Login to Style Stash!</p>}
       </main>
