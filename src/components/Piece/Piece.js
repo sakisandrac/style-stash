@@ -46,25 +46,27 @@ const Piece = ({user, appError, setAppError}) => {
     <section className="piece">
       <div className='back-to-closet'><Link to={`/closet/${category}`}><img src={back} alt='back button'/></Link></div>
       {appError && <ErrorMessage appError={appError}/>}
-      <section className="cart-pieces clothing-container">
-        <img src={piece.image} alt={`clothing item from ${category} category`}/> 
-      </section>
-      {editing ? <input className='outfit-notes' type='textarea' placeholder="Add notes for this outfit..." value={pieceNotes} onChange={(e) => setPieceNotes(e.target.value)}/>
-      : <article className={piece.notes ? "outfit-notes piece-notes" : "outfit-notes piece-notes no-note"}>
-        {piece.notes ? piece.notes : 'Edit item to add notes'}
-      </article>}
-      {editing 
-        ? <button className="cart-button" id="editBtn" onClick={() => handleSave()}>SAVE ITEM</button>
-        : <button 
-            className="cart-button" 
-            id="editBtn" 
+      <div className="piece-cart-container">
+        <section className="cart-pieces clothing-container">
+          <img src={piece.image} alt={`clothing item from ${category} category`} />
+        </section>
+        {editing ? <textarea className='edit-notes' placeholder="Add notes for this outfit..." value={pieceNotes} onChange={(e) => setPieceNotes(e.target.value)} />
+          : <article className={piece.notes ? "piece-notes" : "piece-notes no-note"}>
+            {piece.notes ? piece.notes : 'Edit item to add notes'}
+          </article>}
+        {editing
+          ? <button className="edit-button" id="editBtn" onClick={() => handleSave()}>SAVE ITEM</button>
+          : <button
+            className="edit-button"
+            id="editBtn"
             onClick={() => {
-              setEditing(prev => !prev) 
+              setEditing(prev => !prev)
               setAddSuccess(false)
             }}>
-              EDIT ITEM
+            EDIT ITEM
           </button>
-      }
+        }
+      </div>
       {addSuccess && <p>Item Edited!</p>}
     </section>
   )

@@ -3,23 +3,57 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 90vh;
+  /* height: 90vh; */
+}
+
+.piece-cart-container {
+  display: flex;
+  align-items: center;
+}
+
+.edit-button {
+  margin: 15px;
+  border: none;
+  padding: 15px;
+  border-radius: 20px;
+  min-width: 15%;
+  max-width: 250px;
+  height: 60px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #eccdc1;
+  text-decoration: none;
+  color: black;
+  font-size: large;
 }
 
 .piece-notes {
   border: 2px solid #eccdc1;
+  border-radius: 20px;
   display: flex; 
   justify-content: center;
   text-align: center;
   padding: 1%;
   margin: 2%;
   overflow-y: auto;
+  width: 50%;
+  max-height: 400px;
+}
+
+.edit-notes {
+  border-radius: 20px;
+  justify-content: center;
+  text-align: center;
+  padding: 1%;
+  margin: 2%;
+  overflow: auto;
+  width: 50%;
+  height: 300px;
 }
 
 .no-note {
   align-items: center;
 }
-
 
 .piece-notes::-webkit-scrollbar {
   width: 10px;
@@ -36,6 +70,17 @@
   align-items: center;
 }
 
-#editBtn {
-  padding: 5%;
+@media (max-width: 600px) {
+  .piece-cart-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .piece-notes {
+    max-height: 100px;
+  }
+
+  .edit-notes {
+    height: 100px;
+  }
 }
