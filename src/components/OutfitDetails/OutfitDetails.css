@@ -22,7 +22,7 @@
 }
 
 .piece-image {
-  width: 90%;
+  width: 220px;
   border-radius: 20px;
   margin: 10px;
 }
@@ -30,6 +30,7 @@
 .pieces-container {
   height: 80vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin: 0 40px 60px 20px;
 
@@ -108,12 +109,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40%;
-  height: 70%;
+  width: 50%;
+  height: 60%;
   border-radius: 25px;
   text-align: center;
   border: 1px solid black;
 }
+
+.pieces-scroll {
+  width: 60%;
+  max-width: 1500px;
+  height: 80%;
+  display: flex; 
+  /* flex-direction: column; */
+  align-items: center;
+  overflow-x: auto;
+  background-color: #eccdc166;
+  border: 3px solid #eccdc1;
+  border-radius: 25px;
+  padding: 3%;
+  margin: 3%;
+}
+
 
 @media (max-width: 900px) {
   .outfit-details-container {
@@ -124,8 +141,16 @@
     flex-direction: column;
   }
 
+  .pieces-scroll {
+    flex-direction: column;
+  }
+
   .notes {
     width: 65%;
     height: 20%;
+  }
+
+  .piece-image {
+    width: 90%;
   }
 }

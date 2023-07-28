@@ -141,7 +141,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
             {newOutfitImage && <img className='file-image' src={newOutfitImage} />}
            </>
           }
-          <div className='cart-pieces'>
+          <div className='pieces-scroll'>
             {pieceEls(pieces)}
           </div>
           {isEditing ?
