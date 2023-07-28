@@ -15,6 +15,8 @@ Our backend repo <a href-="https://github.com/sakisandrac/style-stash-api">here<
 ## Challenges:
 
 ## Project Preview
+<img width="654" alt="stylestash" src="https://github.com/sakisandrac/style-stash/assets/118419729/c3fa622e-7856-4f15-9a55-14b4da8f224e"><br>
+<img width="250" alt="Screenshot 2023-07-28 at 12 00 00 AM" src="https://github.com/sakisandrac/style-stash/assets/118419729/185342d4-306e-475a-8b50-21f14f9e7845"><img width="250" alt="Screenshot 2023-07-28 at 12 00 37 AM" src="https://github.com/sakisandrac/style-stash/assets/118419729/e5362fc3-1e73-4d2a-9573-19be4f637167"><img width="250" alt="Screenshot 2023-07-28 at 12 01 11 AM" src="https://github.com/sakisandrac/style-stash/assets/118419729/59eee109-a98c-458a-8dfd-7e571e9ac953">
 
 ## Set up
 1. Fork or clone down this respository. 
