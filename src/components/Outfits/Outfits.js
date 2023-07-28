@@ -14,6 +14,7 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
       try {
         const data = await getData(type, userID)
         setOutfits(data.allData)
+        setAppError(null)
       } catch (error) {
         setAppError(error)
       }
@@ -22,6 +23,8 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
       if(user) {
         apiCall('outfits', user.userID)
       }
+
+      return () => setAppError(null)
   },[])
 
   const outfitPieceImgs = (outfit) => {
