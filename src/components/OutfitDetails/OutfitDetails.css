@@ -30,7 +30,6 @@
 .pieces-container {
   height: 80vh;
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
   margin: 0 40px 60px 20px;
 
@@ -62,7 +61,6 @@
   background-color: #eccdc1;
   text-decoration: none;
   color: black;
-  /* margin: 1%; */
   font-size: large;
 }
 
@@ -119,28 +117,15 @@
 
 @media (max-width: 900px) {
   .outfit-details-container {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
   }
 
   .pieces-container {
-    height: 80vh;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 60px;
   }
 
   .notes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 65%;
     height: 20%;
-    border-radius: 25px;
-    text-align: center;
-    border: 1px solid black;
   }
 }
