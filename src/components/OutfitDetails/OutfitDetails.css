@@ -30,9 +30,10 @@
 .pieces-container {
   height: 80vh;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
-  margin-bottom: 60px;
+  margin: 0 40px 60px 20px;
+
 }
 
 .back-icon-container {
@@ -51,6 +52,18 @@
 
 .delete-button {
   margin: 15px;
+  border: none;
+  padding: 15px;
+  border-radius: 20px;
+  min-width: 10%;
+  max-width: 250px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #eccdc1;
+  text-decoration: none;
+  color: black;
+  /* margin: 1%; */
+  font-size: large;
 }
 
 .delete-button:hover {
@@ -91,4 +104,43 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.notes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  height: 70%;
+  border-radius: 25px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+@media (max-width: 900px) {
+  .outfit-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .pieces-container {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+
+  .notes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65%;
+    height: 20%;
+    border-radius: 25px;
+    text-align: center;
+    border: 1px solid black;
+  }
 }

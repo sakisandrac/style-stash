@@ -12,7 +12,11 @@ form {
 }
 
 .file-image {
+  margin: 15px;
+  border-radius: 20px;
   width: 50%;
+  height: 50%;
+  object-fit: cover;
 }
 
 .upload-img-btn {
