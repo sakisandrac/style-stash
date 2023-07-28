@@ -213,10 +213,12 @@ function App() {
         <Route path='/closet/:category/:pieceID' element={<Piece user={user} appError={appError} setAppError={setAppError}/>} />
         <Route path="/login" element={<LoginPage appError={appError} setAppError={setAppError} setUser={setUser} user={user}/>} />
         <Route path='/outfits' element={<Outfits appError={appError} setAppError={setAppError} user={user} closeMenu={openOrCloseMenu}/>} />
-        <Route path="/itemform" element={<ItemForm />} />
+        <Route path="/itemform" element={<ItemForm user={user}/>} />
         <Route path='/outfitform' element={<OutfitForm closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitform/:category' element={<OutfitForm user={user} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
-        <Route path='/outfitdetails/:id' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError}/>} />
+        <Route path='/outfitdetails/:id' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
+        <Route path='/outfitdetails/:id/add-piece' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
+        <Route path='/outfitdetails/:id/add-piece/:category' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
       </Routes>}
     </main>
   );
