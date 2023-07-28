@@ -207,7 +207,7 @@ function App() {
       {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} setUser={setUser} openMenu={openOrCloseMenu}/>}
       {mainShown &&
       <Routes>
-        <Route path="/" element={<Home />}/> 
+        <Route path="/" element={<Home user={user} setAppError={setAppError}/>}/> 
         <Route path='/closet' element={<Closet user={user} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category' element={<CategoryPage user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category/:pieceID' element={<Piece user={user} appError={appError} setAppError={setAppError}/>} />

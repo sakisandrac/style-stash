@@ -132,21 +132,21 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
         </div>
         <h1 className='page-title page-title-short'>My Outfit</h1>
         <div className='pieces-container'>
-          <button className='cart-button' onClick={() => toggleEditing(outfitNotes)}>{`${isEditing? 'Save Edits' : 'Edit Outfit'}`}</button>
+          <button className='delete-button' onClick={() => toggleEditing(outfitNotes)}>{`${isEditing? 'Save Edits' : 'Edit Outfit'}`}</button>
           {isEditing &&
              <>
              <label htmlFor='fileUpload' className='upload-img-btn'>{`${outfitData.fullOutfitImage? 'Change': 'Upload'} Outfit Image`}
              <input id='fileUpload' className='file-upload-default' type="file" onChange={(e) => {changeOutfitImage(e)}}/>
-           </label>
-           <img className='file-image' src={newOutfitImage} />
+            </label>
+            {newOutfitImage && <img className='file-image' src={newOutfitImage} />}
            </>
           }
-          <div className='cart-pieces'>
+          <div className='pieces-scroll'>
             {pieceEls(pieces)}
           </div>
           {isEditing ?
           <input type='textarea' className='outfit-notes' onChange={(e) => handleChange(e)} value={outfitNotes} placeholder={outfitNotes.length > 0? outfitNotes : 'Add notes here...'}/>
-          : <div className='outfit-notes'>{loading? 'loading...' : notes.length > 0? notes : 'Add notes here...'}
+          : <div className='notes'>{loading? 'loading...' : notes.length > 0? notes : 'Add notes here...'}
           </div>}
           {isEditing && 
           <div className='delete-container'>
@@ -156,7 +156,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
                   <p>Warning: You are about to delete this outfit! Action cannot be undone!</p>
                   <div className='modal-button-container'>
                     <button className='cart-button delete-button' onClick={(e) => {deleteOutfit(e)}}>DELELTE OUTFIT</button>
-                    <div src={xIcon} className='cart-button back-btn' onClick={(e)=> {e.target.parentElement.parentElement.parentElement.close()}}>Go Back</div>
+                    <div src={xIcon} className='back-btn' onClick={(e)=> {e.target.parentElement.parentElement.parentElement.close()}}>Go Back</div>
                   </div>
                 </div>
               </dialog>

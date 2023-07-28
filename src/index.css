@@ -15,11 +15,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
 }
-/* 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
 
 .menu-btn {
   background-color: #00000000;
@@ -41,7 +36,7 @@ code {
   align-items: center;
 }
 
-.category-container, .piece-container {
+.category-container{
   width: 100%;
   height: 80%;
   display: flex; 
@@ -50,3 +45,11 @@ code {
   justify-content: center;
 }
 
+.piece-container {
+  display: flex; 
+  flex-wrap: wrap;
+  align-items: space-evenly;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+}

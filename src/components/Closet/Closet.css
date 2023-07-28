@@ -40,6 +40,13 @@
   cursor: pointer;
 }
 
+.closet-piece {
+  border-radius: 25px;
+  width: 25%;
+  margin: 1%;
+  cursor: pointer;
+}
+
 .icon-container {
   width: 100%;
   display: flex;

@@ -17,3 +17,8 @@
 .back-to-closet {
   width: 95%;
 }
+
+.piece-container {
+  overflow: scroll;
+  
+}
