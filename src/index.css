@@ -4,6 +4,8 @@
 
 html {
   height: 100%;
+  margin: 0;
+  width: 100%
 }
 
 body {
@@ -28,3 +30,11 @@ body {
   border-bottom: 5px double #eccdc1;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #debdac;
+  border-radius: 25px;
+}
