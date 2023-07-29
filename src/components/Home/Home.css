@@ -105,13 +105,13 @@
   font-size: 1.7rem;
   text-align: center;
   width: 410px;
+  max-width: 100%;
 }
 
 .featured-piece {
   width: 250px;
   height: 250px;
   object-fit: cover;
-  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
 }
 
 .piece-0 {
@@ -147,6 +147,23 @@
   width: 100%;
   height: 100%;
   background-color: #fadcd1;
+}
+
+.modal-open-featured {
+  border-radius: 180px 180px 0px 0px;
+  margin: 0;
+  height: 350px;
+  width: 350px;
+}
+
+.modal-open-featured-piece {
+  height: 160px; 
+  width: 160px;
+  object-fit: cover;
+}
+
+.column-flex {
+  flex-direction: column;
 }
 
 @media (max-width: 1200px) {
