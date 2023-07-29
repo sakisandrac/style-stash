@@ -66,7 +66,7 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
     {user ?
       <div className='my-outfits-container'>
         <Link to='/outfitform' className='menu-btn add-btn' onClick={() => closeMenu('close')}><img src={add} alt='close button' /></Link>
-        <h1 className='my-outfits-header'>My Outfits</h1>
+        <h1 className='page-title'>My Outfits</h1>
         <div className='outfits-container'>
           {userOutfitImages}
         </div>
