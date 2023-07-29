@@ -4,7 +4,7 @@ import './FormPiece.css'
 
 const FormPiece = ({piece, itemInCart, addToCart, removeFromCart}) => {
   return (
-  <div className='choose-piece piece-link closet-link'>
+  <div className='choose-piece piece-link form-link'>
     <button className='add-cart-btn' onClick={itemInCart ? () => removeFromCart(piece) : () => addToCart(piece)}><img src={itemInCart ? remove : add}/></button>
     <img src={piece.image} />
   </div>
