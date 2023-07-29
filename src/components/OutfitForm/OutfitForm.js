@@ -113,7 +113,7 @@ const OutfitForm = ({closeMenu, setAppError, user}) => {
 
   return (
     <section className={location.pathname.includes('cart') ? 'cart-page' :'closet-page'}>
-      <section className={categoryInUrl ? 'top-form-links margin-links' : 'top-form-links'}>
+      <section className='top-form-links'>
         {!location.pathname.includes('cart') && categoryInUrl && <Link to='/outfitform'><img src={back} alt='back button'/></Link>}
         <section className="outfit-cart-link-container">
           <Link className='outfit-cart-link' to='/outfitform/cart'><img src={hanger}/></Link>

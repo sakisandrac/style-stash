@@ -1,3 +1,9 @@
+.outfits-page {
+  display: flex;
+  width: 100%;
+  min-width: 100%;
+}
+
 .outfit-img-container {
   width: 350px;
   height: 350px;
@@ -35,8 +41,8 @@
 }
   
 .outfit-img-container:hover .overlay {
-    display: block;
-    background: rgba(255, 245, 231, 0.3);
+  display: block;
+  background: rgba(255, 245, 231, 0.3);
 }
 
 .full-outfit-img {
@@ -68,6 +74,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  max-width: 1400px
 }
 
 .my-outfits-header {

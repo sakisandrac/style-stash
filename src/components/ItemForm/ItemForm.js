@@ -69,12 +69,13 @@ const ItemForm = ({user}) => {
 
   return ( 
     <div className='item-form'>
-      <h1 className='add-item-header'>Add Item To Closet:</h1>
+      <h1 className='page-title'>Add Item To Closet:</h1>
+      {/* <h1 className='add-item-header'></h1> */}
       <form>
         <label htmlFor='fileUpload' className='upload-img-btn'>Upload Image
           <input id='fileUpload' className='file-upload-default' type="file" onChange={handleChange} />
         </label>
-        <img className='file-image' src={image} />
+        {image && <img className='file-image' src={image} />}
         <select
           className='select-input'
           value={category}
@@ -91,7 +92,7 @@ const ItemForm = ({user}) => {
           <option value='accessories'>Accessories</option>
           <option value='miscellaneous'>Miscellaneous</option>
         </select>
-        <textarea className='notes-input' value={notes} onChange={handleNotes} placeholder='notes'></textarea>
+        <textarea className='notes' value={notes} onChange={handleNotes} placeholder='notes'></textarea>
         <button className='add-btn' onClick={handleSubmit}>Add Item</button>
       </form>
       {error.error && <p>{error.message}</p>}

@@ -7,5 +7,18 @@
 
 .add-cart-btn > img{
   width: 30px;
-  margin-top: 10px;
+}
+
+.form-link {
+  text-align: center;
+  text-decoration: none;
+  font-size: x-large;
+  color: black;
+  border-radius: 25px;
+  height: 30%;
+  margin: 1%;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

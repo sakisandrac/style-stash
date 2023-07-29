@@ -145,7 +145,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
             {pieceEls(pieces)}
           </div>
           {isEditing ?
-          <input type='textarea' className='outfit-notes' onChange={(e) => handleChange(e)} value={outfitNotes} placeholder={outfitNotes.length > 0? outfitNotes : 'Add notes here...'}/>
+          <input type='textarea' className='notes' onChange={(e) => handleChange(e)} value={outfitNotes} placeholder={outfitNotes.length > 0? outfitNotes : 'Add notes here...'}/>
           : <div className='notes'>{loading? 'loading...' : notes.length > 0? notes : 'Add notes here...'}
           </div>}
           {isEditing && 
