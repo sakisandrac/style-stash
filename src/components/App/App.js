@@ -185,7 +185,7 @@ function App() {
   }
 
   const resizeScreen = () => {
-    window.innerWidth <= 700 
+    window.innerWidth <= 740 
       ? setSmallScreen(true)
       : setSmallScreen(false)
   }
