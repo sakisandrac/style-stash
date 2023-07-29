@@ -19,6 +19,7 @@ const Home = ({user, setAppError}) => {
         const data = await getData(type, userID)
         const outfit = data.allData[getRandIndex(data.allData.length)].outfit
         if (outfit.fullOutfitImage) {
+          console.log('outgit', outfit.fullOutfitImage)
           setFeaturedImage(data.allData[getRandIndex(data.allData.length)].outfit)
         } else {
           apiCall()
@@ -33,44 +34,56 @@ const Home = ({user, setAppError}) => {
       }
   },[])
 
-  // useEffect(() => {
-  //   const apiCall = async (type, userID) => {
-  //     try {
-  //       const data = await getData(type, userID)
-  //       console.log(data)
-  //       const items = [data.pieces[getRandIndex(data.pieces.length)]]
-  //       // , data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)]
-  //       setFeaturedItems(items)
-  //     } catch (error) {
-  //       setAppError(error)
-  //     }
-  //   }
+  useEffect(() => {
+    const apiCallItem = async (type, userID) => {
+      try {
+        setFeaturedItems([])
+        const data = await getData(type, userID)
+        const items = [data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)]]
+        if (items.length > 4) {
+          items.splice(0, 1)
+        }
+        setFeaturedItems(items)
+      } catch (error) {
+        setAppError(error)
+      }
+    }
 
-  //     if(user) {
-  //       apiCall('closet', user.userID)
-  //     }
-  // },[])
+      if(user) {
+        apiCallItem('closet', user.userID)
+      }
+  },[])
 
-  // const featuredPieces = () => {
-  //   console.log(featuredItems)
-  //   return featuredItems.map(item => <img key={item.id} className='featured-piece' src={item.image}/>
-  // )}
+  const featuredPieces = () => {
+    return featuredItems.map(item => {
+      return (
+        <div className='featured-piece-container'>
+          <img key={item.id} className={`featured-piece piece-${featuredItems.indexOf(item)}`} src={item.image} />
+          <Link className='view-outfit-link' to={`closet/${item.categoryID.split('-')[1]}/${item.id}`}><div className='view-outfit-btn-home'>View item</div></Link>
+        </div>
+      )
+    }
+  )}
 
   return (
     <div className='homepage-container'>
       <main className='homepage'> 
-        <img className='home-logo' src={logo} />
+        {/* <img className='home-logo' src={logo} /> */}
         {user?
           <div className='featured-container'>
-            <div className='featured-img-container'>
-              <img className='featured-img' src={featuredImage.fullOutfitImage} />
-              <Link className='view-outfit-link' to={`/outfitdetails/${featuredImage.id}`}><div className='view-outfit-btn-home'>View my outfit</div></Link>
-              <p className='featured-img-text'>♡ Today's Featured Outfit ♡</p>
+            <div className='featured-left'>
+              <div className='featured-img-container'>
+                <img className='featured-img' src={featuredImage.fullOutfitImage} />
+                <Link className='view-outfit-link' to={`/outfitdetails/${featuredImage.id}`}><div className='view-outfit-btn-home'>View my outfit</div></Link>
+                <p className='featured-img-text'>Today's Featured Outfit ♡</p>
+              </div>
             </div>
-            {/* <div className='featured-pieces-container'>
-              {featuredPieces()}
-              <p className='featured-img-text'>♡ Today's Featured Piece ♡</p>
-            </div> */}
+            <div className='featured-right'>
+              <div className='featured-pieces-container'>
+                {featuredPieces()}
+                <p className='featured-img-text'>Re-discover These Pieces ♡</p>
+              </div>
+            </div>
           </div>
         : <p>Please Login to Style Stash!</p>}
       </main>

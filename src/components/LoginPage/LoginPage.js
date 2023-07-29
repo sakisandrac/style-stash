@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getData } from '../../apiCalls';
+import { postData } from '../../apiCalls';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -11,11 +11,6 @@ const LoginPage = ({ user, setUser, appError, setAppError }) => {
   const [password, setPassword] = useState("");
   const [credentialsSubmitted, setCredentialsSubmitted] = useState(false);
   const [loginError, setLoginError] = useState(false);
-
-   //is this what you meant by cleaning up the error? this will set the error back to null on page load to try again
-  useEffect(() => {
-    setAppError(null)
-  }, [])
 
   const handleChange = (e) => {
     if (e.target.name === 'username') {
@@ -42,7 +37,7 @@ const LoginPage = ({ user, setUser, appError, setAppError }) => {
     useEffect(() => {
     const login = async (username, password) => {
       try {
-        const data = await getData('user', {username, password});
+        const data = await postData('user', {username, password});
         console.log(data.credentialsFound[0])
         setUser(data.credentialsFound[0])
       } catch (error) {
@@ -53,6 +48,9 @@ const LoginPage = ({ user, setUser, appError, setAppError }) => {
     if(credentialsSubmitted) {
     login(username, password);
     }
+
+    return () => setAppError(null)
+    
   }, [credentialsSubmitted])
 
  const navigate = useNavigate();

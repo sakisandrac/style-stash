@@ -37,7 +37,7 @@ const Cart = ({cart, removeFromCart, fullOutfitImage, updateOutfitImg, notes, up
           <input id='outfitImgUpload' className='file-upload-default' type="file" onChange={(e) => handleChange(updateOutfitImg, e)} />
         </label>
       </div>
-      <img style={{width: "150px"}} className='file-image' src={fullOutfitImage} />
+      {fullOutfitImage && <img style={{width: "150px"}} className='file-image' src={fullOutfitImage} />}
       <section className="cart-pieces">
         {cart.length ? pieceEls : <p className='empty-cart-text'>No clothing items added yet! Add some pieces to create an outfit!</p>}
       </section>
