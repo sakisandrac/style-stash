@@ -153,4 +153,12 @@
   .piece-image {
     width: 90%;
   }
+
+  .modal-button-container {
+    flex-direction: column;
+  }
+
+  .delete-button {
+    margin: 5px;
+  }
 }
