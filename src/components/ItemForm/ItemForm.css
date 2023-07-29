@@ -14,8 +14,9 @@ form {
 .file-image {
   margin: 15px;
   border-radius: 20px;
-  width: 50%;
-  height: 50%;
+  width: 30%;
+  min-width: 100px;
+  height: 30%;
   object-fit: cover;
 }
 

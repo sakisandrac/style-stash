@@ -61,6 +61,7 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
 
   return (
     <>
+    {/* <div className='outfits-page'> */}
     {appError && <ErrorMessage appError={appError}/>}
     {user ?
       <div className='my-outfits-container'>
@@ -71,6 +72,7 @@ const Outfits = ({setAppError, closeMenu, user, appError}) => {
         </div>
       </div>
       : <p>Please Login to Continue</p>}
+    {/* </div> */}
     </>
   )
 }
