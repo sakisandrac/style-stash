@@ -55,7 +55,14 @@ const Home = ({user, setAppError}) => {
   },[])
 
   const featuredPieces = () => {
-    return featuredItems.map(item => <img key={item.id} className={`featured-piece piece-${featuredItems.indexOf(item)}`} src={item.image}/>
+    return featuredItems.map(item => {
+      return (
+        <div className='featured-piece-container'>
+          <img key={item.id} className={`featured-piece piece-${featuredItems.indexOf(item)}`} src={item.image} />
+          <Link className='view-outfit-link' to={`closet/${item.categoryID.split('-')[1]}/${item.id}`}><div className='view-outfit-btn-home'>View item</div></Link>
+        </div>
+      )
+    }
   )}
 
   return (
