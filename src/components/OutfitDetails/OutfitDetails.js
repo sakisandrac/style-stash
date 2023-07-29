@@ -54,7 +54,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   }
 
   const deleteWarning = (e) => {
-    e.target.nextElementSibling.showModal()
+    document.querySelector('.delete-warning').showModal()
   }
 
   const deleteOutfit = (e) => {
@@ -63,7 +63,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     pieces.forEach(piece => {
       deleteData('outfit-to-pieces', user.userID, {outfitID, pieceID: piece.id})
     })
-    e.target.parentElement.parentElement.parentElement.close()
+    document.querySelector('.delete-warning').close()
   }
 
   const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
@@ -156,7 +156,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
                   <p>Warning: You are about to delete this outfit! Action cannot be undone!</p>
                   <div className='modal-button-container'>
                     <button className='cart-button delete-button' onClick={(e) => {deleteOutfit(e)}}>DELELTE OUTFIT</button>
-                    <div src={xIcon} className='back-btn' onClick={(e)=> {e.target.parentElement.parentElement.parentElement.close()}}>Go Back</div>
+                    <div src={xIcon} className='back-btn' onClick={(e)=> {document.querySelector('.delete-warning').close()}}>Go Back</div>
                   </div>
                 </div>
               </dialog>
