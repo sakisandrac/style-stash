@@ -152,6 +152,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
           <div className='delete-container'>
             <button className='cart-button delete-button' onClick={() => deleteWarning()}>Delete Outfit</button>
               <dialog className='delete-warning'>
+                <button style={{background: 'none', border: 'none'}}onClick={()=> {document.querySelector('.delete-warning').close()}}><img src={xIcon} alt='close button'/></button>
                 <div className='delete-warning-container'>
                   <p>Warning: You are about to delete this outfit! Action cannot be undone!</p>
                   <div className='modal-button-container'>

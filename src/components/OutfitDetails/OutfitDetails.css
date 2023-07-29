@@ -161,4 +161,16 @@
   .delete-button {
     margin: 5px;
   }
+
+
+  .delete-warning {
+    width: 90%;
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .delete-warning {
+    height: 250px;
+  }
 }
