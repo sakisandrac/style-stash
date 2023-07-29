@@ -9,6 +9,7 @@ const Home = ({menuOpen, user, setAppError}) => {
   const [featuredImage, setFeaturedImage] = useState({})
   const [featuredItems, setFeaturedItems] = useState([])
   const [featuredPieceClass, setFeaturedPieceClass] = useState('featured-piece')
+  const randomPieces = []
 
   useEffect(() => {
     const updateCSS = () => {
@@ -36,15 +37,37 @@ const Home = ({menuOpen, user, setAppError}) => {
     return Math.floor(Math.random() * num)
   }
 
+  const getAllRandomPieces = (pieces) => {
+    const piecesToChooseFrom = pieces.filter(piece => {
+      return randomPieces.some(item => item.id === piece.id) ? false : true
+    })
+
+    getRandomPiece(piecesToChooseFrom)
+    if(randomPieces.length < 4) {
+      getAllRandomPieces(piecesToChooseFrom)
+    }
+
+    return randomPieces
+  }
+
+  const getRandomPiece = (pieces) => {
+    const newRandPiece = pieces[getRandIndex(pieces.length)]
+    const pieceAlreadyInRandom = randomPieces.includes(newRandPiece)
+
+    if(!pieceAlreadyInRandom) {
+      randomPieces.push(pieces[getRandIndex(pieces.length)])
+    }
+  }
+
   useEffect(() => {
     const apiCall = async (type, userID) => {
       try {
         const data = await getData(type, userID)
         const outfit = data.allData[getRandIndex(data.allData.length)].outfit
         if (outfit.fullOutfitImage) {
-          setFeaturedImage(data.allData[getRandIndex(data.allData.length)].outfit)
+          setFeaturedImage(outfit)
         } else {
-          apiCall()
+          apiCall(type, userID)
         }
       } catch (error) {
         setAppError(error)
@@ -61,11 +84,8 @@ const Home = ({menuOpen, user, setAppError}) => {
       try {
         setFeaturedItems([])
         const data = await getData(type, userID)
-        const items = [data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)]]
-        if (items.length > 4) {
-          items.splice(0, 1)
-        }
-        setFeaturedItems(items)
+        const items = getAllRandomPieces(data.pieces)
+        setFeaturedItems([items[0], items[1], items[2], items[3]])
       } catch (error) {
         setAppError(error)
       }
@@ -79,8 +99,8 @@ const Home = ({menuOpen, user, setAppError}) => {
   const featuredPieces = () => {
     return featuredItems.map(item => {
       return (
-        <div className='featured-piece-container'>
-          <img key={item.id} className={`${featuredPieceClass} piece-${featuredItems.indexOf(item)}`} src={item.image} />
+        <div key={item.id} className='featured-piece-container'>
+          <img className={`${featuredPieceClass} piece-${featuredItems.indexOf(item)}`} src={item.image} />
           <Link className='view-outfit-link' to={`closet/${item.categoryID.split('-')[1]}/${item.id}`}><div className='view-outfit-btn-home'>View item</div></Link>
         </div>
       )
