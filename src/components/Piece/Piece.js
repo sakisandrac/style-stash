@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom"
-import { getData, patchData } from "../../apiCalls"
+import { getData, patchData, deleteData } from "../../apiCalls"
 import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import { useEffect, useState } from "react"
 import back from '../../images/arrow.png'
+import xIcon from '../../images/close.png'
 import './Piece.css'
 
 const Piece = ({user, appError, setAppError}) => {
@@ -10,6 +11,7 @@ const Piece = ({user, appError, setAppError}) => {
   const [editing, setEditing] = useState(false)
   const [pieceNotes, setPieceNotes] = useState('')
   const [addSuccess, setAddSuccess] = useState(false)
+  const [deleteSuccess, setDeleteSuccess] = useState(false)
   const {pieceID, category} = useParams()
 
   const apiCall = async () => {
@@ -42,6 +44,20 @@ const Piece = ({user, appError, setAppError}) => {
     setAddSuccess(true)
   }
 
+  const deleteWarning = () => {
+    document.querySelector('.delete-warning').showModal()
+  }
+
+  const deletePiece = async () => {
+    try {
+      await deleteData('piece', user.userID, {id: pieceID});
+      setDeleteSuccess(true);
+    } catch(error) {
+      setAppError(error)
+    }
+    document.querySelector('.delete-warning').close()
+  }
+
   return (
     <section className="piece">
       <div className='back-to-closet'><Link to={`/closet/${category}`}><img src={back} alt='back button'/></Link></div>
@@ -66,8 +82,23 @@ const Piece = ({user, appError, setAppError}) => {
             EDIT ITEM
           </button>
         }
+        {editing && 
+        <div className='delete-container'>
+        <button className='cart-button delete-button' onClick={deleteWarning}>Delete Item</button>
+          <dialog className='delete-warning'>
+            <div className='delete-warning-container'>
+              <p>Warning: You are about to delete this item! Action cannot be undone!</p>
+              <div className='modal-button-container'>
+                <button className='cart-button back-btn' onClick={()=> {document.querySelector('.delete-warning').close()}}>CANCEL</button>
+                <button className='cart-button delete-button' onClick={deletePiece}>DELELTE ITEM</button>
+              </div>
+            </div>
+          </dialog>
       </div>
-      {addSuccess && <p>Item Edited!</p>}
+        }
+      </div>
+      {addSuccess && <p className='success-text'>Item Edited!</p>}
+      {deleteSuccess && <p className='success-text'>Item Succesfully Deleted!</p>}
     </section>
   )
 }

@@ -22,7 +22,7 @@ const postData = async (type, info) => {
   })
   let data = await response.json()
 
-  if(data.message) {
+  if(data.message.includes('Error')) {
     throw new Error(`${data.message} -- Please try again`)
   }
   return data
@@ -45,7 +45,7 @@ const patchData = async (type, allIDs, info) => {
 }
 
 const deleteData = async (type, userID, info) => {
-  let response = await fetch(`http://localhost:3003/api/v1/data/${type}/${userID}`, {
+  let response = await fetch(`https://style-stash-api.vercel.app/api/v1/data/${type}/${userID}`, {
     method: 'DELETE',
     body: JSON.stringify(info), 
     headers: {

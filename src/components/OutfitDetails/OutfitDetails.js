@@ -53,11 +53,11 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     setNewPieces(prev => [...prev, piece.id]);
   }
 
-  const deleteWarning = (e) => {
+  const deleteWarning = () => {
     document.querySelector('.delete-warning').showModal()
   }
 
-  const deleteOutfit = (e) => {
+  const deleteOutfit = () => {
     deleteData('outfits', user.userID, {id: outfitID});
     setDeleteSuccess(true);
     pieces.forEach(piece => {
@@ -150,13 +150,13 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
           </div>}
           {isEditing && 
           <div className='delete-container'>
-            <button className='cart-button delete-button' onClick={(e) => deleteWarning(e)}>Delete Outfit</button>
+            <button className='cart-button delete-button' onClick={() => deleteWarning()}>Delete Outfit</button>
               <dialog className='delete-warning'>
                 <div className='delete-warning-container'>
                   <p>Warning: You are about to delete this outfit! Action cannot be undone!</p>
                   <div className='modal-button-container'>
-                    <button className='cart-button delete-button' onClick={(e) => {deleteOutfit(e)}}>DELELTE OUTFIT</button>
-                    <div src={xIcon} className='back-btn' onClick={(e)=> {document.querySelector('.delete-warning').close()}}>Go Back</div>
+                    <button className='cart-button back-btn' onClick={()=> {document.querySelector('.delete-warning').close()}}>CANCEL</button>
+                    <button className='cart-button delete-button' onClick={() => {deleteOutfit()}}>DELELTE OUTFIT</button>
                   </div>
                 </div>
               </dialog>
