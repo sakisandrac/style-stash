@@ -156,7 +156,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
                   <p>Warning: You are about to delete this outfit! Action cannot be undone!</p>
                   <div className='modal-button-container'>
                     <button className='cart-button delete-button' onClick={(e) => {deleteOutfit(e)}}>DELELTE OUTFIT</button>
-                    <div src={xIcon} className='back-btn' onClick={(e)=> {e.target.parentElement.parentElement.parentElement.close()}}>Go Back</div>
+                    <div className='delete-button' onClick={(e)=> {e.target.parentElement.parentElement.parentElement.close()}}>Go Back</div>
                   </div>
                 </div>
               </dialog>

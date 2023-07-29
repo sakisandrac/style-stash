@@ -68,10 +68,6 @@
   font-size: large;
 }
 
-.delete-button:hover {
-  background-color: rgb(180, 47, 47);
-}
-
 .delete-warning {
   width: 50%;
   height: 130px;
