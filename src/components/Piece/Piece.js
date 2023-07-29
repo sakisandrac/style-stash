@@ -12,13 +12,16 @@ const Piece = ({user, appError, setAppError}) => {
   const [pieceNotes, setPieceNotes] = useState('')
   const [addSuccess, setAddSuccess] = useState(false)
   const [deleteSuccess, setDeleteSuccess] = useState(false)
+  const [otps, setOTPs] = useState([])
   const {pieceID, category} = useParams()
 
   const apiCall = async () => {
     try {
       const fetchedCategory = await getData('closet', user.userID, category)
       const fetchedPiece = fetchedCategory.filteredPieces.find(item => item.id === pieceID)
+      // const outfitPieces = await getData('outfit-piece-amount', user.userID, pieceID)
       setPiece(fetchedPiece)
+      // setOTPs(outfitPieces)
     } catch(error) {
       setAppError(error)
     }
@@ -86,8 +89,9 @@ const Piece = ({user, appError, setAppError}) => {
         <div className='delete-container'>
         <button className='cart-button delete-button' onClick={deleteWarning}>Delete Item</button>
           <dialog className='delete-warning'>
+          <button style={{background: 'none', border: 'none'}}onClick={()=> {document.querySelector('.delete-warning').close()}}><img src={xIcon} alt='close button'/></button>
             <div className='delete-warning-container'>
-              <p>Warning: You are about to delete this item! Action cannot be undone!</p>
+              <p>Warning: You are about to delete this item{otps.length ? `, and it is in ${otps.length} of your outfits` : ''}! Action cannot be undone!</p>
               <div className='modal-button-container'>
                 <button className='cart-button back-btn' onClick={()=> {document.querySelector('.delete-warning').close()}}>CANCEL</button>
                 <button className='cart-button delete-button' onClick={deletePiece}>DELELTE ITEM</button>
