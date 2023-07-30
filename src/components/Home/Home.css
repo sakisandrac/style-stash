@@ -1,21 +1,24 @@
 .featured-img {
-  border-radius: 180px 180px 0px 0px;
+  border-radius: 250px 250px 0px 0px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  width: 100%;
-  height: 100%;
+  width: 500px;
+  height: 500px;
   margin-top: 30px;
   object-fit: cover;
+  /* z-index: 1; */
 }
 
 .featured-img-container {
-  width: 40%;
+  width: 500px;
+  height: 500px;
+  border-radius: 250px 250px 0px 0px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   object-fit: contain;
-  background-color:#f7f2eb;
+  background-color:#00000000;
   margin: 0;
   cursor: pointer;
 }
@@ -101,13 +104,14 @@
 .featured-img-text {
   font-size: 1.7rem;
   text-align: center;
+  width: 410px;
+  max-width: 100%;
 }
 
 .featured-piece {
   width: 250px;
   height: 250px;
   object-fit: cover;
-  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
 }
 
 .piece-0 {
@@ -145,6 +149,23 @@
   background-color: #fadcd1;
 }
 
+.modal-open-featured {
+  border-radius: 180px 180px 0px 0px;
+  margin: 0;
+  height: 350px;
+  width: 350px;
+}
+
+.modal-open-featured-piece {
+  height: 160px; 
+  width: 160px;
+  object-fit: cover;
+}
+
+.column-flex {
+  flex-direction: column;
+}
+
 @media (max-width: 1200px) {
   .featured-piece {
     width: 150px;
@@ -156,23 +177,51 @@
     width: 350px;
   }
 
+  .featured-img, .featured-img-container {
+    border-radius: 180px 180px 0px 0px;
+    margin: 0;
+    height: 300px;
+    width: 300px;
+  }
+
 }
 
 @media (max-width: 900px) {
+  .featured-left, .featured-right {
+    max-height: 50%;
+  }
+
   .featured-img-text {
     font-size: 1.3rem;
   }
-
-  .featured-img-container {
-    width: 200px;
-    position: absolute;
-  }
-
+  
   .featured-container {
     flex-direction: column;
+    align-items: center;
+    min-height: fit-content;
   }
 
   .home-logo {
     width: 50%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .featured-piece {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .featured-pieces-container {
+    width: 200px;
+    background-color: none;
+  }
+
+  .featured-img, .featured-img-container {
+    border-radius: 180px 180px 0px 0px;
+    margin: 0;
+    height: 200px;
+    width: 200px;
   }
 }

@@ -4,13 +4,59 @@ import { useEffect, useState } from 'react';
 import { getData } from '../../apiCalls';
 import { Link } from 'react-router-dom';
 
-const Home = ({user, setAppError}) => {
+const Home = ({menuOpen, user, setAppError}) => {
 
   const [featuredImage, setFeaturedImage] = useState({})
   const [featuredItems, setFeaturedItems] = useState([])
+  const [featuredPieceClass, setFeaturedPieceClass] = useState('featured-piece')
+  const randomPieces = []
+
+  useEffect(() => {
+    const updateCSS = () => {
+      const classes = ['.featured-img-container', '.featured-img', '.featured-pieces-container']
+      
+      if(window.innerWidth > 1200 && window.innerWidth < 1650 && menuOpen) {
+        classes.forEach(item => document.querySelector(item).classList.add('modal-open-featured'))
+        setFeaturedPieceClass('modal-open-featured-piece')
+      } else {
+        classes.forEach(item => document.querySelector(item).classList.remove('modal-open-featured'))
+        setFeaturedPieceClass('featured-piece')
+      }
+
+      if(window.innerWidth < 1000 && menuOpen) {
+        document.querySelector('.featured-container').classList.add('column-flex')
+      } else {
+        document.querySelector('.featured-container').classList.remove('column-flex')
+      }
+    }
+    window.addEventListener('resize', updateCSS)
+    return () => window.removeEventListener('resize', updateCSS)
+  })
 
   const getRandIndex = (num) => {
     return Math.floor(Math.random() * num)
+  }
+
+  const getAllRandomPieces = (pieces) => {
+    const piecesToChooseFrom = pieces.filter(piece => {
+      return randomPieces.some(item => item.id === piece.id) ? false : true
+    })
+
+    getRandomPiece(piecesToChooseFrom)
+    if(randomPieces.length < 4) {
+      getAllRandomPieces(piecesToChooseFrom)
+    }
+
+    return randomPieces
+  }
+
+  const getRandomPiece = (pieces) => {
+    const newRandPiece = pieces[getRandIndex(pieces.length)]
+    const pieceAlreadyInRandom = randomPieces.includes(newRandPiece)
+
+    if(!pieceAlreadyInRandom) {
+      randomPieces.push(pieces[getRandIndex(pieces.length)])
+    }
   }
 
   useEffect(() => {
@@ -19,10 +65,9 @@ const Home = ({user, setAppError}) => {
         const data = await getData(type, userID)
         const outfit = data.allData[getRandIndex(data.allData.length)].outfit
         if (outfit.fullOutfitImage) {
-          console.log('outgit', outfit.fullOutfitImage)
-          setFeaturedImage(data.allData[getRandIndex(data.allData.length)].outfit)
+          setFeaturedImage(outfit)
         } else {
-          apiCall()
+          apiCall(type, userID)
         }
       } catch (error) {
         setAppError(error)
@@ -39,11 +84,8 @@ const Home = ({user, setAppError}) => {
       try {
         setFeaturedItems([])
         const data = await getData(type, userID)
-        const items = [data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)], data.pieces[getRandIndex(data.pieces.length)]]
-        if (items.length > 4) {
-          items.splice(0, 1)
-        }
-        setFeaturedItems(items)
+        const items = getAllRandomPieces(data.pieces)
+        setFeaturedItems([items[0], items[1], items[2], items[3]])
       } catch (error) {
         setAppError(error)
       }
@@ -57,8 +99,8 @@ const Home = ({user, setAppError}) => {
   const featuredPieces = () => {
     return featuredItems.map(item => {
       return (
-        <div className='featured-piece-container'>
-          <img key={item.id} className={`featured-piece piece-${featuredItems.indexOf(item)}`} src={item.image} />
+        <div key={item.id} className='featured-piece-container'>
+          <img className={`${featuredPieceClass} piece-${featuredItems.indexOf(item)}`} src={item.image} />
           <Link className='view-outfit-link' to={`closet/${item.categoryID.split('-')[1]}/${item.id}`}><div className='view-outfit-btn-home'>View item</div></Link>
         </div>
       )

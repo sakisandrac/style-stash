@@ -3,9 +3,8 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  width: 45%;
+  min-width: 30%;
   box-shadow: 2px 0px 4px 0px #eccdc1;
-  margin-right: 2%;
 }
 
 .menu-top {
@@ -32,7 +31,7 @@
 
 @media screen and (max-width: 990px) {
   .menu {
-    width: 50%;
+    min-width: 40%;
   }
 
   .link {
@@ -40,7 +39,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 740px) {
   .menu {
     width: 100%;
     margin: 0;

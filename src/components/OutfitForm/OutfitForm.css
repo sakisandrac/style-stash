@@ -1,12 +1,14 @@
 .outfit-cart-link > img {
   width: 80px;
 }
+
 .top-form-links {
   width: 95%;
   display: flex;
   justify-content: space-between;
-  margin: 2% 5%;
+  margin-top: 10px;
 }
+
 .outfit-cart-link-container{
   display: flex; 
   justify-content: flex-end;

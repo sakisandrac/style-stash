@@ -53,17 +53,17 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     setNewPieces(prev => [...prev, piece.id]);
   }
 
-  const deleteWarning = (e) => {
-    e.target.nextElementSibling.showModal()
+  const deleteWarning = () => {
+    document.querySelector('.delete-warning').showModal()
   }
 
-  const deleteOutfit = (e) => {
+  const deleteOutfit = () => {
     deleteData('outfits', user.userID, {id: outfitID});
     setDeleteSuccess(true);
     pieces.forEach(piece => {
       deleteData('outfit-to-pieces', user.userID, {outfitID, pieceID: piece.id})
     })
-    e.target.parentElement.parentElement.parentElement.close()
+    document.querySelector('.delete-warning').close()
   }
 
   const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
@@ -150,13 +150,14 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
           </div>}
           {isEditing && 
           <div className='delete-container'>
-            <button className='cart-button delete-button' onClick={(e) => deleteWarning(e)}>Delete Outfit</button>
+            <button className='cart-button delete-button' onClick={() => deleteWarning()}>Delete Outfit</button>
               <dialog className='delete-warning'>
+                <button style={{background: 'none', border: 'none'}}onClick={()=> {document.querySelector('.delete-warning').close()}}><img src={xIcon} alt='close button'/></button>
                 <div className='delete-warning-container'>
                   <p>Warning: You are about to delete this outfit! Action cannot be undone!</p>
                   <div className='modal-button-container'>
-                    <button className='cart-button delete-button' onClick={(e) => {deleteOutfit(e)}}>DELELTE OUTFIT</button>
-                    <div className='delete-button' onClick={(e)=> {e.target.parentElement.parentElement.parentElement.close()}}>Go Back</div>
+                    <button className='cart-button back-btn' onClick={()=> {document.querySelector('.delete-warning').close()}}>CANCEL</button>
+                    <button className='cart-button delete-button' onClick={() => {deleteOutfit()}}>DELELTE OUTFIT</button>
                   </div>
                 </div>
               </dialog>

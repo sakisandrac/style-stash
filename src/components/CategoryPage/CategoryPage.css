@@ -1,3 +1,7 @@
+.piece-link {
+  width: 300px;
+}
+
 .piece-link > img {
   max-width: 100%;
   border-radius: 20px;
@@ -8,11 +12,12 @@
   display: flex; 
   flex-direction: column;
   justify-content: flex-start;
-  min-height: 150px;
+  width: 400px;
+  height: fit-content;
 }
 
 .choose-piece > img {
-  height: 100%
+  width: 80%;
 }
 
 .back-to-closet {
@@ -20,6 +25,8 @@
 }
 
 .piece-container {
+  max-height: 100%;
+  overflow-y: auto;
   display: flex; 
   flex-wrap: wrap;
   align-items: space-evenly;
@@ -27,7 +34,6 @@
   align-content: flex-start;
   height: 100%;
   width: 100%;
-  overflow: scroll;
 }
 
 .category-page {
@@ -38,6 +44,7 @@
   justify-content: center;
   align-items: center;
 }
+
 
 .category-container{
   width: 100%;
