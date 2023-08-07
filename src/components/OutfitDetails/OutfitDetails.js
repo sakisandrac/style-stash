@@ -3,11 +3,11 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import CategoryContainer from '../CategoryContainer/CategoryContainer';
 import CategoryPage from '../CategoryPage/CategoryPage';
+import OutfitLanding from './OutfitLanding/OutfitLanding';
 import { getData, patchData, postData, deleteData } from '../../apiCalls';
 import './OutfitDetails.css';
 import backIcon from '../../images/arrow.png';
 import xIcon from '../../images/close.png';
-import plus from '../../images/add.png';
 
 const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   const outfitID = useParams().id;
@@ -68,15 +68,14 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
 
   const checkForItem = (id) => pieces.find(item => item.id === id) ? true : false
 
-  const pieceEls = (pieces) => {
-    return pieces?.map(piece => {
+  const pieceEls = pieces?.map(piece => {
       return (
       <div key={piece.id} className='piece-image-container'>
         <img className='piece-image' alt='piece of clothing' src={piece.image}/>
         {isEditing && <img alt='icon to remove item' src={xIcon} onClick={() => {removePiece(piece)}} />}
       </div>
     )})
-  }
+  
   
   const toggleEditing = (notes) => {
     setNotes(notes)
@@ -117,57 +116,6 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     }
   }, [addSuccess])
 
-  const OutfitLanding = () => {
-    const [outfitNotes, setOutfitNotes] = useState(notes)
-
-    const handleChange = (e) => {
-      setOutfitNotes(e.target.value)
-    }
-
-    return (
-      <div className='outfit-details-container'>
-        <div className='back-icon-container'>
-          <Link to='/outfits'><img alt='icon for back button'src={backIcon}/></Link>
-          {isEditing && <Link to={`/outfitdetails/${outfitID}/add-piece`} ><img alt='icon for add item button' src={plus}/></Link>}
-        </div>
-        <h1 className='page-title page-title-short'>My Outfit</h1>
-        <div className='pieces-container'>
-          <button className='delete-button' onClick={() => toggleEditing(outfitNotes)}>{`${isEditing? 'Save Edits' : 'Edit Outfit'}`}</button>
-          {isEditing &&
-             <>
-             <label htmlFor='fileUpload' className='upload-img-btn'>{`${outfitData.fullOutfitImage? 'Change': 'Upload'} Outfit Image`}
-             <input id='fileUpload' className='file-upload-default' type="file" onChange={(e) => {changeOutfitImage(e)}}/>
-            </label>
-            {newOutfitImage && <img className='file-image' src={newOutfitImage} />}
-           </>
-          }
-          <div className='pieces-scroll'>
-            {pieceEls(pieces)}
-          </div>
-          {isEditing ?
-          <input type='textarea' className='notes' onChange={(e) => handleChange(e)} value={outfitNotes} placeholder={outfitNotes.length > 0? outfitNotes : 'Add notes here...'}/>
-          : <div className='notes'>{loading? 'loading...' : notes.length > 0? notes : 'Add notes here...'}
-          </div>}
-          {isEditing && 
-          <div className='delete-container'>
-            <button className='cart-button delete-button' onClick={() => deleteWarning()}>Delete Outfit</button>
-              <dialog className='delete-warning'>
-                <button style={{background: 'none', border: 'none'}}onClick={()=> {document.querySelector('.delete-warning').close()}}><img src={xIcon} alt='close button'/></button>
-                <div className='delete-warning-container'>
-                  <p>Warning: You are about to delete this outfit! Action cannot be undone!</p>
-                  <div className='modal-button-container'>
-                    <button className='cart-button back-btn' onClick={()=> {document.querySelector('.delete-warning').close()}}>CANCEL</button>
-                    <button className='cart-button delete-button' onClick={() => {deleteOutfit()}}>DELELTE OUTFIT</button>
-                  </div>
-                </div>
-              </dialog>
-          </div>}
-          {addSuccess && <p className='success-text'>Outfit Edited!</p>}
-          {deleteSuccess && <p className='success-text'>Outfit Succesfully Deleted!</p>}
-        </div>
-      </div>
-    )
-  }
   const ChooseCategory = () => {
     return (
       <>
@@ -182,20 +130,36 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     if(categoryInUrl) {
       return (
         <CategoryPage 
-        removeFromCart={removePiece}
-        addToCart={addPiece}
-        checkCartForItem={checkForItem}
-        outfitID={outfitID}
-        setAppError={setAppError}
-        user={user}
-      /> 
+          removeFromCart={removePiece}
+          addToCart={addPiece}
+          checkCartForItem={checkForItem}
+          outfitID={outfitID}
+          setAppError={setAppError}
+          user={user}
+        /> 
       )
     } else if(location.pathname.includes('add-piece')) {
       return (
         <ChooseCategory />
       )
     } else {
-      return <OutfitLanding />
+      return (
+        <OutfitLanding 
+          isEditing={isEditing}
+          outfitID={outfitID}
+          toggleEditing={toggleEditing}
+          loading={loading}
+          notes={notes}
+          outfitData={outfitData}
+          addSuccess={addSuccess}
+          deleteSuccess={deleteSuccess}
+          pieceEls={pieceEls}
+          newOutfitImage={newOutfitImage}
+          deleteWarning={deleteWarning}
+          deleteOutfit={deleteOutfit}
+          changeOutfitImage={changeOutfitImage}
+        />
+      )
     }
   }
 
