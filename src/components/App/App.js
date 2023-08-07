@@ -17,7 +17,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [mainShown, setMainShown] = useState(true)
   const [smallScreen, setSmallScreen] = useState(false)
-  const [appError, setAppError] = useState(null);
+  const [appError, setAppError] = useState(false);
   const [user, setUser] = useState({
     "userID": "USE-user-ex-1",
 });
@@ -45,6 +45,11 @@ function App() {
       : setMainShown(true)
   }, [menuOpen, smallScreen])
 
+
+  useEffect(() =>{
+    console.log('apperr', appError)
+  },[appError])
+
   return (
     <main className={menuOpen ? 'row-flex' : ''}>
       {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} setUser={setUser} openMenu={openOrCloseMenu}/>}
@@ -57,8 +62,8 @@ function App() {
         <Route path="/login" element={<LoginPage appError={appError} setAppError={setAppError} setUser={setUser} user={user}/>} />
         <Route path='/outfits' element={<Outfits appError={appError} setAppError={setAppError} user={user} closeMenu={openOrCloseMenu}/>} />
         <Route path="/itemform" element={<ItemForm user={user}/>} />
-        <Route path='/outfitform' element={<OutfitForm closeMenu={openOrCloseMenu}/>} />
-        <Route path='/outfitform/:category' element={<OutfitForm user={user} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
+        <Route path='/outfitform' element={<OutfitForm appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
+        <Route path='/outfitform/:category' element={<OutfitForm user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitdetails/:id' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitdetails/:id/add-piece' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitdetails/:id/add-piece/:category' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
