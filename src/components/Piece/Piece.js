@@ -69,10 +69,11 @@ const Piece = ({user, appError, setAppError}) => {
         <section className="clothing-container">
           <img className='piece-cart-img' src={piece.image} alt={`clothing item from ${category} category`} />
         </section>
-        {editing ? <textarea className='edit-notes' placeholder="Add notes for this outfit..." value={pieceNotes} onChange={(e) => setPieceNotes(e.target.value)} />
+        {editing 
+          ? <textarea className='edit-notes' placeholder="Add notes for this outfit..." value={pieceNotes} onChange={(e) => setPieceNotes(e.target.value)} />
           : <article className={piece.notes ? "piece-notes" : "piece-notes no-note"}>
-            {piece.notes ? piece.notes : 'Edit item to add notes'}
-          </article>}
+              {piece.notes ? piece.notes : 'Edit item to add notes'}
+            </article>}
         {editing
           ? <button className="edit-button" id="editBtn" onClick={() => handleSave()}>SAVE ITEM</button>
           : <button
@@ -83,22 +84,22 @@ const Piece = ({user, appError, setAppError}) => {
               setAddSuccess(false)
             }}>
             EDIT ITEM
-          </button>
+            </button>
         }
         {editing && 
-        <div className='delete-container'>
-        <button className='cart-button delete-button' onClick={deleteWarning}>Delete Item</button>
-          <dialog className='delete-warning'>
-          <button style={{background: 'none', border: 'none'}}onClick={()=> {document.querySelector('.delete-warning').close()}}><img src={xIcon} alt='close button'/></button>
-            <div className='delete-warning-container'>
-              <p>Warning: You are about to delete this item{otps.length ? `, and it is in ${otps.length} of your outfits` : ''}! Action cannot be undone!</p>
-              <div className='modal-button-container'>
-                <button className='cart-button back-btn' onClick={()=> {document.querySelector('.delete-warning').close()}}>CANCEL</button>
-                <button className='cart-button delete-button' onClick={deletePiece}>DELELTE ITEM</button>
+          <div className='delete-container'>
+            <button className='cart-button delete-button' onClick={deleteWarning}>Delete Item</button>
+            <dialog className='delete-warning'>
+            <button style={{background: 'none', border: 'none'}}onClick={()=> {document.querySelector('.delete-warning').close()}}><img src={xIcon} alt='close button'/></button>
+              <div className='delete-warning-container'>
+                <p>Warning: You are about to delete this item{otps.length ? `, and it is in ${otps.length} of your outfits` : ''}! Action cannot be undone!</p>
+                <div className='modal-button-container'>
+                  <button className='cart-button back-btn' onClick={()=> {document.querySelector('.delete-warning').close()}}>CANCEL</button>
+                  <button className='cart-button delete-button' onClick={deletePiece}>DELELTE ITEM</button>
+                </div>
               </div>
-            </div>
-          </dialog>
-      </div>
+            </dialog>
+          </div>
         }
       </div>
       {addSuccess && <p className='success-text'>Item Edited!</p>}
