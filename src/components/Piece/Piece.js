@@ -19,9 +19,9 @@ const Piece = ({user, appError, setAppError}) => {
     try {
       const fetchedCategory = await getData('closet', user.userID, category)
       const fetchedPiece = fetchedCategory.filteredPieces.find(item => item.id === pieceID)
-      // const outfitPieces = await getData('outfit-piece-amount', user.userID, pieceID)
+      const outfitPieces = await getData('outfit-piece-amount', user.userID, pieceID)
       setPiece(fetchedPiece)
-      // setOTPs(outfitPieces)
+      setOTPs(outfitPieces.data)
     } catch(error) {
       setAppError(error)
     }
