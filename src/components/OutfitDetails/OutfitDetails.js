@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import CategoryContainer from '../CategoryContainer/CategoryContainer';
 import CategoryPage from '../CategoryPage/CategoryPage';
 import OutfitLanding from './OutfitLanding/OutfitLanding';
 import { getData, patchData, postData, deleteData } from '../../apiCalls';
 import './OutfitDetails.css';
-import backIcon from '../../images/arrow.png';
 import xIcon from '../../images/close.png';
+import ChooseCategory from '../ChooseCategory/ChooseCategory';
 
 const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
   const outfitID = useParams().id;
@@ -116,16 +115,6 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
     }
   }, [addSuccess])
 
-  const ChooseCategory = () => {
-    return (
-      <>
-        <Link to={`/outfitdetails/${outfitID}`}><img src={backIcon} alt='back button'/></Link>
-        <h2 style={{textAlign: "center", fontWeight: "lighter"}}>Choose a category to add an item</h2>
-        <CategoryContainer closeMenu={closeMenu} parentRoute={`outfitdetails/${outfitID}/add-piece`}/>
-      </>
-    )
-  }
-
   const MainContent = () =>{
     if(categoryInUrl) {
       return (
@@ -140,7 +129,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu}) => {
       )
     } else if(location.pathname.includes('add-piece')) {
       return (
-        <ChooseCategory />
+        <ChooseCategory parentRoute={`outfitdetails/${outfitID}/add-piece`} backButton={`/outfitdetails/${outfitID}`} closeMenu={closeMenu}/>
       )
     } else {
       return (

@@ -1,7 +1,7 @@
 import '../Closet/Closet.css'
 import './OutfitForm.css'
 import {v4 as uuid} from 'uuid'
-import CategoryContainer from "../CategoryContainer/CategoryContainer"
+import ChooseCategory from '../ChooseCategory/ChooseCategory'
 import hanger from '../../images/hanger.png'
 import back from '../../images/arrow.png'
 import { Link, useLocation, useParams } from 'react-router-dom'
@@ -10,7 +10,7 @@ import CategoryPage from '../CategoryPage/CategoryPage'
 import Cart from '../Cart/Cart'
 import { postData } from '../../apiCalls'
 
-const OutfitForm = ({closeMenu, updateError, appError, setAppError, user}) => {
+const OutfitForm = ({closeMenu, appError, setAppError, user}) => {
   const location = useLocation();
   const categoryInUrl = useParams().category;
   const [cart, setCart] = useState([]);
@@ -73,15 +73,6 @@ const OutfitForm = ({closeMenu, updateError, appError, setAppError, user}) => {
     setCart(prevCart => prevCart.filter(item => item.id !== piece.id));
   }
 
-  const ChooseCategory = () => {
-    return (
-      <>
-        <h2 style={{textAlign: "center", fontWeight: "lighter"}}>Choose a category to add an item</h2>
-        <CategoryContainer closeMenu={closeMenu} parentRoute={'outfitform'}/>
-      </>
-    )
-  }
-
   const MainContent = () => {
     if(location.pathname.includes('cart')) {
       return (
@@ -110,7 +101,7 @@ const OutfitForm = ({closeMenu, updateError, appError, setAppError, user}) => {
         />     
       )
     } else {
-      return <ChooseCategory />
+      return <ChooseCategory parentRoute='outfitform' closeMenu={closeMenu}/>
     }
   }
 
