@@ -21,7 +21,7 @@ const postData = async (type, info) => {
     }
   })
   let data = await response.json()
-
+console.log('this worked', data)
   if(data.message.includes('Error')) {
     throw new Error(`${data.message} -- Please try again`)
   }

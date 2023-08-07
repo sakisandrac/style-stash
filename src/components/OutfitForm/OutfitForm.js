@@ -10,22 +10,39 @@ import CategoryPage from '../CategoryPage/CategoryPage'
 import Cart from '../Cart/Cart'
 import { postData } from '../../apiCalls'
 
-const OutfitForm = ({closeMenu, setAppError, user}) => {
-  const location = useLocation()
-  const categoryInUrl = useParams().category
-  const [cart, setCart] = useState([])
+const OutfitForm = ({closeMenu, updateError, appError, setAppError, user}) => {
+  const location = useLocation();
+  const categoryInUrl = useParams().category;
+  const [cart, setCart] = useState([]);
   const [addSuccess, setAddSuccess] = useState(false);
-  const [outfitReady, setOutfitReady] = useState(false)
-  const [notes, setNotes] = useState('')
-  const [outfit, setOutfit] = useState('')
-  const [fullOutfitImage, setFullOutfitImage] = useState('')
+  const [outfitReady, setOutfitReady] = useState(false);
+  const [notes, setNotes] = useState('');
+  const [outfit, setOutfit] = useState('');
+  const [fullOutfitImage, setFullOutfitImage] = useState('');
+
+  const postNewOutfit = () => {
+    postData(`outfits/${user.userID}`, outfit).then(newOutfit => {
+      let pieceIDs = cart.map(piece => piece.id);
+      pieceIDs.forEach(id => {
+        postData(`outfit-to-pieces/${user.userID}`, { outfitID: newOutfit.newData.id, pieceID: id })
+        .catch(err => {
+          setAppError(err)
+        })
+      })
+      clearOutfitSetup();
+      setAddSuccess(true);
+    })
+    .catch(err => {
+      setAppError(err)
+    })
+  }
 
   const clearOutfitSetup = () => {
-    setCart([])
-    setNotes('')
-    setOutfit('')
-    setFullOutfitImage('')
-    setOutfitReady(false)
+    setCart([]);
+    setNotes('');
+    setOutfit('');
+    setFullOutfitImage('');
+    setOutfitReady(false);
   }
 
   useEffect(() => {
@@ -35,40 +52,25 @@ const OutfitForm = ({closeMenu, setAppError, user}) => {
   }, [outfitReady])
 
   useEffect(() => {
-    const apiCall = async () => {
-      try {
-        let newOutfit = await postData(`outfits/${user.userID}`, outfit)
-        let pieceIDs = cart.map(piece => piece.id)
-        pieceIDs.forEach(id => {
-          postData(`outfit-to-pieces/${user.userID}`, {outfitID: newOutfit.newData.id, pieceID: id})
-        })
-        clearOutfitSetup()
-        setAddSuccess(true)
-      } catch (error) {
-        //update this to use the error component 
-        console.log(error)
-      }
-    }
-
-    if(outfit) {
-      apiCall()
+    if (outfit) {
+      postNewOutfit();
     }
   }, [outfit])
 
   const updateNotes = newNotes => {
-    setNotes(newNotes)
+    setNotes(newNotes);
   }
 
-  const updateOutfitImg = (e) => setFullOutfitImage(URL.createObjectURL(e.target.files[0]))
+  const updateOutfitImg = (e) => setFullOutfitImage(URL.createObjectURL(e.target.files[0]));
 
   const checkCartForItem = (id) => cart.find(item => item.id === id) ? true : false
 
   const addToCart = (piece) => {
-    setCart(prevCart => [...prevCart, piece])
+    setCart(prevCart => [...prevCart, piece]);
   }
 
   const removeFromCart = (piece) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== piece.id))
+    setCart(prevCart => prevCart.filter(item => item.id !== piece.id));
   }
 
   const ChooseCategory = () => {
@@ -88,7 +90,8 @@ const OutfitForm = ({closeMenu, setAppError, user}) => {
           removeFromCart={removeFromCart} 
           fullOutfitImage={fullOutfitImage} 
           updateOutfitImg={updateOutfitImg}
-          notes={notes} 
+          notes={notes}
+          appError={appError}
           updateNotes={updateNotes} 
           setOutfitReady={setOutfitReady}
           addSuccess={addSuccess}

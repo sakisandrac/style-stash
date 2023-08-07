@@ -1,9 +1,9 @@
 import './Cart.css'
 import { Link } from "react-router-dom"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import remove from '../../images/close.png'
 
-const Cart = ({cart, removeFromCart, fullOutfitImage, updateOutfitImg, notes, updateNotes, setOutfitReady, addSuccess, setAddSuccess}) => {
+const Cart = ({appError, cart, removeFromCart, fullOutfitImage, updateOutfitImg, notes, updateNotes, setOutfitReady, addSuccess, setAddSuccess}) => {
   const [error, setError] = useState('');
   const [outfitNotes, setOutfitNotes] = useState(notes)
 
@@ -43,8 +43,9 @@ const Cart = ({cart, removeFromCart, fullOutfitImage, updateOutfitImg, notes, up
       </section>
       <input className='outfit-notes' type='textarea' placeholder="Add notes for this outfit..." value={outfitNotes} onChange={(e) => setOutfitNotes(e.target.value)}/>
       <button className='cart-button' onClick={completeLook}>Complete The Look</button>
-      {addSuccess && !outfitNotes && <p>Outfit added successfully!</p>}
+      {addSuccess && !appError && !outfitNotes && <p>Outfit added successfully!</p>}
       {error && <p>{error}</p>}
+      {appError && <p>{appError.message}</p>}
     </section>
   )
 }
