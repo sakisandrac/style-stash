@@ -39,7 +39,6 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
         getFeaturedOutfit(type, userID);
       }
     } catch (error) {
-      console.log('err outfit', error)
       setAppError(error);
     };
   };
@@ -51,7 +50,6 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
       const items = getAllRandomPieces(data.pieces);
       setFeaturedItems([items[0], items[1], items[2], items[3]]);
     } catch (error) {
-      console.log('err item', error)
       setAppError(error);
     };
   };

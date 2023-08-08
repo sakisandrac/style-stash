@@ -17,7 +17,6 @@ const CategoryPage = ({user, appError, setAppError, closeMenu, cart, checkCartFo
   const userID = user?.userID;
 
   const getAllPieces = async () => {
-    console.log('jere')
     setLoading(true);
     try {
       let data = await getData('closet', userID, category);
