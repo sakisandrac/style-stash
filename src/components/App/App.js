@@ -1,11 +1,11 @@
 import './App.css';
-import NavBar from '../NavBar/NavBar'
-import Home from '../Home/Home'
-import Menu from '../Menu/Menu'
-import Closet from '../Closet/Closet'
-import Outfits from '../Outfits/Outfits'
+import NavBar from '../NavBar/NavBar';
+import Home from '../Home/Home';
+import Menu from '../Menu/Menu';
+import Closet from '../Closet/Closet';
+import Outfits from '../Outfits/Outfits';
 import Piece from '../Piece/Piece';
-import CategoryPage from '../CategoryPage/CategoryPage'
+import CategoryPage from '../CategoryPage/CategoryPage';
 import OutfitForm from '../OutfitForm/OutfitForm';
 import ItemForm from '../ItemForm/ItemForm';
 import { Routes, Route } from 'react-router-dom';
@@ -17,7 +17,7 @@ const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mainShown, setMainShown] = useState(true);
   const [smallScreen, setSmallScreen] = useState(false);
-  const [appError, setAppError] = useState(false);
+  const [appError, setAppError] = useState(null);
   const [user, setUser] = useState({
     "userID": "USE-user-ex-1",
 });
@@ -50,7 +50,7 @@ const App = () => {
       {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} setUser={setUser} openMenu={openOrCloseMenu}/>}
       {mainShown &&
       <Routes>
-        <Route path="/" element={<Home menuOpen={menuOpen} user={user} setAppError={setAppError}/>}/> 
+        <Route path="/" element={<Home menuOpen={menuOpen} user={user} appError={appError} setAppError={setAppError}/>}/> 
         <Route path='/closet' element={<Closet user={user} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category' element={<CategoryPage user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category/:pieceID' element={<Piece user={user} appError={appError} setAppError={setAppError}/>} />

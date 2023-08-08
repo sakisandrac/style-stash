@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const ErrorMessage = ({appError}) => {
   return (
     <div>
-      <p className='error-message'>{`${appError}`}</p>
+      <p className='error-message'>{`${appError} - Please try again!`}</p>
     </div>
   )
 }

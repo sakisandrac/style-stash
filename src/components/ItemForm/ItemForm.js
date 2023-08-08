@@ -74,6 +74,7 @@ const ItemForm = ({user}) => {
     if (newData) {
       postNewItem()
     };
+    return () => setError({error:false, message: ""});
   }, [newData]);
 
   return (

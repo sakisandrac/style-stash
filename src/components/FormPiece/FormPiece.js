@@ -1,6 +1,6 @@
-import add from '../../images/add.png'
-import remove from '../../images/remove.png'
-import './FormPiece.css'
+import add from '../../images/add.png';
+import remove from '../../images/remove.png';
+import './FormPiece.css';
 
 const FormPiece = ({piece, itemInCart, addToCart, removeFromCart}) => {
   return (

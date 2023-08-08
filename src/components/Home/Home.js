@@ -2,8 +2,9 @@ import './Home.css';
 import { useEffect, useState } from 'react';
 import { getData } from '../../apiCalls';
 import { Link } from 'react-router-dom';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-const Home = ({ menuOpen, user, setAppError }) => {
+const Home = ({ menuOpen, user, setAppError, appError }) => {
 
   const [featuredImage, setFeaturedImage] = useState({});
   const [featuredItems, setFeaturedItems] = useState([]);
@@ -38,6 +39,7 @@ const Home = ({ menuOpen, user, setAppError }) => {
         getFeaturedOutfit(type, userID);
       }
     } catch (error) {
+      console.log('err outfit', error)
       setAppError(error);
     };
   };
@@ -49,6 +51,7 @@ const Home = ({ menuOpen, user, setAppError }) => {
       const items = getAllRandomPieces(data.pieces);
       setFeaturedItems([items[0], items[1], items[2], items[3]]);
     } catch (error) {
+      console.log('err item', error)
       setAppError(error);
     };
   };
@@ -84,6 +87,7 @@ const Home = ({ menuOpen, user, setAppError }) => {
       getFeaturedOutfit('outfits', user.userID);
       getFeaturedItems('closet', user.userID);
     };
+    return () => setAppError(null);
   }, []);
 
   useEffect(() => {
@@ -99,8 +103,7 @@ const Home = ({ menuOpen, user, setAppError }) => {
           <Link className='view-outfit-link' to={`closet/${item.categoryID.split('-')[1]}/${item.id}`}><div className='view-outfit-btn-home'>View item</div></Link>
         </div>
       )
-    }
-    )
+    })
   };
 
   return (
@@ -108,6 +111,7 @@ const Home = ({ menuOpen, user, setAppError }) => {
       <main className='homepage'>
         {user ?
           <div className='featured-container'>
+            {appError && <ErrorMessage appError={appError} />}
             <div className='featured-left'>
               <div className='featured-img-container'>
                 <img className='featured-img' src={featuredImage.fullOutfitImage} />

@@ -5,9 +5,9 @@ import FormPiece from '../FormPiece/FormPiece'
 import './CategoryPage.css';
 import { getData } from '../../apiCalls';
 import { useEffect, useState } from 'react';
-import back from '../../images/arrow.png'
+import back from '../../images/arrow.png';
 
-const CategoryPage = ({  user, appError, setAppError, closeMenu, cart, checkCartForItem, addToCart, removeFromCart, outfitID}) => {
+const CategoryPage = ({user, appError, setAppError, closeMenu, cart, checkCartForItem, addToCart, removeFromCart, outfitID}) => {
   const location = useLocation();
   
   const [allPieces, setAllPieces] = useState(null);
@@ -17,6 +17,7 @@ const CategoryPage = ({  user, appError, setAppError, closeMenu, cart, checkCart
   const userID = user?.userID;
 
   const getAllPieces = async () => {
+    console.log('jere')
     setLoading(true);
     try {
       let data = await getData('closet', userID, category);

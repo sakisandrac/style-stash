@@ -1,7 +1,8 @@
-import './Cart.css'
-import { Link } from "react-router-dom"
-import { useState, useEffect } from 'react'
-import remove from '../../images/close.png'
+import './Cart.css';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import remove from '../../images/close.png';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const Cart = ({appError, cart, removeFromCart, fullOutfitImage, updateOutfitImg, notes, updateNotes, setOutfitReady, addSuccess, setAddSuccess}) => {
   const [error, setError] = useState('');
@@ -48,7 +49,7 @@ const Cart = ({appError, cart, removeFromCart, fullOutfitImage, updateOutfitImg,
       <button className='cart-button' onClick={completeLook}>Complete The Look</button>
       {addSuccess && !appError && !outfitNotes && <p>Outfit added successfully!</p>}
       {error && <p>{error}</p>}
-      {appError && <p>{appError.message}</p>}
+      {appError && <ErrorMessage appError={appError} />}
     </section>
   )
 }
