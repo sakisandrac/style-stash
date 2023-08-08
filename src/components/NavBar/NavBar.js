@@ -12,6 +12,8 @@ const handleClick = () => {
 }
 
   return (
+    <>
+    <div className='construction-marquee'><marquee>This project is currently under construction- not all features may work yet!</marquee></div>
     <nav>
       <button onClick={() => openMenu('open')} className='menu-btn'><img src={menu} alt='menu button' /></button>
       <Link to='/' className="logo-heading"><h1 className="logo-heading">Style Stash</h1></Link>
@@ -21,6 +23,7 @@ const handleClick = () => {
       </div>
       </Link>
     </nav>
+    </>
   )
 }
 
