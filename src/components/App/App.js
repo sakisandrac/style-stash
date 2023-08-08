@@ -13,42 +13,37 @@ import { useState, useEffect } from 'react';
 import LoginPage from '../LoginPage/LoginPage';
 import OutfitDetails from '../OutfitDetails/OutfitDetails';
 
-function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [mainShown, setMainShown] = useState(true)
-  const [smallScreen, setSmallScreen] = useState(false)
+const App = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [mainShown, setMainShown] = useState(true);
+  const [smallScreen, setSmallScreen] = useState(false);
   const [appError, setAppError] = useState(false);
   const [user, setUser] = useState({
     "userID": "USE-user-ex-1",
 });
 
-
   const openOrCloseMenu = (setting) => {
-    setting === 'open' ? setMenuOpen(true) : setMenuOpen(false)
-  }
+    setting === 'open' ? setMenuOpen(true) : setMenuOpen(false);
+  };
 
   const resizeScreen = () => {
     window.innerWidth <= 740 
       ? setSmallScreen(true)
-      : setSmallScreen(false)
-  }
+      : setSmallScreen(false);
+  };
 
   useEffect(() => {
-    resizeScreen()
-    window.addEventListener('resize', resizeScreen)
-    return () => window.removeEventListener('resize', resizeScreen)
-  }, [menuOpen])
+    resizeScreen();
+    window.addEventListener('resize', resizeScreen);
+    return () => window.removeEventListener('resize', resizeScreen);
+  }, [menuOpen]);
 
   useEffect(() => {
     menuOpen && smallScreen 
       ? setMainShown(false)
-      : setMainShown(true)
-  }, [menuOpen, smallScreen])
+      : setMainShown(true);
+  }, [menuOpen, smallScreen]);
 
-
-  useEffect(() =>{
-    console.log('apperr', appError)
-  },[appError])
 
   return (
     <main className={menuOpen ? 'row-flex' : ''}>

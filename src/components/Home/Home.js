@@ -1,100 +1,95 @@
 import './Home.css';
-import logo from '../../images/homepage.png';
 import { useEffect, useState } from 'react';
 import { getData } from '../../apiCalls';
 import { Link } from 'react-router-dom';
 
-const Home = ({menuOpen, user, setAppError}) => {
+const Home = ({ menuOpen, user, setAppError }) => {
 
-  const [featuredImage, setFeaturedImage] = useState({})
-  const [featuredItems, setFeaturedItems] = useState([])
-  const [featuredPieceClass, setFeaturedPieceClass] = useState('featured-piece')
-  const randomPieces = []
+  const [featuredImage, setFeaturedImage] = useState({});
+  const [featuredItems, setFeaturedItems] = useState([]);
+  const [featuredPieceClass, setFeaturedPieceClass] = useState('featured-piece');
+  const randomPieces = [];
 
-  useEffect(() => {
-    const updateCSS = () => {
-      const classes = ['.featured-img-container', '.featured-img', '.featured-pieces-container']
-      
-      if(window.innerWidth > 1200 && window.innerWidth < 1650 && menuOpen) {
-        classes.forEach(item => document.querySelector(item).classList.add('modal-open-featured'))
-        setFeaturedPieceClass('modal-open-featured-piece')
+  const updateCSS = () => {
+    const classes = ['.featured-img-container', '.featured-img', '.featured-pieces-container'];
+
+    if (window.innerWidth > 1200 && window.innerWidth < 1650 && menuOpen) {
+      classes.forEach(item => document.querySelector(item).classList.add('modal-open-featured'));
+      setFeaturedPieceClass('modal-open-featured-piece');
+    } else {
+      classes.forEach(item => document.querySelector(item).classList.remove('modal-open-featured'));
+      setFeaturedPieceClass('featured-piece');
+    };
+
+    if (window.innerWidth < 1000 && menuOpen) {
+      document.querySelector('.featured-container').classList.add('column-flex');
+    } else {
+      document.querySelector('.featured-container').classList.remove('column-flex');
+    };
+  };
+
+  const getFeaturedOutfit = async (type, userID) => {
+    try {
+      const data = await getData(type, userID);
+      const outfit = data.allData[getRandIndex(data.allData.length)].outfit;
+      if (outfit.fullOutfitImage) {
+        setFeaturedImage(outfit);
       } else {
-        classes.forEach(item => document.querySelector(item).classList.remove('modal-open-featured'))
-        setFeaturedPieceClass('featured-piece')
+        getFeaturedOutfit(type, userID);
       }
+    } catch (error) {
+      setAppError(error);
+    };
+  };
 
-      if(window.innerWidth < 1000 && menuOpen) {
-        document.querySelector('.featured-container').classList.add('column-flex')
-      } else {
-        document.querySelector('.featured-container').classList.remove('column-flex')
-      }
-    }
-    window.addEventListener('resize', updateCSS)
-    return () => window.removeEventListener('resize', updateCSS)
-  })
+  const getFeaturedItems = async (type, userID) => {
+    try {
+      setFeaturedItems([]);
+      const data = await getData(type, userID);
+      const items = getAllRandomPieces(data.pieces);
+      setFeaturedItems([items[0], items[1], items[2], items[3]]);
+    } catch (error) {
+      setAppError(error);
+    };
+  };
 
   const getRandIndex = (num) => {
-    return Math.floor(Math.random() * num)
-  }
+    return Math.floor(Math.random() * num);
+  };
 
   const getAllRandomPieces = (pieces) => {
     const piecesToChooseFrom = pieces.filter(piece => {
-      return randomPieces.some(item => item.id === piece.id) ? false : true
-    })
+      return randomPieces.some(item => item.id === piece.id) ? false : true;
+    });
 
     getRandomPiece(piecesToChooseFrom)
-    if(randomPieces.length < 4) {
-      getAllRandomPieces(piecesToChooseFrom)
-    }
+    if (randomPieces.length < 4) {
+      getAllRandomPieces(piecesToChooseFrom);
+    };
 
-    return randomPieces
-  }
+    return randomPieces;
+  };
 
   const getRandomPiece = (pieces) => {
-    const newRandPiece = pieces[getRandIndex(pieces.length)]
-    const pieceAlreadyInRandom = randomPieces.includes(newRandPiece)
+    const newRandPiece = pieces[getRandIndex(pieces.length)];
+    const pieceAlreadyInRandom = randomPieces.includes(newRandPiece);
 
-    if(!pieceAlreadyInRandom) {
-      randomPieces.push(pieces[getRandIndex(pieces.length)])
-    }
-  }
-
-  useEffect(() => {
-    const apiCall = async (type, userID) => {
-      try {
-        const data = await getData(type, userID)
-        const outfit = data.allData[getRandIndex(data.allData.length)].outfit
-        if (outfit.fullOutfitImage) {
-          setFeaturedImage(outfit)
-        } else {
-          apiCall(type, userID)
-        }
-      } catch (error) {
-        setAppError(error)
-      }
-    }
-
-      if(user) {
-        apiCall('outfits', user.userID)
-      }
-  },[])
+    if (!pieceAlreadyInRandom) {
+      randomPieces.push(pieces[getRandIndex(pieces.length)]);
+    };
+  };
 
   useEffect(() => {
-    const apiCallItem = async (type, userID) => {
-      try {
-        setFeaturedItems([])
-        const data = await getData(type, userID)
-        const items = getAllRandomPieces(data.pieces)
-        setFeaturedItems([items[0], items[1], items[2], items[3]])
-      } catch (error) {
-        setAppError(error)
-      }
-    }
+    if (user) {
+      getFeaturedOutfit('outfits', user.userID);
+      getFeaturedItems('closet', user.userID);
+    };
+  }, []);
 
-      if(user) {
-        apiCallItem('closet', user.userID)
-      }
-  },[])
+  useEffect(() => {
+    window.addEventListener('resize', updateCSS);
+    return () => window.removeEventListener('resize', updateCSS);
+  });
 
   const featuredPieces = () => {
     return featuredItems.map(item => {
@@ -105,13 +100,13 @@ const Home = ({menuOpen, user, setAppError}) => {
         </div>
       )
     }
-  )}
+    )
+  };
 
   return (
     <div className='homepage-container'>
-      <main className='homepage'> 
-        {/* <img className='home-logo' src={logo} /> */}
-        {user?
+      <main className='homepage'>
+        {user ?
           <div className='featured-container'>
             <div className='featured-left'>
               <div className='featured-img-container'>
@@ -127,7 +122,7 @@ const Home = ({menuOpen, user, setAppError}) => {
               </div>
             </div>
           </div>
-        : <p>Please Login to Style Stash!</p>}
+          : <p>Please Login to Style Stash!</p>}
       </main>
     </div>
   )

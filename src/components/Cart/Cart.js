@@ -5,12 +5,23 @@ import remove from '../../images/close.png'
 
 const Cart = ({appError, cart, removeFromCart, fullOutfitImage, updateOutfitImg, notes, updateNotes, setOutfitReady, addSuccess, setAddSuccess}) => {
   const [error, setError] = useState('');
-  const [outfitNotes, setOutfitNotes] = useState(notes)
+  const [outfitNotes, setOutfitNotes] = useState(notes);
 
   const handleChange = (setup, args) => {
-    if(setup) setup(args)
-    setAddSuccess(false)
-  }
+    if(setup) {
+      setup(args);
+    };
+    setAddSuccess(false);
+  };
+
+  const completeLook = () => {
+    if(!cart.length) {
+      setError('Add at least one clothing item to create an outfit!');
+    } else {
+      setOutfitReady(true);
+      updateNotes(outfitNotes);
+    };
+  };
 
   const pieceEls = cart.map(piece => {
     return (
@@ -18,17 +29,9 @@ const Cart = ({appError, cart, removeFromCart, fullOutfitImage, updateOutfitImg,
         <img src={piece.image} alt='item in cart'/>
         <button className='remove-cart-button' onClick={() => removeFromCart(piece)}><img src={remove}/></button>
       </div>
-    )
-})
+    );
+});
 
-  const completeLook = () => {
-    if(!cart.length) {
-      setError('Add at least one clothing item to create an outfit!')
-    } else {
-      setOutfitReady(true)
-      updateNotes(outfitNotes)
-    }
-  }
   return (
     <section className='cart-page'>
       <div style={{display: "flex"}}>
