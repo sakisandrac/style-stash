@@ -64,11 +64,13 @@ const OutfitForm = ({ closeMenu, appError, setAppError, user }) => {
     setNotes(newNotes);
   };
 
-  const updateOutfitImg = (e) =>
+  const updateOutfitImg = (e) => {
     setFullOutfitImage(URL.createObjectURL(e.target.files[0]));
+  }
 
-  const checkCartForItem = (id) =>
+  const checkCartForItem = (id) => {
     cart.find((item) => item.id === id) ? true : false;
+  }
 
   const addToCart = (piece) => {
     setCart((prevCart) => [...prevCart, piece]);

@@ -70,8 +70,9 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu }) => {
     document.querySelector('.delete-warning').close();
   };
 
-  const checkForItem = (id) =>
+  const checkForItem = (id) => {
     pieces.find((item) => item.id === id) ? true : false;
+  }
 
   const pieceEls = pieces?.map((piece) => {
     return (
