@@ -71,7 +71,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu }) => {
   };
 
   const checkForItem = (id) => {
-    pieces.find((item) => item.id === id) ? true : false;
+    return pieces.find((item) => item.id === id) ? true : false;
   }
 
   const pieceEls = pieces?.map((piece) => {

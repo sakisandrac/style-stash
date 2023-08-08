@@ -69,7 +69,7 @@ const OutfitForm = ({ closeMenu, appError, setAppError, user }) => {
   }
 
   const checkCartForItem = (id) => {
-    cart.find((item) => item.id === id) ? true : false;
+    return cart.find((item) => item.id === id) ? true : false;
   }
 
   const addToCart = (piece) => {
