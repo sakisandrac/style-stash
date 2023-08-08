@@ -7,13 +7,13 @@ const handleError = (response) => {
 }
 
 const getData = async (type, userID, secondID) => {
-  let response = await fetch(`https://style-stash-api.vercel.app/api/v1/data/${type}/${userID}/${secondID?secondID:''}`);
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}/${userID}/${secondID?secondID:''}`);
   let data = await handleError(response);
   return data;
 }
 
 const postData = async (type, info) => {
-  let response = await fetch(`https://style-stash-api.vercel.app/api/v1/data/${type}`, {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}`, {
     method: 'POST',
     body: JSON.stringify(info), 
     headers: {
@@ -28,7 +28,7 @@ const postData = async (type, info) => {
 }
 
 const patchData = async (type, allIDs, info) => {
-  let response = await fetch(`https://style-stash-api.vercel.app/api/v1/data/${type}/${allIDs}`, {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}/${allIDs}`, {
     method: 'PATCH',
     body: JSON.stringify(info), 
     headers: {
@@ -44,7 +44,7 @@ const patchData = async (type, allIDs, info) => {
 }
 
 const deleteData = async (type, userID, info) => {
-  let response = await fetch(`https://style-stash-api.vercel.app/api/v1/data/${type}/${userID}`, {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}/${userID}`, {
     method: 'DELETE',
     body: JSON.stringify(info), 
     headers: {

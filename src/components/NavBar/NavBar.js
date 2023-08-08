@@ -11,6 +11,8 @@ const NavBar = ({ openMenu, user, setUser }) => {
   };
 
   return (
+    <>
+    <div className='construction-marquee'><marquee>This project is currently under construction- not all features may work yet!</marquee></div>
     <nav>
       <button onClick={() => openMenu('open')} className="menu-btn">
         <img src={menu} alt="menu button" />
@@ -29,6 +31,7 @@ const NavBar = ({ openMenu, user, setUser }) => {
         </div>
       </Link>
     </nav>
+    </>
   );
 };
 
