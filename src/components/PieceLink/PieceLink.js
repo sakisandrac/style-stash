@@ -1,11 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
 
-const PieceLink = ({category, piece, closeMenu}) => {
+const PieceLink = ({ category, piece, closeMenu }) => {
   return (
-    <Link to={`/closet/${category}/${piece.id}`} className='piece-link closet-piece'  id={piece.id} onClick={() => closeMenu('close')} >
-        <img src={piece.image} />
-      </Link>
-  )
-}
+    <Link
+      to={`/closet/${category}/${piece.id}`}
+      className="piece-link closet-piece"
+      id={piece.id}
+      onClick={() => closeMenu('close')}
+    >
+      <img src={piece.image} />
+    </Link>
+  );
+};
 
-export default PieceLink
+export default PieceLink;
