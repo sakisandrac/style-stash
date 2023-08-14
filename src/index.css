@@ -38,3 +38,11 @@ body {
   background: #debdac;
   border-radius: 25px;
 }
+
+a {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
