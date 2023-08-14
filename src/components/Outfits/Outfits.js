@@ -28,6 +28,7 @@ const Outfits = ({ setAppError, closeMenu, user, appError }) => {
   }, []);
 
   const userOutfitImages = outfits?.map((outfit) => {
+    console.log('outfits', outfits)
     return <OutfitCover outfit={outfit} />;
   });
 

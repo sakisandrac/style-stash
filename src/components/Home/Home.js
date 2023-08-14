@@ -63,7 +63,7 @@ const Home = ({menuOpen, user, setAppError}) => {
     const apiCall = async (type, userID) => {
       try {
         const data = await getData(type, userID)
-        const outfit = data.allData[getRandIndex(data.allData.length)].outfit
+        const outfit = data.allData[getRandIndex(data.allData.length)]
         if (outfit.fullOutfitImage) {
           setFeaturedImage(outfit)
         } else {

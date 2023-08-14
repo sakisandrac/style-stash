@@ -24,10 +24,10 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu }) => {
   const categoryInUrl = useParams().category;
 
   useEffect(() => {
-    const apiCall = async (type, userID, outfitID) => {
+    const apiCall = async (type, outfitID) => {
       setLoading(true);
       try {
-        const data = await getData(type, userID, outfitID);
+        const data = await getData(type, outfitID);
         setPieces(data.outfitPieces);
         setOutfitData(data.outfitData);
         setNotes(data.outfitData.notes);
@@ -37,7 +37,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu }) => {
       }
     };
     if (user) {
-      apiCall('outfits', user.userID, outfitID);
+      apiCall('outfit', outfitID);
     }
   }, []);
 
