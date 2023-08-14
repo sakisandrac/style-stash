@@ -25,7 +25,7 @@ const OutfitForm = ({ closeMenu, appError, setAppError, user }) => {
       .then((newOutfit) => {
         let pieceIDs = cart.map((piece) => piece.id);
         pieceIDs.forEach((id) => {
-          postData(`outfit-to-pieces/${user.userID}`, {
+          postData('outfit-to-pieces', {
             outfitID: newOutfit.newData.id,
             pieceID: id,
           }).catch((err) => {
