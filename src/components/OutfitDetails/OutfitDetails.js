@@ -59,14 +59,8 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu }) => {
   };
 
   const deleteOutfit = () => {
-    deleteData('outfits', user.userID, { id: outfitID });
+    deleteData('outfits', { id: outfitID });
     setDeleteSuccess(true);
-    pieces.forEach((piece) => {
-      deleteData('outfit-to-pieces', user.userID, {
-        outfitID,
-        pieceID: piece.id,
-      });
-    });
     document.querySelector('.delete-warning').close();
   };
 
@@ -114,7 +108,7 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu }) => {
       try {
         let newOutfit = await patchData(
           'outfit',
-          `${user.userID}/${outfitData.id}`,
+          `${outfitData.id}`,
           {
             notes,
             fullOutfitImage: newOutfitImage
@@ -124,14 +118,14 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu }) => {
         );
 
         deletedPieces.forEach((id) => {
-          deleteData('outfit-to-pieces', `${user.userID}`, {
+          deleteData('outfit-to-pieces', {
             outfitID: outfitData.id,
             pieceID: id,
           });
         });
 
         newPieces.forEach((id) => {
-          postData(`outfit-to-pieces/${user.userID}`, {
+          postData('outfit-to-pieces', {
             outfitID: outfitData.id,
             pieceID: id,
           });
