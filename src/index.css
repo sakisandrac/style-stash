@@ -19,11 +19,17 @@ body {
 
 }
 
-.menu-btn {
+.menu-btn, .menu-nav-btn {
   background-color: #00000000;
   border: none;
   color: black;
 }
+
+.menu-nav-btn {
+  display: flex;
+  width: 153px;
+}
+
 
 .page-title {
   padding: 1%;

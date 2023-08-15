@@ -12,7 +12,7 @@ const NavBar = ({ openMenu, user, setUser }) => {
 
   return (
     <nav>
-      <button onClick={() => openMenu('open')} className="menu-btn">
+      <button onClick={() => openMenu('open')} className="menu-nav-btn">
         <img src={menu} alt="menu button" />
       </button>
       <Link to="/" className="logo-heading">
