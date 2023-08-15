@@ -1,11 +1,11 @@
 import './App.css';
-import NavBar from '../NavBar/NavBar'
-import Home from '../Home/Home'
-import Menu from '../Menu/Menu'
-import Closet from '../Closet/Closet'
-import Outfits from '../Outfits/Outfits'
+import NavBar from '../NavBar/NavBar';
+import Home from '../Home/Home';
+import Menu from '../Menu/Menu';
+import Closet from '../Closet/Closet';
+import Outfits from '../Outfits/Outfits';
 import Piece from '../Piece/Piece';
-import CategoryPage from '../CategoryPage/CategoryPage'
+import CategoryPage from '../CategoryPage/CategoryPage';
 import OutfitForm from '../OutfitForm/OutfitForm';
 import ItemForm from '../ItemForm/ItemForm';
 import { Routes, Route } from 'react-router-dom';
@@ -15,38 +15,34 @@ import OutfitDetails from '../OutfitDetails/OutfitDetails';
 import DemoPage from '../DemoPage/DemoPage';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [mainShown, setMainShown] = useState(true)
-  const [smallScreen, setSmallScreen] = useState(false)
-  const [appError, setAppError] = useState(false);
+const App = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [mainShown, setMainShown] = useState(true);
+  const [smallScreen, setSmallScreen] = useState(false);
+  const [appError, setAppError] = useState(null);
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    console.log(user)
-  },[user])
-
   const openOrCloseMenu = (setting) => {
-    setting === 'open' ? setMenuOpen(true) : setMenuOpen(false)
-  }
+    setting === 'open' ? setMenuOpen(true) : setMenuOpen(false);
+  };
 
   const resizeScreen = () => {
     window.innerWidth <= 740 
       ? setSmallScreen(true)
-      : setSmallScreen(false)
-  }
+      : setSmallScreen(false);
+  };
 
   useEffect(() => {
-    resizeScreen()
-    window.addEventListener('resize', resizeScreen)
-    return () => window.removeEventListener('resize', resizeScreen)
-  }, [menuOpen])
+    resizeScreen();
+    window.addEventListener('resize', resizeScreen);
+    return () => window.removeEventListener('resize', resizeScreen);
+  }, [menuOpen]);
 
   useEffect(() => {
     menuOpen && smallScreen 
       ? setMainShown(false)
-      : setMainShown(true)
-  }, [menuOpen, smallScreen])
+      : setMainShown(true);
+  }, [menuOpen, smallScreen]);
 
   return (
     <main className={menuOpen ? 'row-flex' : ''}>

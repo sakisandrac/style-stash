@@ -42,6 +42,10 @@ a:visited {
   font-size: .9rem;
 }
 
+.construction-marquee {
+  background-color: #eccdc1;
+}
+
 @media (max-width: 600px) {
   .login-container {
     display: flex;

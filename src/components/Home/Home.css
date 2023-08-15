@@ -5,7 +5,6 @@
   height: 500px;
   margin-top: 30px;
   object-fit: cover;
-  /* z-index: 1; */
 }
 
 .featured-img-container {
@@ -59,7 +58,6 @@
 .homepage-container {
   display: flex;
   justify-content: center;
-  /* background-color: #eccdc1; */
   height: 100vh;
   width: 100%;
 }
@@ -83,7 +81,6 @@
   justify-content: space-around;
   width: 100%;
   height: 100%;
-  /* border: 5px solid red; */
 }
 
 .featured-pieces-container {
@@ -93,7 +90,6 @@
   align-items: center;
   flex-wrap: wrap;
   width: 90%;
-  /* min-width: 250px; */
   max-width: 550px;
   height: 500px;
   border-radius: 10px;

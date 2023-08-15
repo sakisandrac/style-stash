@@ -1,9 +1,8 @@
-import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
 import './Closet.css';
 import CategoryContainer from '../CategoryContainer/CategoryContainer';
 import './Closet.css';
-import plusIcon from '../../images/add.png'
+import plusIcon from '../../images/add.png';
 
 const Closet = ({closeMenu, user}) => {
   return (

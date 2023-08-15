@@ -14,63 +14,72 @@ const ItemForm = ({user}) => {
   const handleChange = (e) => {
     setAddSuccess(false);
     setImage(URL.createObjectURL(e.target.files[0]));
-}
+  };
 
   const handleSelect = (e) => {
     setAddSuccess(false);
     setCategory(e.target.value);
-  }
+  };
 
   const handleNotes = (e) => {
     setAddSuccess(false);
     setNotes(e.target.value);
-  }
-  const clearForm = () => {
-    setImage("")
-    setNotes("")
-    setCategory("")
-  }
+  };
+
+  const clearForm = (setters) => {
+    setters.forEach((func) => {
+      func("");
+    });
+  };
+
+  const newFormData = () => {
+    return {
+      id: `PIE-${uuid()}`,
+      image: image,
+      categoryID: `CAT-${category.toLowerCase()}`,
+      notes: notes,
+      userID: user.userID
+    };
+  };
+
+  const checkErrors = (err) => {
+    if (err.message.includes('Failed')) {
+      setError({ error: true, message: `Connection error, please try again later!` });
+    } else {
+      setError({ error: true, message: err.message });
+    };
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if(image && category) {
-      setNewData({
-        id: `PIE-${uuid()}`,
-        image: image,
-        categoryID: `CAT-${category.toLowerCase()}`,
-        notes: notes,
-        userID: user.id
-      });
-      clearForm();
+      setNewData(newFormData());
+      clearForm([setImage, setNotes, setCategory]);
     } else {
       setError({error: true, message:`Please select both an image and category!`});
-    }
-  }
+    };
+  };
 
-    useEffect(() => {
-      const apiCall = async () => {
-        try {
-          await postData('closet', newData)
-          setError({error: false, message: ""});
-          setAddSuccess(true);
-        } catch (err) {
-          if(err.message.includes('Failed')) {
-            setError({error: true, message: `Connection error, please try again later!`})
-          } else {
-            setError({error: true, message: err.message})
-          }
-        }
-        }
-        
-      if(newData) {
-      apiCall()
-      }
-    },[newData])
+  const postNewItem = async () => {
+    try {
+      await postData('closet', newData);
+      setError({ error: false, message: "" });
+      setAddSuccess(true);
+    } catch (err) {
+      checkErrors(err);
+    };
+  };
 
-  return ( 
+  useEffect(() => {
+    if (newData) {
+      postNewItem()
+    };
+    return () => setError({error:false, message: ""});
+  }, [newData]);
+
+  return (
     <div className='item-form'>
       <h1 className='page-title'>Add Item To Closet:</h1>
-      {/* <h1 className='add-item-header'></h1> */}
       <form>
         <label htmlFor='fileUpload' className='upload-img-btn'>Upload Image
           <input id='fileUpload' className='file-upload-default' type="file" onChange={handleChange} />
@@ -97,7 +106,6 @@ const ItemForm = ({user}) => {
       </form>
       {error.error && <p>{error.message}</p>}
       {addSuccess && <p>Item successfully added!</p>}
-      
     </div>
   )
 }
