@@ -12,9 +12,8 @@ const CategoryPage = ({user, appError, setAppError, closeMenu, cart, checkCartFo
   
   const [allPieces, setAllPieces] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const category = useParams().category;
-  const userID = user?.userID;
+  const category = useParams().category
+  const userID = user?.id
 
   const getAllPieces = async () => {
     setLoading(true);
@@ -26,6 +25,7 @@ const CategoryPage = ({user, appError, setAppError, closeMenu, cart, checkCartFo
       setAppError(error);
     }
   }
+
 
   useEffect(() => {
     if (user) {
@@ -57,7 +57,7 @@ const CategoryPage = ({user, appError, setAppError, closeMenu, cart, checkCartFo
       <BackLink />
       <h1 className='page-title' >{category.toUpperCase()}</h1>
       <section className='piece-container'>
-        {allPieces ? pieceEls : user ? loading ? <p>Loading...</p> : <p>No items in the {category} category yet! Add to your collection to get started!</p> : <p>Please login to continue</p>}
+        {allPieces ? pieceEls : user ? loading ? <p>Loading...</p> : <p>No items in the {category} category yet! Add to your collection to get started!</p> : <p className="login-prompt">Please login to continue</p>}
       </section>
     </section>
   )

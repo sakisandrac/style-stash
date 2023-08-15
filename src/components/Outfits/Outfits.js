@@ -21,7 +21,7 @@ const Outfits = ({ setAppError, closeMenu, user, appError }) => {
     };
 
     if (user) {
-      apiCall('outfits', user.userID);
+      apiCall('outfits', user.id);
     }
 
     return () => setAppError(null);
@@ -47,7 +47,7 @@ const Outfits = ({ setAppError, closeMenu, user, appError }) => {
           <div className="outfits-container">{userOutfitImages}</div>
         </div>
       ) : (
-        <p>Please Login to Continue</p>
+        <p className="login-prompt">Please Login to Continue</p>
       )}
     </>
   );

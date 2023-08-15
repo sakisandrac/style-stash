@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const Home = ({ menuOpen, user, setAppError, appError }) => {
-
   const [featuredImage, setFeaturedImage] = useState({});
   const [featuredItems, setFeaturedItems] = useState([]);
   const [featuredPieceClass, setFeaturedPieceClass] = useState('featured-piece');
@@ -32,7 +31,7 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
   const getFeaturedOutfit = async (type, userID) => {
     try {
       const data = await getData(type, userID);
-      const outfit = data.allData[getRandIndex(data.allData.length)].outfit;
+      const outfit = data.allData[getRandIndex(data.allData.length)];
       if (outfit.fullOutfitImage) {
         setFeaturedImage(outfit);
       } else {
@@ -47,7 +46,7 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
     try {
       setFeaturedItems([]);
       const data = await getData(type, userID);
-      const items = getAllRandomPieces(data.pieces);
+      const items = getAllRandomPieces(data.closetData);
       setFeaturedItems([items[0], items[1], items[2], items[3]]);
     } catch (error) {
       setAppError(error);
@@ -82,23 +81,24 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
 
   useEffect(() => {
     if (user) {
-      getFeaturedOutfit('outfits', user.userID);
-      getFeaturedItems('closet', user.userID);
+      getFeaturedOutfit('outfits', user.id);
+      getFeaturedItems('closet', user.id);
     };
     return () => setAppError(null);
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     window.addEventListener('resize', updateCSS);
     return () => window.removeEventListener('resize', updateCSS);
   });
 
+
   const featuredPieces = () => {
     return featuredItems.map(item => {
       return (
         <div key={item.id} className='featured-piece-container'>
           <img className={`${featuredPieceClass} piece-${featuredItems.indexOf(item)}`} src={item.image} />
-          <Link className='view-outfit-link' to={`closet/${item.categoryID.split('-')[1]}/${item.id}`}><div className='view-outfit-btn-home'>View item</div></Link>
+          <Link className='view-outfit-link' to={`closet/${item.category_id.split('-')[1]}/${item.id}`}><div className='view-outfit-btn-home'>View item</div></Link>
         </div>
       )
     })
@@ -124,7 +124,7 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
               </div>
             </div>
           </div>
-          : <p>Please Login to Style Stash!</p>}
+        : <p className="login-prompt">Please Login To Continue!</p>}
       </main>
     </div>
   )

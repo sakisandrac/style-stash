@@ -15,7 +15,7 @@ const Closet = ({closeMenu, user}) => {
       <h1 className='page-title' >My Closet</h1>
       <CategoryContainer closeMenu={closeMenu} parentRoute={'closet' }/>
     </section>
-    : <p>Please Login to Continue</p>
+    : <p className="login-prompt">Please Login to Continue</p>
     } 
     </>
   )

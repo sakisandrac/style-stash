@@ -12,15 +12,15 @@ import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LoginPage from '../LoginPage/LoginPage';
 import OutfitDetails from '../OutfitDetails/OutfitDetails';
+import DemoPage from '../DemoPage/DemoPage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mainShown, setMainShown] = useState(true);
   const [smallScreen, setSmallScreen] = useState(false);
   const [appError, setAppError] = useState(null);
-  const [user, setUser] = useState({
-    "userID": "USE-user-ex-1",
-});
+  const [user, setUser] = useState(null);
 
   const openOrCloseMenu = (setting) => {
     setting === 'open' ? setMenuOpen(true) : setMenuOpen(false);
@@ -44,13 +44,12 @@ const App = () => {
       : setMainShown(true);
   }, [menuOpen, smallScreen]);
 
-
   return (
     <main className={menuOpen ? 'row-flex' : ''}>
       {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} setUser={setUser} openMenu={openOrCloseMenu}/>}
       {mainShown &&
       <Routes>
-        <Route path="/" element={<Home menuOpen={menuOpen} user={user} appError={appError} setAppError={setAppError}/>}/> 
+        <Route path="/" element={user? <Home menuOpen={menuOpen} user={user} setUser={setUser} setAppError={setAppError}/> : <DemoPage setUser={setUser}/>}/> 
         <Route path='/closet' element={<Closet user={user} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category' element={<CategoryPage user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category/:pieceID' element={<Piece user={user} appError={appError} setAppError={setAppError}/>} />
@@ -62,6 +61,7 @@ const App = () => {
         <Route path='/outfitdetails/:id' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitdetails/:id/add-piece' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitdetails/:id/add-piece/:category' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
+        <Route path='*' element={<ErrorMessage appError={'404'}/>}></Route>
       </Routes>}
     </main>
   );

@@ -21,11 +21,11 @@ const OutfitForm = ({ closeMenu, appError, setAppError, user }) => {
   const [fullOutfitImage, setFullOutfitImage] = useState('');
 
   const postNewOutfit = () => {
-    postData(`outfits/${user.userID}`, outfit)
+    postData(`outfits/${user.id}`, outfit)
       .then((newOutfit) => {
         let pieceIDs = cart.map((piece) => piece.id);
         pieceIDs.forEach((id) => {
-          postData(`outfit-to-pieces/${user.userID}`, {
+          postData('outfit-to-pieces', {
             outfitID: newOutfit.newData.id,
             pieceID: id,
           }).catch((err) => {
