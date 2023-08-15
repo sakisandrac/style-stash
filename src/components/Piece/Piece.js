@@ -23,7 +23,6 @@ const Piece = ({ user, appError, setAppError }) => {
       );
       const outfitPieces = await getData(
         'outfit-piece-amount',
-        user.userID,
         pieceID
       );
       setPiece(fetchedPiece);
