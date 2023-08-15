@@ -20,9 +20,9 @@ function App() {
   const [appError, setAppError] = useState(false);
   const [user, setUser] = useState(null);
 
-useEffect(() => {
-console.log('thisisuser', user)
-},[user])
+  useEffect(() => {
+    console.log(user)
+  },[user])
 
   const openOrCloseMenu = (setting) => {
     setting === 'open' ? setMenuOpen(true) : setMenuOpen(false)
@@ -51,7 +51,7 @@ console.log('thisisuser', user)
       {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} setUser={setUser} openMenu={openOrCloseMenu}/>}
       {mainShown &&
       <Routes>
-        <Route path="/" element={<Home menuOpen={menuOpen} user={user} setAppError={setAppError}/>}/> 
+        <Route path="/" element={<Home menuOpen={menuOpen} user={user} setUser={setUser} setAppError={setAppError}/>}/> 
         <Route path='/closet' element={<Closet user={user} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category' element={<CategoryPage user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/closet/:category/:pieceID' element={<Piece user={user} appError={appError} setAppError={setAppError}/>} />

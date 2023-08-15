@@ -21,7 +21,6 @@ const postData = async (type, info) => {
     }
   })
   let data = await response.json()
-  console.log('inapi', data)
   if(data.message && data.message.includes('Error')) {
     throw new Error(`${data.message} -- Please try again`)
   }

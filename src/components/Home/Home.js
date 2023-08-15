@@ -3,8 +3,9 @@ import logo from '../../images/homepage.png';
 import { useEffect, useState } from 'react';
 import { getData } from '../../apiCalls';
 import { Link } from 'react-router-dom';
+import DemoPage from '../DemoPage/DemoPage';
 
-const Home = ({menuOpen, user, setAppError}) => {
+const Home = ({menuOpen, user, setUser, setAppError}) => {
 
   const [featuredImage, setFeaturedImage] = useState({})
   const [featuredItems, setFeaturedItems] = useState([])
@@ -77,7 +78,7 @@ const Home = ({menuOpen, user, setAppError}) => {
       if(user) {
         apiCall('outfits', user.id)
       }
-  },[])
+  },[user])
 
   useEffect(() => {
     const apiCallItem = async (type, userID) => {
@@ -95,7 +96,7 @@ const Home = ({menuOpen, user, setAppError}) => {
       if(user) {
         apiCallItem('closet', user.id)
       }
-  },[])
+  },[user])
 
   const featuredPieces = () => {
     return featuredItems.map(item => {
@@ -128,7 +129,7 @@ const Home = ({menuOpen, user, setAppError}) => {
               </div>
             </div>
           </div>
-        : <p>Please Login to Style Stash!</p>}
+        : <DemoPage setUser={setUser}/>}
       </main>
     </div>
   )

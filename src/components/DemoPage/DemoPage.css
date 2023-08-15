@@ -1,0 +1,16 @@
+.users-container {
+  display: flex;
+}
+
+.demo-img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.demo-img:hover {
+  width: 320px;
+  height: 320px;
+}
