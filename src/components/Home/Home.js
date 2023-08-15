@@ -84,7 +84,8 @@ const Home = ({menuOpen, user, setAppError}) => {
       try {
         setFeaturedItems([])
         const data = await getData(type, userID)
-        const items = getAllRandomPieces(data.pieces)
+
+        const items = getAllRandomPieces(data.closetData)
         setFeaturedItems([items[0], items[1], items[2], items[3]])
       } catch (error) {
         setAppError(error)
@@ -101,7 +102,7 @@ const Home = ({menuOpen, user, setAppError}) => {
       return (
         <div key={item.id} className='featured-piece-container'>
           <img className={`${featuredPieceClass} piece-${featuredItems.indexOf(item)}`} src={item.image} />
-          <Link className='view-outfit-link' to={`closet/${item.categoryID.split('-')[1]}/${item.id}`}><div className='view-outfit-btn-home'>View item</div></Link>
+          <Link className='view-outfit-link' to={`closet/${item.category_id.split('-')[1]}/${item.id}`}><div className='view-outfit-btn-home'>View item</div></Link>
         </div>
       )
     }

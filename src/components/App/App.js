@@ -45,11 +45,6 @@ function App() {
       : setMainShown(true)
   }, [menuOpen, smallScreen])
 
-
-  useEffect(() =>{
-    console.log('apperr', appError)
-  },[appError])
-
   return (
     <main className={menuOpen ? 'row-flex' : ''}>
       {menuOpen ? <Menu closeMenu={openOrCloseMenu}/> : <NavBar user={user} setUser={setUser} openMenu={openOrCloseMenu}/>}
