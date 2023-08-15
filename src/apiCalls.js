@@ -44,6 +44,7 @@ const patchData = async (type, allIDs, info) => {
 }
 
 const deleteData = async (type, info) => {
+  console.log(info)
   let response = await fetch(`http://localhost:3003/api/v1/data/${type}`, {
     method: 'DELETE',
     body: JSON.stringify(info), 

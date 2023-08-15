@@ -19,7 +19,7 @@ function App() {
   const [smallScreen, setSmallScreen] = useState(false)
   const [appError, setAppError] = useState(false);
   const [user, setUser] = useState({
-    "userID": "2",
+    "userID": "1",
 });
 
 

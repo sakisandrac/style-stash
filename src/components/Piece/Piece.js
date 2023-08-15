@@ -38,13 +38,13 @@ const Piece = ({ user, appError, setAppError }) => {
   }, []);
 
   useEffect(() => {
-    setPieceNotes(piece.notes);
+    setPieceNotes(piece.note);
   }, [piece]);
 
   const handleSave = async () => {
     try {
       setPiece(
-        await patchData('closet', `${user.userID}/${pieceID}`, {
+        await patchData('closet', `${pieceID}`, {
           ...piece,
           notes: pieceNotes,
         })
@@ -63,7 +63,7 @@ const Piece = ({ user, appError, setAppError }) => {
 
   const deletePiece = async () => {
     try {
-      await deleteData('piece', user.userID, { id: pieceID });
+      await deleteData('piece', { id: pieceID });
       setDeleteSuccess(true);
     } catch (error) {
       setAppError(error);
@@ -96,9 +96,9 @@ const Piece = ({ user, appError, setAppError }) => {
           />
         ) : (
           <article
-            className={piece.notes ? 'piece-notes' : 'piece-notes no-note'}
+            className={piece.note ? 'piece-notes' : 'piece-notes no-note'}
           >
-            {piece.notes ? piece.notes : 'Edit item to add notes'}
+            {piece.note ? piece.note : 'Edit item to add notes'}
           </article>
         )}
         {editing ? (
