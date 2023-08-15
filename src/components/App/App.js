@@ -18,10 +18,11 @@ function App() {
   const [mainShown, setMainShown] = useState(true)
   const [smallScreen, setSmallScreen] = useState(false)
   const [appError, setAppError] = useState(false);
-  const [user, setUser] = useState({
-    "userID": "1",
-});
+  const [user, setUser] = useState(null);
 
+useEffect(() => {
+console.log('thisisuser', user)
+},[user])
 
   const openOrCloseMenu = (setting) => {
     setting === 'open' ? setMenuOpen(true) : setMenuOpen(false)

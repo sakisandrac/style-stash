@@ -39,7 +39,7 @@ const ItemForm = ({user}) => {
         image: image,
         categoryID: `CAT-${category.toLowerCase()}`,
         notes: notes,
-        userID: user.userID
+        userID: user.id
       });
       clearForm();
     } else {

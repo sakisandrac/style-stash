@@ -75,7 +75,7 @@ const Home = ({menuOpen, user, setAppError}) => {
     }
 
       if(user) {
-        apiCall('outfits', user.userID)
+        apiCall('outfits', user.id)
       }
   },[])
 
@@ -93,7 +93,7 @@ const Home = ({menuOpen, user, setAppError}) => {
     }
 
       if(user) {
-        apiCallItem('closet', user.userID)
+        apiCallItem('closet', user.id)
       }
   },[])
 

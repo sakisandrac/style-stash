@@ -14,7 +14,7 @@ const CategoryPage = ({  user, appError, setAppError, closeMenu, cart, checkCart
   const [loading, setLoading] = useState(true);
 
   const category = useParams().category
-  const userID = user?.userID
+  const userID = user?.id
 
   useEffect(() => {
     setAppError(null)

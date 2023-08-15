@@ -21,14 +21,13 @@ const Outfits = ({ setAppError, closeMenu, user, appError }) => {
     };
 
     if (user) {
-      apiCall('outfits', user.userID);
+      apiCall('outfits', user.id);
     }
 
     return () => setAppError(null);
   }, []);
 
   const userOutfitImages = outfits?.map((outfit) => {
-    console.log('outfits', outfits)
     return <OutfitCover outfit={outfit} />;
   });
 

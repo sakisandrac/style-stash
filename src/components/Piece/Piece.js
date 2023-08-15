@@ -17,7 +17,7 @@ const Piece = ({ user, appError, setAppError }) => {
 
   const apiCall = async () => {
     try {
-      const fetchedCategory = await getData('closet', user.userID, category);
+      const fetchedCategory = await getData('closet', user.id, category);
       const fetchedPiece = fetchedCategory.filteredPieces.find(
         (item) => item.id === pieceID
       );

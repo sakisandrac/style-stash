@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 const OutfitCover = ({ outfit }) => {
-  console.log('outfit', outfit)
   const outfitPieceImgs = (outfit) => {
     const allImages = outfit.pieces.map((piece) => {
       return <img key={piece.id} className="piece-img" src={piece.image} />;
