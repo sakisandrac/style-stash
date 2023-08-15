@@ -112,7 +112,6 @@ const Home = ({menuOpen, user, setUser, setAppError}) => {
   return (
     <div className='homepage-container'>
       <main className='homepage'> 
-        {/* <img className='home-logo' src={logo} /> */}
         {user?
           <div className='featured-container'>
             <div className='featured-left'>
@@ -129,7 +128,7 @@ const Home = ({menuOpen, user, setUser, setAppError}) => {
               </div>
             </div>
           </div>
-        : <DemoPage setUser={setUser}/>}
+        : <p>Please Login To Continue!</p>}
       </main>
     </div>
   )

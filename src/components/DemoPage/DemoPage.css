@@ -1,5 +1,28 @@
+.demo-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7f2eb;
+  height: 100vh;
+}
+
+.demo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.welcome-text {
+  font-family: 'Sacramento', cursive;
+  font-size: 3rem;
+  text-align: center;
+}
+
 .users-container {
   display: flex;
+  width: 80%;
+  justify-content: space-around;
 }
 
 .demo-img {
@@ -8,9 +31,50 @@
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+  margin: 10px;
 }
 
-.demo-img:hover {
-  width: 320px;
-  height: 320px;
+.demo1 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-name {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position:absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  background: rgba(255, 245, 231, 0.3);
+}
+
+.demo1:hover .user-name {
+  opacity: 1;
+}
+
+.name-tag { 
+  font-size: 1.7rem;
+  background-color: #debdac;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.login-link-btn {
+  background-color: #debdac;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 650px){
+  .users-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
