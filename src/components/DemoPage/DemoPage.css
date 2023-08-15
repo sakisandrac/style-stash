@@ -26,8 +26,8 @@
 }
 
 .demo-img {
-  width: 300px;
-  height: 300px;
+  width: 450px;
+  height: 450px;
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
@@ -42,8 +42,8 @@
 }
 
 .user-name {
-  width: 300px;
-  height: 300px;
+  width: 450px;
+  height: 450px;
   border-radius: 50%;
   position:absolute;
   display: flex;
@@ -72,6 +72,12 @@
   margin-top: 30px;
 }
 
+@media screen and (max-width: 1000px) {
+  .demo-img {
+    width: 300px;
+    height: 300px;
+  }
+}
 @media screen and (max-width: 650px){
   .users-container {
     flex-direction: column;

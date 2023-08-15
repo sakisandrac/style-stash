@@ -128,7 +128,7 @@ const Home = ({menuOpen, user, setUser, setAppError}) => {
               </div>
             </div>
           </div>
-        : <p>Please Login To Continue!</p>}
+        : <p className="login-prompt">Please Login To Continue!</p>}
       </main>
     </div>
   )

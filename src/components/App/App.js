@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import LoginPage from '../LoginPage/LoginPage';
 import OutfitDetails from '../OutfitDetails/OutfitDetails';
 import DemoPage from '../DemoPage/DemoPage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -64,6 +65,7 @@ function App() {
         <Route path='/outfitdetails/:id' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitdetails/:id/add-piece' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
         <Route path='/outfitdetails/:id/add-piece/:category' element={<OutfitDetails user={user} appError={appError} setAppError={setAppError} closeMenu={openOrCloseMenu}/>} />
+        <Route path='*' element={<ErrorMessage appError={'404'}/>}></Route>
       </Routes>}
     </main>
   );

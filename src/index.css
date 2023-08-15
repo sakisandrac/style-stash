@@ -38,3 +38,8 @@ body {
   background: #debdac;
   border-radius: 25px;
 }
+
+.login-prompt {
+  font-size: 2rem;
+  text-align: center;
+}

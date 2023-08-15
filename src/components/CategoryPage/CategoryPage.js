@@ -59,7 +59,7 @@ const CategoryPage = ({  user, appError, setAppError, closeMenu, cart, checkCart
       <BackLink />
       <h1 className='page-title' >{category.toUpperCase()}</h1>
       <section className='piece-container'>
-        {allPieces ? pieceEls : user ? loading ? <p>Loading...</p> : <p>No items in the {category} category yet! Add to your collection to get started!</p> : <p>Please login to continue</p>}
+        {allPieces ? pieceEls : user ? loading ? <p>Loading...</p> : <p>No items in the {category} category yet! Add to your collection to get started!</p> : <p className="login-prompt">Please login to continue</p>}
       </section>
     </section>
   )
