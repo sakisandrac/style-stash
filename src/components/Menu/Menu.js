@@ -34,6 +34,7 @@ const Menu = ({ closeMenu }) => {
         </button>
       </div>
       {links}
+      {currentLocation === '/' && <Link className="menu-btn link" to='/about' onClick={() => closeMenu('close')}>About Us</Link>}
     </aside>
   );
 };
