@@ -74,32 +74,6 @@
   cursor: pointer;
 }
 
-dialog {
-  width: 60%;
-  height: 60%;
-  border-radius: 20px;
-  border: none;
-  background-color: #f7f2eb;
-  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 25%);
-  text-align: center;
-}
-
-.modal-container {
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.info-text {
-  max-height: 100%;
-  overflow: auto;
-}
-.about-title {
-  font-size: 1.7rem;
-}
-
 @media screen and (max-width: 1000px) {
   .demo-img {
     width: 300px;

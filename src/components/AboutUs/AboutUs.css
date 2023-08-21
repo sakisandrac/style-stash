@@ -1,0 +1,60 @@
+.about-page {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7f2eb;
+}
+
+.about-container {
+  display: flex;
+  width: 80%;
+  margin: 20px;
+}
+
+.info-text {
+  max-height: 100%;
+  overflow: auto;
+  margin: 30px;
+  font-size: 1.1rem;
+}
+
+.about-title {
+  font-size: 1.7rem;
+  width: 50%;
+  text-align: center;
+}
+
+.about-name {
+  font-family: 'Sacramento', cursive;
+  font-size: 3rem;
+  margin-bottom: 5px;
+}
+
+.about-img {
+  width: 100%;
+  border-radius: 250px 250px 0px 0px;
+  object-fit: cover;
+}
+
+.about-info {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-pic {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  border-radius: 250px 250px 0px 0px;
+}
+
+.btn-container {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
