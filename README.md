@@ -4,6 +4,9 @@ This application is a virtual closet platform designed to empower users with sea
 Visit us <a href="https://style-stash.vercel.app">here</a><br>
 <i> (This project is currently under construction- not all features may work  yet!)</i>
 
+## Backend Repo:
+<a href="https://github.com/sakisandrac/style-stash-api">Please Click Here to Visit!</a>
+
 ## Technologies Used
 React, React router v6, create-react-app, CSS, HTML, JavaScript
 Our backend repo <a href-="https://github.com/sakisandrac/style-stash-api">here</a> 
@@ -11,10 +14,6 @@ Our backend repo <a href-="https://github.com/sakisandrac/style-stash-api">here<
 ## Contributors:
 <a href="https://github.com/sakisandrac">Saki Chatphatthanasiri</a><br>
 <a href="https://github.com/lauraguerra1">Laura Garcia Guerra</a>
-
-## Learning Goals:
-
-## Challenges:
 
 ## Project Preview
 <img width="654" alt="stylestash" src="https://github.com/sakisandrac/style-stash/assets/118419729/c3fa622e-7856-4f15-9a55-14b4da8f224e"><br>
