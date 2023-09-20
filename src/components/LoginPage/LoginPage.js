@@ -3,7 +3,8 @@ import { postData } from '../../apiCalls';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import loginLogo from '../../images/login-logo.png'
+import loginLogo from '../../images/login-logo.png';
+import { Link } from 'react-router-dom';
 
 const LoginPage = ({ user, setUser, appError, setAppError }) => {
 
@@ -71,7 +72,11 @@ const LoginPage = ({ user, setUser, appError, setAppError }) => {
           <input className='login-input' value={username} onChange={(e) => { handleChange(e) }} name='username' type='text' />
           <label className='input-label' htmlFor='password'>Password:</label>
           <input className='login-input' value={password} onChange={(e) => { handleChange(e) }} name='password' type='password' />
-          <button className='login-btn' onClick={(e) => {submitCredentials(e)}}>Login</button>
+          <div className='login-buttons'>
+            <button className='login-btn' onClick={(e) => { submitCredentials(e) }}>Login</button>
+            <p style={{marginBottom: '30px', marginTop: '0'}}>OR</p>
+            <button className='login-btn' onClick={() => navigate('/')}>Choose a page to demo</button>
+          </div>
           {loginError && <p>Please enter both username and password!</p>}
           {user && <p>Login Successful! You will be directed back to the homepage shortly</p>}
           {appError && <ErrorMessage appError={appError}/>}
