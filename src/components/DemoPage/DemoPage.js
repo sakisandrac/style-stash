@@ -20,7 +20,6 @@ const DemoPage = ({setUser}) => {
       </section>
       <p className='login-link-btn'>Or <Link to='/login'>Click Here to Login to Style Stash</Link></p>
     </div>
-    
   )
 }
 
