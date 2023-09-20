@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 0;
   background: url('/src/images/background-water.png') no-repeat fixed center;
   background-size: cover;
 }
