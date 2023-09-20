@@ -17,7 +17,7 @@ const postData = async (type, info) => {
     method: 'POST',
     body: JSON.stringify(info), 
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Typce': 'application/json'
     }
   })
   let data = await response.json()
