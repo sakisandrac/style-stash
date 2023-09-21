@@ -201,10 +201,29 @@
   .home-logo {
     width: 50%;
   }
+
+  .featured-img, .featured-img-container {
+    border-radius: 180px 180px 0px 0px;
+    height: 36vh;
+    width: 36vh;
+  }
+    .featured-piece {
+    width: 18vh;
+    height: 18vh;
+    object-fit: cover;
+  }
+
+  .featured-pieces-container {
+    width: 36vh;
+    background-color: none;
+  }
 }
 
 @media screen and (max-width: 400px) {
-  .featured-piece {
+  .featured-img-text {
+    font-size: 16px;
+  }
+  /* .featured-piece {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -213,12 +232,12 @@
   .featured-pieces-container {
     width: 200px;
     background-color: none;
-  }
+  } */
 
-  .featured-img, .featured-img-container {
+  /* .featured-img, .featured-img-container {
     border-radius: 180px 180px 0px 0px;
     margin: 0;
     height: 200px;
     width: 200px;
-  }
+  } */
 }
