@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   background-color: #f7f2eb;
-  height: 100vh;
 }
 
 .demo-container {
@@ -11,6 +10,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  background-color: #f7f2eb;
 }
 
 .welcome-text {
@@ -67,9 +67,11 @@
 .login-link-btn {
   background-color: #debdac;
   border-radius: 20px;
+  border: none;
   padding: 10px 15px;
   font-size: 1.2rem;
   margin-top: 30px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1000px) {
