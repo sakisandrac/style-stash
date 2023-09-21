@@ -8,6 +8,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  animation: fadeIn 1s ease-in;
 }
 
 .page-title-short {

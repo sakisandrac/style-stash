@@ -16,6 +16,10 @@
   justify-content: center;
 } */
 
+.closet-page {
+  animation: fadeIn 1s ease-in;
+}
+
 .category {
   background: url('../../images/sparkles.png');
 }
