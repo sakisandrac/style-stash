@@ -9,6 +9,8 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
   const [featuredImage, setFeaturedImage] = useState({});
   const [featuredItems, setFeaturedItems] = useState([]);
   const [featuredPieceClass, setFeaturedPieceClass] = useState('featured-piece');
+  const [loadingOutfit, setLoadingOutfit] = useState(false);
+  const [loadingItems, setLoadingItems] = useState(false);
   const randomPieces = [];
 
   const updateCSS = () => {
@@ -79,9 +81,6 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
       randomPieces.push(pieces[getRandIndex(pieces.length)]);
     };
   };
-  const [loadingOutfit, setLoadingOutfit] = useState(false);
-  const [loadingItems, setLoadingItems] = useState(false);
-  const [pageLoading, setPageLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -120,25 +119,25 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
         {user ?
           <div className='featured-container'>
             {appError && <ErrorMessage appError={appError} />}
-            {loadingItems || loadingOutfit ? <Loading /> : 
-            <>
-            <div className='featured-left'>
-              <div className='featured-img-container'>
-                <img className='featured-img' src={featuredImage.fullOutfitImage} />
-                <Link className='view-outfit-link' to={`/outfitdetails/${featuredImage.id}`}><div className='view-outfit-btn-home'>View my outfit</div></Link>
-                <p className='featured-img-text'>Today's Featured Outfit ♡</p>
-              </div>
-            </div>
-            <div className='featured-right'>
-              <div className='featured-pieces-container'>
-                {featuredPieces()}
-                <p className='featured-img-text'>Re-discover These Pieces ♡</p>
-              </div>
-            </div>
-            </>
+            {loadingItems || loadingOutfit ? <Loading /> :
+              <>
+                <div className='featured-left'>
+                  <div className='featured-img-container'>
+                    <img className='featured-img' src={featuredImage.fullOutfitImage} />
+                    <Link className='view-outfit-link' to={`/outfitdetails/${featuredImage.id}`}><div className='view-outfit-btn-home'>View my outfit</div></Link>
+                    <p className='featured-img-text'>Today's Featured Outfit ♡</p>
+                  </div>
+                </div>
+                <div className='featured-right'>
+                  <div className='featured-pieces-container'>
+                    {featuredPieces()}
+                    <p className='featured-img-text'>Re-discover These Pieces ♡</p>
+                  </div>
+                </div>
+              </>
             }
           </div>
-        : <p className="login-prompt">Please Login To Continue!</p>}
+          : <p className="login-prompt">Please Login To Continue!</p>}
       </main>
     </div>
   )
