@@ -20,7 +20,6 @@ const postData = async (type, info) => {
       'Content-Type': 'application/json'
     }
   })
-  console.log('response', response)
   return handleError(response)
 }
 
