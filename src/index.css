@@ -19,6 +19,10 @@ body {
 
 }
 
+h1, h2, a {
+  text-align: center;
+}
+
 .menu-btn, .menu-nav-btn {
   background-color: #00000000;
   border: none;
@@ -27,7 +31,6 @@ body {
 
 .menu-nav-btn {
   display: flex;
-  width: 153px;
 }
 
 
@@ -56,4 +59,20 @@ a {
 
 a:visited {
   color: black;
+}
+
+
+@media screen and (max-width: 400px) {
+  .menu-btn img, .menu-nav-btn img {
+    width: 35px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
 }

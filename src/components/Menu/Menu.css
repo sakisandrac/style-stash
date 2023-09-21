@@ -21,7 +21,7 @@
 
 .link {
   font-size: xx-large;
-  margin: 10% 0% 10% 0%;
+  margin: 20px;
   text-decoration: none;
   padding: 5%;
   width: 30%;
@@ -46,6 +46,6 @@
   }
 
   .link {
-    width: 30%;
+    width: 60%;
   }
 }

@@ -3,6 +3,8 @@
   flex-direction: column;
   align-items: center;
   background-color: #f7f2eb;
+  height: 100vh;
+  animation: fadeIn 1s ease-in;
 }
 
 .demo-container {
@@ -71,6 +73,7 @@
   padding: 10px 15px;
   font-size: 1.2rem;
   margin-top: 30px;
+  text-align: center;
   cursor: pointer;
 }
 

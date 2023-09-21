@@ -8,12 +8,20 @@ nav {
   box-shadow: 0px 4px 4px 0px #eccdc1
 }
 
+.login-container, .menu-nav-btn {
+  width: 20vw;
+}
+
 .logo-heading {
   font-family: 'Sacramento', cursive;
   font-size: xxx-large;
   margin: 0.5% 1% 0.3% 1%;
-  flex: 1;
   text-align: center; 
+  font-weight: 700;
+}
+
+h1.logo-heading {
+  flex: 1;
 }
 
 .login-container {
@@ -21,6 +29,8 @@ nav {
   align-items: center;
   height: 60px;
   word-wrap: break-word;
+  margin: 0px 10px;
+  justify-content: flex-end;
 }
 
 a {
@@ -34,12 +44,12 @@ a:visited {
 
 .user-icon {
   height: 25px;
-  margin: 10px;
 }
 
 .login-text {
-  margin-right: 10px;
   font-size: .9rem;
+  text-align: center;
+  margin: 0;
 }
 
 .construction-marquee {
@@ -56,7 +66,26 @@ a:visited {
   }
 
   .login-text {
-    margin: 0px 10px 0 10px;
     font-size: .7rem;
+  }
+
+  .login-container{
+    width: 25vw;
+  }
+
+  .logo-heading {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .logo-heading {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .logo-heading {
+    font-size: 25px;
   }
 }
