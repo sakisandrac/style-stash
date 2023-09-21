@@ -17,10 +17,10 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
     const classes = ['.featured-img-container', '.featured-img', '.featured-pieces-container'];
 
     if (window.innerWidth > 1200 && window.innerWidth < 1650 && menuOpen) {
-      classes.forEach(item => document.querySelector(item).classList.add('modal-open-featured'));
+      classes.forEach(item => document.querySelector(item)?.classList.add('modal-open-featured'));
       setFeaturedPieceClass('modal-open-featured-piece');
     } else {
-      classes.forEach(item => document.querySelector(item).classList.remove('modal-open-featured'));
+      classes.forEach(item => document.querySelector(item)?.classList.remove('modal-open-featured'));
       setFeaturedPieceClass('featured-piece');
     };
 
@@ -97,9 +97,10 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
   }, [user]);
 
   useEffect(() => {
+    updateCSS()
     window.addEventListener('resize', updateCSS);
     return () => window.removeEventListener('resize', updateCSS);
-  });
+  }, [menuOpen]);
 
 
   const featuredPieces = () => {

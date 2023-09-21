@@ -30,6 +30,7 @@ h1.logo-heading {
   height: 60px;
   word-wrap: break-word;
   margin: 0px 10px;
+  justify-content: flex-end;
 }
 
 a {
