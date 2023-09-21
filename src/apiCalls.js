@@ -7,13 +7,15 @@ const handleError = (response) => {
 }
 
 const getData = async (type, firstID, secondID) => {
-  let response = await fetch(`https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/${type}/${firstID}/${secondID?secondID:''}`);
+  // let response = await fetch(`https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/${type}/${firstID}/${secondID?secondID:''}`);
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}/${firstID}/${secondID?secondID:''}`);
   let data = await handleError(response);
   return data;
 }
 
 const postData = async (type, info) => {
-  let response = await fetch(`https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/${type}`, {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}`, {
+  // let response = await fetch(`https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/${type}`, {
     method: 'POST',
     body: JSON.stringify(info), 
     headers: {
@@ -24,7 +26,8 @@ const postData = async (type, info) => {
 }
 
 const patchData = async (type, allIDs, info) => {
-  let response = await fetch(`https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/${type}/${allIDs}`, {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}/${allIDs}`, {
+  // let response = await fetch(`https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/${type}/${allIDs}`, {
     method: 'PATCH',
     body: JSON.stringify(info), 
     headers: {
@@ -40,7 +43,8 @@ const patchData = async (type, allIDs, info) => {
 }
 
 const deleteData = async (type, info) => {
-  let response = await fetch(`https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/${type}`, {
+  let response = await fetch(`http://localhost:3003/api/v1/data/${type}`, {
+  // let response = await fetch(`https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/${type}`, {
     method: 'DELETE',
     body: JSON.stringify(info), 
     headers: {
