@@ -10,7 +10,6 @@ const Menu = ({ closeMenu }) => {
     { path: '/outfits', name: 'My Outfits' },
   ];
   const links = allLocations
-    .filter((location) => location.path !== currentLocation)
     .map((location) => (
       <Link
         className="menu-btn link"
