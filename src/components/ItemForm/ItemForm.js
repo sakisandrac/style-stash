@@ -13,7 +13,13 @@ const ItemForm = ({user}) => {
 
   const handleChange = (e) => {
     setAddSuccess(false);
-    setImage(URL.createObjectURL(e.target.files[0]));
+    if(e.target.name === 'fileUpload') {
+      setImage(URL.createObjectURL(e.target.files[0]))
+    } 
+
+    if(e.target.name === 'url') {
+      setImage(e.target.value)
+    }
   };
 
   const handleSelect = (e) => {
@@ -82,8 +88,10 @@ const ItemForm = ({user}) => {
       <h1 className='page-title'>Add Item To Closet:</h1>
       <form>
         <label htmlFor='fileUpload' className='upload-img-btn'>Upload Image
-          <input id='fileUpload' className='file-upload-default' type="file" onChange={handleChange} />
+          <input name='fileUpload' id='fileUpload' className='file-upload-default' type="file" onChange={(e) => handleChange(e)} />
         </label>
+        <p>OR</p>
+        <input className='url-input' type='text' name='url' onChange={(e) => handleChange(e)} placeholder='Add an image URL'></input>
         {image && <img className='file-image' src={image} />}
         <select
           className='select-input'

@@ -100,7 +100,13 @@ const OutfitDetails = ({ user, setAppError, appError, closeMenu }) => {
   };
 
   const changeOutfitImage = (e) => {
-    setNewOutfitImage(URL.createObjectURL(e.target.files[0]));
+    if(e.target.name === 'fileUpload') {
+      setNewOutfitImage(URL.createObjectURL(e.target.files[0]))
+    } 
+
+    if(e.target.name === 'url') {
+      setNewOutfitImage(e.target.value)
+    }
   };
 
   useEffect(() => {

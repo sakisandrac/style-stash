@@ -61,3 +61,9 @@ form {
   background-color: #eccdc1;
   margin: 30px 0;
 }
+
+.url-input {
+  border-radius: 20px;
+  border: 1px solid black;
+  padding: 10px;
+}
