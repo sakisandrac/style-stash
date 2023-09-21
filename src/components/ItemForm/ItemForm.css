@@ -3,8 +3,10 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 80vh;
   animation: fadeIn 1s ease-in;
+  height: 100vh;
+  background: url('/src/images/background-water.png') no-repeat fixed center;
+  background-size: cover;
 }
 
 form {

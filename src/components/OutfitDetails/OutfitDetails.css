@@ -1,5 +1,5 @@
 .outfit-page {
-  height: 80vh;
+  height: 100vh;
   width: 100%;
 }
 
@@ -7,8 +7,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   animation: fadeIn 1s ease-in;
+  margin-top: 0;
+  background: url('/src/images/background-water.png') no-repeat fixed center;
+  background-size: cover;
 }
 
 .page-title-short {
@@ -31,13 +34,11 @@
 }
 
 .pieces-container {
-  height: 80vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 40px 60px 20px;
-
+  /* margin: 0 40px 60px 20px; */
 }
 
 .back-icon-container {
