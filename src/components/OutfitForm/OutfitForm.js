@@ -65,7 +65,13 @@ const OutfitForm = ({ closeMenu, appError, setAppError, user }) => {
   };
 
   const updateOutfitImg = (e) => {
-    setFullOutfitImage(URL.createObjectURL(e.target.files[0]));
+    if(e.target.name === 'fileUpload') {
+      setFullOutfitImage(URL.createObjectURL(e.target.files[0]))
+    } 
+
+    if(e.target.name === 'url') {
+      setFullOutfitImage(e.target.value)
+    }
   }
 
   const checkCartForItem = (id) => {

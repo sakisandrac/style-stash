@@ -37,9 +37,13 @@ const Cart = ({appError, cart, removeFromCart, fullOutfitImage, updateOutfitImg,
     <section className='cart-page'>
       <div style={{display: "flex"}}>
         <Link className='cart-button' to='/outfitform' onClick={() => handleChange(updateNotes, outfitNotes)}>{cart.length ? 'Continue' : 'Start'} Adding Pieces</Link>
+      </div>
+      <div className='img-upload-container'>
         <label htmlFor='outfitImgUpload' className='cart-button'>{fullOutfitImage ? 'Change' : 'Add'} Full Outfit Image
-          <input id='outfitImgUpload' className='file-upload-default' type="file" onChange={(e) => handleChange(updateOutfitImg, e)} />
+          <input id='outfitImgUpload' name='fileUpload' className='file-upload-default' type="file" onChange={(e) => handleChange(updateOutfitImg, e)} />
         </label>
+        <p>OR</p>
+        <input className='url-input' type='text' name='url' onChange={(e) => handleChange(updateOutfitImg, e)} placeholder='Add full outfit image URL'></input>
       </div>
       {fullOutfitImage && <img style={{width: "150px"}} className='file-image' src={fullOutfitImage} />}
       <section className="cart-pieces">
