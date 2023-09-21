@@ -68,7 +68,7 @@ const ItemForm = ({user}) => {
 
   const postNewItem = async () => {
     try {
-      await postData('closet', newData);
+      await postData('closet/', newData);
       setError({ error: false, message: "" });
       setAddSuccess(true);
     } catch (err) {
