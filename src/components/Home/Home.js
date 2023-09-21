@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getData } from '../../apiCalls';
 import { Link } from 'react-router-dom';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Loading from '../Loading/Loading';
 
 const Home = ({ menuOpen, user, setAppError, appError }) => {
   const [featuredImage, setFeaturedImage] = useState({});
@@ -78,11 +79,20 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
       randomPieces.push(pieces[getRandIndex(pieces.length)]);
     };
   };
+  const [loadingOutfit, setLoadingOutfit] = useState(false);
+  const [loadingItems, setLoadingItems] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
-      getFeaturedOutfit('outfits', user.id);
-      getFeaturedItems('closet', user.id);
+      setLoadingItems(true)
+      setLoadingOutfit(true)
+      getFeaturedOutfit('outfits', user.id).then(data => {
+        setLoadingOutfit(false)
+      })
+      getFeaturedItems('closet', user.id).then(data => {
+        setLoadingItems(false)
+      })
     };
     return () => setAppError(null);
   }, [user]);
@@ -110,6 +120,8 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
         {user ?
           <div className='featured-container'>
             {appError && <ErrorMessage appError={appError} />}
+            {loadingItems || loadingOutfit ? <Loading /> : 
+            <>
             <div className='featured-left'>
               <div className='featured-img-container'>
                 <img className='featured-img' src={featuredImage.fullOutfitImage} />
@@ -123,6 +135,8 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
                 <p className='featured-img-text'>Re-discover These Pieces ♡</p>
               </div>
             </div>
+            </>
+            }
           </div>
         : <p className="login-prompt">Please Login To Continue!</p>}
       </main>
