@@ -20,11 +20,7 @@ const postData = async (type, info) => {
       'Content-Typce': 'application/json'
     }
   })
-  let data = await response.json()
-  if(data.message && data.message.includes('Error')) {
-    throw new Error(`${data.message} -- Please try again`)
-  }
-  return data
+  return handleError(response)
 }
 
 const patchData = async (type, allIDs, info) => {
@@ -52,7 +48,7 @@ const deleteData = async (type, info) => {
     }
   })
   let data = await response.json()
-  
+
   if(data.message.includes('Error')) {
     throw new Error(`${data.message} -- Please try again`)
   }

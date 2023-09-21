@@ -44,7 +44,7 @@ const ItemForm = ({user}) => {
       image: image,
       categoryID: `CAT-${category.toLowerCase()}`,
       notes: notes,
-      userID: user.userID
+      userID: user.id
     };
   };
 
@@ -73,6 +73,7 @@ const ItemForm = ({user}) => {
       setAddSuccess(true);
     } catch (err) {
       checkErrors(err);
+      setAddSuccess(false);
     };
   };
 
