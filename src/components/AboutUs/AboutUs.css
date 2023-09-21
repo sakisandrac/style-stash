@@ -1,5 +1,5 @@
 .about-page {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -46,15 +46,38 @@
   align-items: center;
 }
 
-.about-pic {
+.about-pic, .about-pic1 {
   display: flex;
   justify-content: center;
   width: 50%;
   border-radius: 250px 250px 0px 0px;
 }
 
+.about-pic2 {
+  display:none;
+}
+
 .btn-container {
   width: 50%;
   display: flex;
   justify-content: space-around;
+}
+
+@media (max-width: 600px) {
+  .about-container {
+    flex-direction: column;
+  }
+
+  .about-pic1 {
+    display: none;
+  }
+
+  .about-pic {
+    width: 100%;
+  }
+
+  .about-pic2 {
+    display: block;
+  }
+  
 }
