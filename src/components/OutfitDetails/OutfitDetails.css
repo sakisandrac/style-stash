@@ -7,8 +7,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-top: 20px; */
-  animation: fadeIn 1s ease-in;
   margin-top: 0;
   background: url('/src/images/background-water.png') no-repeat fixed center;
   background-size: cover;
@@ -131,6 +129,13 @@
   border-radius: 25px;
   padding: 3%;
   margin: 3%;
+}
+
+.img-upload-container {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 

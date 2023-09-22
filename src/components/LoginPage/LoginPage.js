@@ -39,7 +39,6 @@ const LoginPage = ({ user, setUser, appError, setAppError }) => {
     const login = async (username, password) => {
       try {
         const data = await postData('user', {username, password});
-        console.log('helo', data)
         setUser(data.credentialsFound[0])
       } catch (error) {
         setAppError(error)

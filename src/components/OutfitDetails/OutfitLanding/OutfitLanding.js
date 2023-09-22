@@ -46,19 +46,23 @@ const OutfitLanding = (props) => {
         >{`${isEditing ? 'Save Edits' : 'Edit Outfit'}`}</button>
         {isEditing && (
           <>
-            <label htmlFor="fileUpload" className="upload-img-btn">
-              {`${
-                outfitData.fullOutfitImage ? 'Change' : 'Upload'
-              } Outfit Image`}
-              <input
-                id="fileUpload"
-                className="file-upload-default"
-                type="file"
-                onChange={(e) => {
-                  changeOutfitImage(e);
-                }}
-              />
-            </label>
+            <div className='img-upload-container'>
+              <label htmlFor="fileUpload" className="upload-img-btn">
+                {`${outfitData.fullOutfitImage ? 'Change' : 'Upload'
+                  } Outfit Image`}
+                <input
+                  id="fileUpload"
+                  name="fileUpload"
+                  className="file-upload-default"
+                  type="file"
+                  onChange={(e) => {
+                    changeOutfitImage(e);
+                  }}
+                />
+              </label>
+              <p>OR</p>
+              <input className='url-input' type='text' name='url' onChange={(e) => changeOutfitImage(e)} placeholder='Add an image URL'></input>
+            </div>
             {newOutfitImage && (
               <img className="file-image" src={newOutfitImage} />
             )}
@@ -80,8 +84,8 @@ const OutfitLanding = (props) => {
             {loading
               ? 'loading...'
               : notes.length > 0
-              ? notes
-              : 'Add notes here...'}
+                ? notes
+                : 'Add notes here...'}
           </div>
         )}
         {isEditing && (

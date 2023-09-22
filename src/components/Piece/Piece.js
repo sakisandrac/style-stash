@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getData, patchData, deleteData } from '../../apiCalls';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { useEffect, useState } from 'react';
@@ -14,6 +14,7 @@ const Piece = ({ user, appError, setAppError }) => {
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [otps, setOTPs] = useState([]);
   const { pieceID, category } = useParams();
+  const navigate = useNavigate();
 
   const apiCall = async () => {
     try {
@@ -65,6 +66,7 @@ const Piece = ({ user, appError, setAppError }) => {
     try {
       await deleteData('piece', { id: pieceID });
       setDeleteSuccess(true);
+      navigate(-1);
     } catch (error) {
       setAppError(error);
     }
