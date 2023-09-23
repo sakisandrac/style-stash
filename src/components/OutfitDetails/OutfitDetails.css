@@ -36,7 +36,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin: 0 40px 60px 20px; */
 }
 
 .back-icon-container {
@@ -132,7 +131,8 @@
 }
 
 .img-upload-container {
-  width: 40%;
+  width: 50%;
+  max-width: 500px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -141,6 +141,10 @@
 
 @media (max-width: 900px) {
   .outfit-details-container {
+    flex-direction: column;
+  }
+
+  .img-upload-container {
     flex-direction: column;
   }
 

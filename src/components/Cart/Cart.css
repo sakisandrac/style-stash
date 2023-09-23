@@ -60,7 +60,7 @@
 
 .cart-button {
   border: none;
-  padding: 20px;
+  padding: 12px;
   border-radius: 20px;
   min-width: 10%;
   max-width: 250px;
@@ -70,17 +70,12 @@
   text-decoration: none;
   color: black;
   margin: 1%;
-  font-size: large;
+  font-size: 1rem;
 }
 
 .cart-pieces::-webkit-scrollbar {
   width: 10px;
 }
-
-
-/* .cart-pieces::-webkit-scrollbar-track {
-  background: pink;
-} */
 
 .cart-pieces::-webkit-scrollbar-thumb {
   background: #debdac;

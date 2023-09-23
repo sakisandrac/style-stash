@@ -5,6 +5,7 @@
   background-color: #f7f2eb;
   height: 100vh;
   animation: fadeIn 1s ease-in;
+  overflow-x: hidden;
 }
 
 .demo-container {
