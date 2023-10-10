@@ -16,10 +16,25 @@ describe('User should be able to load homepage', () => {
       "https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/closet/2/",
       {
         statusCode: 200,
+        fixture: 'closet2'
+      }
+    ).as('closet-data')
+    .intercept(
+      "GET",
+      "https://style-stash-db-0d28a93cf3ce.herokuapp.com/api/v1/data/outfits/2/",
+      {
+        statusCode: 200,
         fixture: 'outfit2'
       }
-    )
-    cy.get(':nth-child(1) > .user-name').click()
-    cy.get('.featured-img-container > .featured-img-text').should('have.text', 'Today\'s Featured Outfit')
+    ).as('outfit-data')
+    .get(':nth-child(1) > .user-name').click()
+    .wait(['@outfit-data', '@closet-data']).then((intercept) => {
+      cy.get('.featured-img-container > .featured-img-text').should('have.text', 'Today\'s Featured Outfit ♡')
+      .get('.featured-img').should('have.attr', 'src', 'https://i.imgur.com/phQ7cly.jpeg')
+      .get('.featured-pieces-container > .featured-img-text').should('have.text', 'Re-discover These Pieces ♡')
+      .get('.featured-pieces-container').children().should('have.length', 5)
+    })
+    
   })
 })
+  
