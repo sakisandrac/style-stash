@@ -34,6 +34,7 @@ const Home = ({ menuOpen, user, setAppError, appError }) => {
   const getFeaturedOutfit = async (type, userID) => {
     try {
       const data = await getData(type, userID);
+      console.log(data)
       const outfit = data.allData[getRandIndex(data.allData.length)];
       if (outfit.fullOutfitImage) {
         setFeaturedImage(outfit);

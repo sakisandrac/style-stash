@@ -1,0 +1,16 @@
+{
+    "allData": [
+        {
+            "fullOutfitImage": "https://i.imgur.com/phQ7cly.jpeg",
+            "id": "OUT-outfit-lg-4",
+            "notes": "",
+            "pieces": [
+                 {
+                    "id": "PIE-pants-lg0", 
+                    "notes":"", 
+                    "image": "https://i.imgur.com/hcwNUhk.jpeg', categoryID: 'CAT-pants"
+                }
+            ]
+        }
+    ]
+}
