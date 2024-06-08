@@ -1,9 +1,6 @@
 # Style Stash
 This application is a virtual closet platform designed to empower users with seamless organization of their wardrobe. With the ability to upload images from your personal collection, our application facilitates efficient categorization of your clothing items. Moreover, it offers a seamless outfit planning feature, enabling users to curate ensembles for daily wear, special events, or simply for creative enjoyment. Experience the convenience and style synergy our application brings to your fashion journey!
 
-Visit us <a href="https://style-stash.vercel.app">here</a><br>
-<i> (This project is currently under construction- not all features may work  yet!)</i>
-
 ## Backend Repo:
 <a href="https://github.com/sakisandrac/style-stash-api">Please Click Here to Visit!</a>
 
